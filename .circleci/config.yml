@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: bocinsky/GuedesBocinsky2018:latest
+      - image: bocinsky/asian_niche:latest
     steps:
       - checkout
       - run:
