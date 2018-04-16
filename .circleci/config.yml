@@ -5,10 +5,11 @@ jobs:
       - image: bocinsky/asian_niche:latest
     steps:
       - checkout
+      - run: 
+          name: build
+          command: docker build -t bocinsky/asian_niche .
       - run:
-          name: Greeting
-          command: echo Hello, world.
-      - run:
-          name: Print the Current Time
-          command: date
+          name: test
+          command: docker run --name asian_niche -d -p 8787:8787 bocinsky/asian_niche
+
 
