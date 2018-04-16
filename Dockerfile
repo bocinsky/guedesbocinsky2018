@@ -1,4 +1,4 @@
-FROM rocker/geospatial:3.3.3
+FROM rocker/geospatial:3.4.4
 
 MAINTAINER Kyle Bocinsky <bocinsky@gmail.com>
 
@@ -22,10 +22,10 @@ RUN apt-get install -y --no-install-recommends \
     ghostscript
 
 ## Update currently installed R packages to MRAN version
-RUN r -e 'update.packages(repos="https://mran.microsoft.com/snapshot/2017-05-15", ask=FALSE)'
+RUN r -e 'update.packages(repos="https://mran.microsoft.com/snapshot/2018-04-15", ask=FALSE)'
 
 ## Install R package dependencies from stable MRAN repo
-RUN install2.r -r 'https://mran.microsoft.com/snapshot/2017-05-15' --error \
+RUN install2.r -r 'https://mran.microsoft.com/snapshot/2018-04-15' --error \
     ## Packages for Python-like command-line parsing
     devtools \
     optparse \
