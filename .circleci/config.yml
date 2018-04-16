@@ -1,0 +1,9 @@
+version: 2
+jobs:
+   build:
+     docker:
+       - image: bocinsky/bocin_base:latest
+     steps:
+       - checkout
+       - run: docker info
+
