@@ -5,7 +5,7 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t $DOCKER_USER/GuedesBocinsky2018  .
+    - docker build -t $DOCKER_USER/guedesbocinsky2018  .
 
 test:
   override:
