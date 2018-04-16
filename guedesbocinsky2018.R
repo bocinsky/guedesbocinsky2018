@@ -35,7 +35,7 @@ opt = parse_args(opt_parser);
 ### BEGIN SCRIPT ###
 
 start_time <- Sys.time()
-message("asian_niche.R started at ", start_time)
+message("guedesbocinsky2018.R started at ", start_time)
 
 ## This is the code for the pan-Asian niche reconstructions
 
@@ -1368,6 +1368,6 @@ bibtex::write.bib(all_packages, out("packages.bib"))
 # Render the README.Rmd file
 rmarkdown::render("README.Rmd")
 
-message("asian_niche.R complete! Total run time: ", capture.output(Sys.time() - start_time))
+message("guedesbocinsky2018.R complete! Total run time: ", capture.output(Sys.time() - start_time))
 
 ### END SCRIPT ###

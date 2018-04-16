@@ -4,40 +4,40 @@ VERSION="0.9.0"
 ARCH_SITES="../../DALPOIMGUEDES_BOCINSKY_2017.xlsx"
 
 ## Build the Docker image from the github repo
-docker build -t bocinsky/asian_niche https://github.com/bocinsky/asian_niche.git#$VERSION
+docker build -t bocinsky/guedesbocinsky2018 https://github.com/bocinsky/guedesbocinsky2018.git#$VERSION
 
 ## Remove any previous containers
-docker rm asian_niche
+docker rm guedesbocinsky2018
 
 ## Create the Docker container
-docker create -w /asian_niche --name asian_niche bocinsky/asian_niche
+docker create -w /guedesbocinsky2018 --name guedesbocinsky2018 bocinsky/guedesbocinsky2018
 
 ## Start the Docker container
-docker start asian_niche
+docker start guedesbocinsky2018
 
 ## Copy the archaeological site data to the Docker container
-docker cp $ARCH_SITES asian_niche:/asian_niche/DATA/DALPOIMGUEDES_BOCINSKY_2017.xlsx
+docker cp $ARCH_SITES guedesbocinsky2018:/guedesbocinsky2018/DATA/guedesbocinsky2018.xlsx
 
 ## Download and copy pre-run output into the container
-#docker cp ~/Desktop/OUTPUT asian_niche:/asian_niche/
+#docker cp ~/Desktop/OUTPUT guedesbocinsky2018:/guedesbocinsky2018/
 
 ## Run the analysis in the docker container
-docker exec asian_niche Rscript asian_niche.R
+docker exec guedesbocinsky2018 Rscript guedesbocinsky2018.R
 
 ## Copy the output from the container to the host
-docker cp asian_niche:/asian_niche/OUTPUT ./
+docker cp guedesbocinsky2018:/guedesbocinsky2018/OUTPUT ./
 
 ## Copy README.md from the container to the host
-docker cp asian_niche:/asian_niche/README.md ./README.md
+docker cp guedesbocinsky2018:/guedesbocinsky2018/README.md ./README.md
 
 ## Stop the Docker container
-docker stop asian_niche
+docker stop guedesbocinsky2018
 
 ## Make a Zenodo directory
 rm -r Zenodo; mkdir Zenodo
 
 ## Create a compressed tar archive of the output
-tar -zcf ./Zenodo/asian_niche-$VERSION-OUTPUT.tar.gz OUTPUT
+tar -zcf ./Zenodo/guedesbocinsky2018-$VERSION-OUTPUT.tar.gz OUTPUT
 
 ## Make the Submission directory
 rm -r Submission; mkdir Submission
@@ -55,4 +55,4 @@ cp ./OUTPUT/FIGURES/All_buckwheat.mov ./Submission/Supplementary_Video_5.mov
 cp ./DATA/crops.csv ./Submission/Supplementary_Table_1.csv
 cp ./OUTPUT/TABLES/sites_dates_raw.csv ./Submission/Supplementary_Table_2.csv
 cp ./OUTPUT/TABLES/age_niche_estimates.csv ./Submission/Supplementary_Table_3.csv
-curl -L https://codeload.github.com/bocinsky/asian_niche/tar.gz/$VERSION
+curl -L https://codeload.github.com/bocinsky/guedesbocinsky2018/tar.gz/$VERSION
