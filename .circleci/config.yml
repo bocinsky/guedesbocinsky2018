@@ -9,7 +9,7 @@ defaults: &steps
         command: |
           Rscript \
           -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
-          -e devtools::install_github("r-lib/devtools")
+          -e 'devtools::install_github("r-lib/devtools")'
 
     ## setup -------------------------------
 
@@ -30,33 +30,11 @@ defaults: &steps
           Rscript \
             -e 'devtools::install_deps(dependencies = TRUE)'
 
-    ## build and test -----------------
-
-    - run:
-        name: Build package
-        command: R CMD build .
+    ## check and test with devtools -----------------
 
     - run:
         name: Check package
-        command: R CMD check "${PKG_TARBALL}" --as-cran --no-manual
-    - run:
-        name: Check failures
-        command: |
-          Rscript -e "message(devtools::check_failures(path = '${RCHECK_DIR}'))"
-          # warnings are errors
-          # - run: if grep -q -R "WARNING" "${RCHECK_DIR}/00check.log"; then exit 1; fi
-
-    ## store artifacts -----------------
-
-    - run:
-        command: mv ${RCHECK_DIR} /tmp/Rcheck
-        when: always
-    - store_test_results:
-        path: /tmp/Rcheck/tests/
-        when: always
-    - store_artifacts:
-        path: /tmp/Rcheck
-        when: always
+        command: Rscript -e 'devtools::check()'
 
 version: 2
 jobs:
