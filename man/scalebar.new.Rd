@@ -9,7 +9,32 @@ scalebar.new(d, xy = NULL, height = NULL, line.offset = c(0, 0),
   adj = c(0.5, -0.5), lwd = 2, ...)
 }
 \arguments{
-\item{...}{}
+\item{d}{the length of the scalebar in meters}
+
+\item{xy}{the position of the scale bar}
+
+\item{height}{the height of the scale bar in inches}
+
+\item{line.offset}{the offset of the position of the scale bar}
+
+\item{side}{which side of the plot the scale bar should be on}
+
+\item{lab.side}{which side of the scale bar the label should be on}
+
+\item{col}{the color of the scale bar}
+
+\item{lonlat}{is the plot in georgaphic coordinates?}
+
+\item{label}{The label}
+
+\item{adj}{An adjustment for the scale bar}
+
+\item{lwd}{the line width of the scale bar}
+
+\item{...}{Additional parameters passed on to text}
+}
+\value{
+A scalebar is added to the current graphics device.
 }
 \description{
 A simple scale bar.

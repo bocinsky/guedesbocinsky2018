@@ -1,12 +1,10 @@
 #' Sum a GHCN record over a set of months to generate annual estimates.
 #'
-#' @param station
-#' @param months
+#' @param station GHCN station data
+#' @param months The months over which to annualize
 #'
-#' @return
+#' @return A [data.frame] of annualized data.
 #' @export
-#'
-#' @examples
 annualize <- function(station, months=1:12) {
   # first, remove unwanted months
   station <- station[station$MONTH %in% months, ]

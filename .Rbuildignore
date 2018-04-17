@@ -5,6 +5,6 @@ analysis
 ^README-.*\.png$
 ^CONDUCT\.md$
 ^CONTRIBUTING\.md$
-^circle\.yml$
+.circleci
 ^Dockerfile$
 ^LICENSE\.md$

@@ -1,15 +1,15 @@
+utils::globalVariables(c("out",
+                         "coordinates"))
 #' Download and clean daily climate records from the Global Historical Climate Database.
 #'
-#' @param region
-#' @param label
-#' @param calibration.years
-#' @param google_maps_elevation_api_key
-#' @param force.redo
+#' @param region A spatial object defining the region
+#' @param label A label for the region
+#' @param calibration.years The years for defining climatology
+#' @param google_maps_elevation_api_key the users Google Maps Elevation API key
+#' @param force.redo Should the GHCN data be re-processed?
 #'
-#' @return
+#' @return A clean set of GHCN data
 #' @export
-#'
-#' @examples
 prepare_ghcn <- function(region,
                          label,
                          calibration.years,

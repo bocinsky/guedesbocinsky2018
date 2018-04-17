@@ -6,9 +6,10 @@
 \usage{
 space_time_plot(the_brick, the_brick_upper = NULL, the_brick_lower = NULL,
   out_file, title = NULL, time, timelim, timeaxis, timelab = "Year AD",
-  zbreaks = NULL, zlab, zaxis, zcolors = rev(brewer.pal(11, "RdYlBu")),
-  fig_width = 6.5, graph_height = 1.5, margin = 0.1, pt_size = 8,
-  smooth = FALSE, extra_plot_fun = NULL, extra_legend_fun = NULL)
+  zbreaks = NULL, zlab, zaxis, zcolors = rev(RColorBrewer::brewer.pal(11,
+  "RdYlBu")), fig_width = 6.5, graph_height = 1.5, margin = 0.1,
+  pt_size = 8, smooth = FALSE, extra_plot_fun = NULL,
+  extra_legend_fun = NULL)
 }
 \arguments{
 \item{extra_legend_fun}{}
@@ -18,3 +19,4 @@ Given a raster brick (and possibly uncertainties/errors),
 plot a map of the average across time, and a
 graph of the average across space.
 }
+\keyword{internal}

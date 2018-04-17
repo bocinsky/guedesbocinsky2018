@@ -1,6 +1,8 @@
+utils::globalVariables(c("out"))
+
 #' Download and prepare data from Mann et al. 2008 and Marcott et al. 2013.
 #'
-#' @param calibration.years
+#' @param calibration.years The years used to define climatology
 #'
 #' @return
 #' @export
@@ -12,12 +14,12 @@ prepare_marcott <- function(calibration.years) {
   message("Downloading Mann et al. 2008 infilled instrumental temperature data.")
   dir.create(out("DATA/mann2008/"), showWarnings = FALSE, recursive = TRUE)
   FedData::download_data(url = "ftp://ftp.ncdc.noaa.gov/pub/data/paleo/contributions_by_author/mann2008/instrument.zip", destdir = out("DATA/mann2008/"))
-  unzip(out("DATA/mann2008/instrument.zip"), exdir = out("DATA/mann2008/"))
+  utils::unzip(out("DATA/mann2008/instrument.zip"), exdir = out("DATA/mann2008/"))
   # Get just the Northern Hemisphere HAD CRU V3 data.
   iHAD_NH_reform <- readr::read_table(out("DATA/mann2008/iHAD_NH_reform"), col_names = c("Year", "Temperature"))
   iHAD_NH_reform <- iHAD_NH_reform[iHAD_NH_reform$Year %in% calibration.years, ]
   message("Calculating standard deviation for 1961--1990 calibration period.")
-  calib.sd <- sd(iHAD_NH_reform$Temperature)
+  calib.sd <- stats::sd(iHAD_NH_reform$Temperature)
 
   # Get the Marcott et al. 2013 Northern Hemisphere temperature reconstruction,
   # which is referenced to the Mann et al. 2008 infilled instrumental average from 1961--1990

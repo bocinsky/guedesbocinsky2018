@@ -8,17 +8,15 @@
 #' and again smooths using the same type of GAM.
 #' Optionally, you may plot the results.
 #'
-#' @param daily.data
-#' @param unwrapped
-#' @param plot
+#' @param daily.data GHCN data
+#' @param unwrapped Whether the data are already unwrapped
+#' @param plot Whether to create a polar plot of the climatology.
 #'
-#' @return
+#' @return A list containing the day-of-year, mean, and sd.
 #' @export
-#'
-#' @examples
 calcDailyMeanSD <- function(daily.data,
-                            unwrapped=F,
-                            plot=F) {
+                            unwrapped = F,
+                            plot = F) {
   if (!unwrapped) {
     # Unwrap data and convert to POSIX Day of Year (DoY)
     daily.data.unwrap <- data.frame(
@@ -39,33 +37,33 @@ calcDailyMeanSD <- function(daily.data,
   }
 
   # fit a generalized additive model to data as smooth, periodic function of DoY
-  mean.model <- gam(DATA ~ s(DOY, bs = "cc"),
+  mean.model <- mgcv::gam(DATA ~ s(DOY, bs = "cc"),
     data = daily.data.unwrap
   )
 
   # generate predictions from our DoY model
-  mean.predictions <- predict(
+  mean.predictions <- stats::predict(
     mean.model,
     data.frame(DOY = 1:366)
   )
 
   # Get the standard deviation of the residuals for each day
-  daily.data.unwrap$RES <- residuals(mean.model)
-  residual.sds <- aggregate(daily.data.unwrap$RES,
+  daily.data.unwrap$RES <- stats::residuals(mean.model)
+  residual.sds <- stats::aggregate(daily.data.unwrap$RES,
     by = list(daily.data.unwrap$DOY),
-    sd
+    stats::sd
   )
   names(residual.sds) <- c("DOY", "SD")
-  sd.model <- gam(SD ~ s(DOY, bs = "cc"),
+  sd.model <- mgcv::gam(SD ~ s(DOY, bs = "cc"),
     data = residual.sds
   )
-  sd.predictions <- predict(
+  sd.predictions <- stats::predict(
     sd.model,
     data.frame(DOY = 1:366)
   )
 
   if (plot) {
-    polar.plot(
+    plotrix::polar.plot(
       lengths = daily.data.unwrap$DATA,
       polar.pos = (daily.data.unwrap$DOY) * 360 / 365,
       labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"),
@@ -76,7 +74,7 @@ calcDailyMeanSD <- function(daily.data,
       radial.lim = range(daily.data.unwrap$DATA),
       cex = 0.1
     )
-    polar.plot(
+    plotrix::polar.plot(
       lengths = as.numeric(mean.predictions),
       polar.pos = as.numeric(names(mean.predictions)) * 360 / 366,
       rp.type = "p",
@@ -87,7 +85,7 @@ calcDailyMeanSD <- function(daily.data,
       line.col = "dodgerblue",
       add = TRUE
     )
-    polar.plot(
+    plotrix::polar.plot(
       lengths = as.numeric(mean.predictions) + as.numeric(sd.predictions),
       polar.pos = as.numeric(names(mean.predictions)) * 360 / 366,
       rp.type = "p",
@@ -99,7 +97,7 @@ calcDailyMeanSD <- function(daily.data,
       line.col = "red",
       lwd = 2
     )
-    polar.plot(
+    plotrix::polar.plot(
       lengths = as.numeric(mean.predictions) - as.numeric(sd.predictions),
       polar.pos = as.numeric(names(mean.predictions)) * 360 / 366,
       rp.type = "p",

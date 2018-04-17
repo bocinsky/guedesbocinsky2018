@@ -3,8 +3,8 @@
 #' User must provide a vector (n) specifying the length of rows.
 #' n can be either a constant (in which case it will be repeated), or a vector.
 #'
-#' @param vec
-#' @param n
+#' @param vec A vector
+#' @param n the length of each row.
 #'
 #' @return
 #' @export

@@ -2,19 +2,17 @@
 #' and maximum and minimum growth temperatures.
 #'
 #' GDD is calculated as
-#' $[(TMINc+TMAXc)/2]-TBASE$
+#' $((TMINc+TMAXc)/2)-TBASE$
 #' Where TMINc and TMAXc are measured temperatures bounded by TBASE as a minimum
 #' and perhaps a TCAP as a maximum.
 #'
-#' @param tmin.vector
-#' @param tmax.vector
-#' @param t.base
-#' @param t.cap
+#' @param tmin.vector A vector of daily tmin values
+#' @param tmax.vector A vector of daily tmax values
+#' @param t.base A base temperature
+#' @param t.cap An (optional) cap temperature
 #'
-#' @return
+#' @return A vector of daily GDD values
 #' @export
-#'
-#' @examples
 calcGDD <- function(tmin.vector,
                     tmax.vector,
                     t.base,

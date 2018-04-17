@@ -7,7 +7,12 @@
 annualize(station, months = 1:12)
 }
 \arguments{
-\item{months}{}
+\item{station}{GHCN station data}
+
+\item{months}{The months over which to annualize}
+}
+\value{
+A \link{data.frame} of annualized data.
 }
 \description{
 Sum a GHCN record over a set of months to generate annual estimates.

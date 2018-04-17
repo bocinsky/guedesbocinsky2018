@@ -7,7 +7,7 @@
 prepare_marcott(calibration.years)
 }
 \arguments{
-\item{calibration.years}{}
+\item{calibration.years}{The years used to define climatology}
 }
 \description{
 Download and prepare data from Mann et al. 2008 and Marcott et al. 2013.

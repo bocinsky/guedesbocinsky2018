@@ -1,24 +1,32 @@
 #' A simple scale bar.
 #'
-#' @param d
-#' @param xy
-#' @param height
-#' @param line.offset
-#' @param side
-#' @param lab.side
-#' @param col
-#' @param lonlat
-#' @param label
-#' @param adj
-#' @param lwd
-#' @param ...
+#' @param d the length of the scalebar in meters
+#' @param xy the position of the scale bar
+#' @param height the height of the scale bar in inches
+#' @param line.offset the offset of the position of the scale bar
+#' @param side which side of the plot the scale bar should be on
+#' @param lab.side which side of the scale bar the label should be on
+#' @param col the color of the scale bar
+#' @param lonlat is the plot in georgaphic coordinates?
+#' @param label The label
+#' @param adj An adjustment for the scale bar
+#' @param lwd the line width of the scale bar
+#' @param ... Additional parameters passed on to text
 #'
-#' @return
+#' @return A scalebar is added to the current graphics device.
 #' @export
-#'
-#' @examples
-scalebar.new <- function(d, xy = NULL, height = NULL, line.offset=c(0, 0), side="right", lab.side="top", col="black", lonlat = NULL, label, adj = c(0.5, -0.5), lwd = 2, ...) {
-  pr <- par()
+scalebar.new <- function(d,
+                         xy = NULL,
+                         height = NULL,
+                         line.offset=c(0, 0),
+                         side="right",
+                         lab.side="top",
+                         col="black",
+                         lonlat = NULL,
+                         label,
+                         adj = c(0.5, -0.5),
+                         lwd = 2, ...) {
+  pr <- graphics::par()
   if (is.null(lonlat)) {
     if (pr$usr[1] > -181 & pr$usr[2] < 181 & pr$yaxp[1] >
       -200 & pr$yaxp[2] < 200) {
@@ -33,7 +41,7 @@ scalebar.new <- function(d, xy = NULL, height = NULL, line.offset=c(0, 0), side=
     lat <- mean(pr$yaxp[1:2])
     if (missing(d)) {
       dx <- (pr$usr[2] - pr$usr[1]) / 10
-      d <- pointDistance(
+      d <- raster::pointDistance(
         cbind(0, lat), cbind(dx, lat),
         TRUE
       )
@@ -72,7 +80,7 @@ scalebar.new <- function(d, xy = NULL, height = NULL, line.offset=c(0, 0), side=
     height <- dd * 0.1
   }
 
-  rect(xleft = xstart, ybottom = xy[2], xright = xend, ytop = xy[2] + height, col = col, border = NA, lend = 1)
+  graphics::rect(xleft = xstart, ybottom = xy[2], xright = xend, ytop = xy[2] + height, col = col, border = NA, lend = 1)
 
   #   lines(matrix(c(xstart, xy[2], xend, xy[2]), byrow = T, nrow = 2), lend=1, lwd = lwd, ...)
 
@@ -87,22 +95,22 @@ scalebar.new <- function(d, xy = NULL, height = NULL, line.offset=c(0, 0), side=
   }
 
   if (lab.side == "top") {
-    text(mean(c(xstart, xend)), xy[2],
+    graphics::text(mean(c(xstart, xend)), xy[2],
       labels = label, adj = c(0.5, -0.5), col = col,
       ...
     )
   } else if (lab.side == "right") {
-    text(xend, xy[2],
+    graphics::text(xend, xy[2],
       labels = label, adj = c(-0.1, 0), col = col,
       ...
     )
   } else if (lab.side == "left") {
-    text(xstart, xy[2],
+    graphics::text(xstart, xy[2],
       labels = label, adj = c(1.1, 0), col = col,
       ...
     )
   } else if (lab.side == "bottom") {
-    text(mean(c(xstart, xend)), xy[2],
+    graphics::text(mean(c(xstart, xend)), xy[2],
       labels = label, adj = c(0.5, 1.5), col = col,
       ...
     )

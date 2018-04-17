@@ -7,7 +7,14 @@
 calcDailyMeanSD(daily.data, unwrapped = F, plot = F)
 }
 \arguments{
-\item{plot}{}
+\item{daily.data}{GHCN data}
+
+\item{unwrapped}{Whether the data are already unwrapped}
+
+\item{plot}{Whether to create a polar plot of the climatology.}
+}
+\value{
+A list containing the day-of-year, mean, and sd.
 }
 \description{
 First, it converts all data to DOY data (366-day-year).

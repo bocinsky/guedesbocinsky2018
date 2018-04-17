@@ -7,7 +7,9 @@
 rewrapRows(vec, n)
 }
 \arguments{
-\item{n}{}
+\item{vec}{A vector}
+
+\item{n}{the length of each row.}
 }
 \description{
 User must provide a vector (n) specifying the length of rows.

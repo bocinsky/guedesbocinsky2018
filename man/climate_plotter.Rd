@@ -7,7 +7,14 @@
 climate_plotter(data, station, element)
 }
 \arguments{
-\item{element}{}
+\item{data}{GHCN data}
+
+\item{station}{A station name}
+
+\item{element}{An element (variable) name}
+}
+\value{
+A ggplot2 object
 }
 \description{
 Plot climatology for a GHCN station and element (variable).

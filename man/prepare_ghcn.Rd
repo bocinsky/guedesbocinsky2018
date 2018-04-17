@@ -8,7 +8,18 @@ prepare_ghcn(region, label, calibration.years, google_maps_elevation_api_key,
   force.redo = FALSE)
 }
 \arguments{
-\item{force.redo}{}
+\item{region}{A spatial object defining the region}
+
+\item{label}{A label for the region}
+
+\item{calibration.years}{The years for defining climatology}
+
+\item{google_maps_elevation_api_key}{the users Google Maps Elevation API key}
+
+\item{force.redo}{Should the GHCN data be re-processed?}
+}
+\value{
+A clean set of GHCN data
 }
 \description{
 Download and clean daily climate records from the Global Historical Climate Database.

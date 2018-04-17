@@ -7,7 +7,12 @@
 unwrapRows(mat, n)
 }
 \arguments{
-\item{n}{}
+\item{mat}{A matrix}
+
+\item{n}{The length of rows}
+}
+\value{
+A vector
 }
 \description{
 n can be either a constant (in which case it will be repeated), or a vector.

@@ -6,16 +6,17 @@
 #' (4) fill by average those days at the beginning and end of years with missing data
 #' (5) remove stations with less than min.years years of complete data
 #'
-#' @param data.list
-#' @param year.range
-#' @param na.cutoff
-#' @param min.years
+#' @param data.list a list of GHCN data sets
+#' @param year.range the intended years
+#' @param na.cutoff the maximum length of gaps, above which a dataset is excluded.
+#' @param min.years the minimum number of years a dataset must include, below which a dataset is excluded.
 #'
-#' @return
+#' @return a clean set of ghcn data
 #' @export
-#'
-#' @examples
-ghcnCleaner <- function(data.list, year.range, na.cutoff, min.years=length(year.range)) {
+ghcnCleaner <- function(data.list,
+                        year.range,
+                        na.cutoff,
+                        min.years = length(year.range)) {
   ## (1) crop each series to year.range
   data.list <- lapply(data.list, function(X) {
     X <- X[X$YEAR %in% year.range, ]
@@ -38,7 +39,7 @@ ghcnCleaner <- function(data.list, year.range, na.cutoff, min.years=length(year.
       annual.records <- as.matrix(annual.data[, 4:34])
 
       # Get the number of days per month in the records
-      n.days <- monthDays(as.Date(paste(annual.data$YEAR, annual.data$MONTH, "01", sep = "-")))
+      n.days <- Hmisc::monthDays(as.Date(paste(annual.data$YEAR, annual.data$MONTH, "01", sep = "-")))
 
       ## Unnwrap each row, accounting for number of days in the month
       annual.records.unwrapped <- unwrapRows(annual.records, n.days)
@@ -78,13 +79,13 @@ ghcnCleaner <- function(data.list, year.range, na.cutoff, min.years=length(year.
       data.matrix <- as.matrix(data.split[, 4:34])
 
       # Get the number of days per month in the records
-      n.days <- monthDays(as.Date(paste(data.split$YEAR, data.split$MONTH, "01", sep = "-")))
+      n.days <- Hmisc::monthDays(as.Date(paste(data.split$YEAR, data.split$MONTH, "01", sep = "-")))
 
       ## Unnwrap each row, accounting for number of days in the month
       data.matrix.unwrapped <- unwrapRows(data.matrix, n.days)
 
       # Interpolate
-      data.matrix.unwrapped.interp <- round(na.approx(data.matrix.unwrapped, na.rm = F))
+      data.matrix.unwrapped.interp <- round(zoo::na.approx(data.matrix.unwrapped, na.rm = F))
 
       # coerce back into a matrix
       data.matrix.final <- rewrapRows(data.matrix.unwrapped.interp, n.days)
@@ -100,7 +101,7 @@ ghcnCleaner <- function(data.list, year.range, na.cutoff, min.years=length(year.
     # split by year
     interp.records.final.years <- split(interp.records.final, interp.records.final$YEAR)
     # stack in 3D array
-    interp.records.final.years.stack <- do.call(abind, c(interp.records.final.years, list(along = 0))) # Gives 2 x 4 x 5
+    interp.records.final.years.stack <- do.call(abind::abind, c(interp.records.final.years, list(along = 0))) # Gives 2 x 4 x 5
     class(interp.records.final.years.stack) <- "integer"
     # Calculate the mean of all years
     interp.records.final.years.stack.mean <- apply(interp.records.final.years.stack, c(2, 3), function(X) {

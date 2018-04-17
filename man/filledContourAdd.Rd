@@ -7,7 +7,18 @@
 filledContourAdd(x, y = 1, maxpixels = 1e+05, levels, col)
 }
 \arguments{
-\item{col}{}
+\item{x}{a raster object}
+
+\item{y}{Integer. The layer number of x (if x has multiple layers)}
+
+\item{maxpixels}{the maximum number of pixels to plot}
+
+\item{levels}{The levels to plot}
+
+\item{col}{a vector of colors}
+}
+\value{
+An additional plot on the current graphics device
 }
 \description{
 Add a filled contour to a plot.

@@ -8,11 +8,20 @@ and maximum and minimum growth temperatures.}
 calcGDD(tmin.vector, tmax.vector, t.base, t.cap = NULL)
 }
 \arguments{
-\item{t.cap}{}
+\item{tmin.vector}{A vector of daily tmin values}
+
+\item{tmax.vector}{A vector of daily tmax values}
+
+\item{t.base}{A base temperature}
+
+\item{t.cap}{An (optional) cap temperature}
+}
+\value{
+A vector of daily GDD values
 }
 \description{
 GDD is calculated as
-$\link{(TMINc+TMAXc)/2}-TBASE$
+$((TMINc+TMAXc)/2)-TBASE$
 Where TMINc and TMAXc are measured temperatures bounded by TBASE as a minimum
 and perhaps a TCAP as a maximum.
 }

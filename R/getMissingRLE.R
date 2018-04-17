@@ -2,19 +2,17 @@
 #'
 #' Useful for deciding the cutoff value for the number of contiguous days.
 #'
-#' @param vect
+#' @param vect A numebric vector
 #'
-#' @return
+#' @return the RLE of the vector
 #' @export
-#'
-#' @examples
 getMissingRLE <- function(vect) {
   ## Read in both records
   vect.tmin <- vect[["TMIN"]]
   vect.tmax <- vect[["TMAX"]]
 
   ## Make sure they are both the same dimensions
-  if (!equals(dim(vect.tmin), dim(vect.tmax))) {
+  if (!R.oo::equals(dim(vect.tmin), dim(vect.tmax))) {
     return(NULL)
   }
 
@@ -27,7 +25,7 @@ getMissingRLE <- function(vect) {
   vect.tmax.records[is.na(vect.tmin.records)] <- NA
 
   ## Get the number of days per month in the records
-  n.days <- monthDays(as.Date(paste(vect.tmin$YEAR, vect.tmin$MONTH, "01", sep = "-")))
+  n.days <- Hmisc::monthDays(as.Date(paste(vect.tmin$YEAR, vect.tmin$MONTH, "01", sep = "-")))
 
   ## Unnwrap each row, accounting for number of days in the month, and count
   ## consecutive missing values (these are the same)

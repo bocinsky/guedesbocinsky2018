@@ -1,6 +1,6 @@
 Package: guedesbocinsky2018
 Version: 1.0.0.9000
-Title: Research Compendium for d'Alpoim Guedes and Bocinsky (in review)
+Title: Research Compendium for d'Alpoim Guedes and Bocinsky (in Review)
 Description: This R package repository is a research compendium for d'Alpoim Guedes and Bocinsky (in review). 
   The compendium contains all code associated with the analyses described and presented in the publication, 
   as well as a Docker environment for running the code.
@@ -13,8 +13,7 @@ Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 Requires: R (>= 3.4.3)
-Remotes:
-    hadley/purrrlyr,
+Remotes: hadley/purrrlyr,
     bocinsky/tdar
 Imports: 
     bookdown,
@@ -44,6 +43,15 @@ Imports:
     plotly,
     bibtex,
     ggplot2,
-    knitcitations
+    knitcitations,
+    plotrix,
+    plyr,
+    tibble,
+    readr,
+    readxl,
+    stringi,
+    stringr,
+    R.oo,
+    zoo
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1

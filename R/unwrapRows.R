@@ -2,13 +2,11 @@
 #'
 #' n can be either a constant (in which case it will be repeated), or a vector.
 #'
-#' @param mat
-#' @param n
+#' @param mat A matrix
+#' @param n The length of rows
 #'
-#' @return
+#' @return A vector
 #' @export
-#'
-#' @examples
 unwrapRows <- function(mat, n) {
   n <- rep_len(n, nrow(mat))
   i <- 0

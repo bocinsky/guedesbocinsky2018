@@ -7,7 +7,15 @@
 arrow.new(x, y, height, width, adj)
 }
 \arguments{
-\item{adj}{}
+\item{x}{The x position of the arrow}
+
+\item{y}{The y position of the arrow}
+
+\item{height}{The height of the arrow}
+
+\item{width}{The width of the arrow}
+
+\item{adj}{The adjustment for the arrow}
 }
 \description{
 A north arrow.

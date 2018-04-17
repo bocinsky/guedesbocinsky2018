@@ -7,7 +7,16 @@
 sdModulator(data.df, temp.change.sd, t.base, t.cap = NULL)
 }
 \arguments{
-\item{t.cap}{}
+\item{data.df}{A dataframe of temperature data}
+
+\item{temp.change.sd}{The change in standard score (z-score) of the data}
+
+\item{t.base}{A base temperature for calculating GDD}
+
+\item{t.cap}{An optional cap temperature for calculating GDD}
+}
+\value{
+The modulated GDD
 }
 \description{
 Modulate a record by a deviation of its standard score.

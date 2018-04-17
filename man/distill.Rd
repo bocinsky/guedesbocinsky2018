@@ -7,7 +7,9 @@
 distill(file, gray = F)
 }
 \arguments{
-\item{gray}{}
+\item{file}{A file name}
+
+\item{gray}{Whether the output should be grayscale}
 }
 \description{
 Use ghostscript to distill a PDF, possibly to grayscale.

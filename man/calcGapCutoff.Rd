@@ -7,7 +7,12 @@
 calcGapCutoff(rleVector, pLevel = 0.95)
 }
 \arguments{
-\item{pLevel}{}
+\item{rleVector}{the RLE vector}
+
+\item{pLevel}{a p level}
+}
+\value{
+The cutoff value
 }
 \description{
 This function calculates the empirical cumulative distribution function,

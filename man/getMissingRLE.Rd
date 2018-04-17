@@ -7,7 +7,10 @@
 getMissingRLE(vect)
 }
 \arguments{
-\item{vect}{}
+\item{vect}{A numebric vector}
+}
+\value{
+the RLE of the vector
 }
 \description{
 Useful for deciding the cutoff value for the number of contiguous days.

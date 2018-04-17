@@ -1,3 +1,4 @@
+utils::globalVariables(c("sd.temporal"))
 #' A space-time video
 #'
 #' Given a raster brick (and possibly uncertainties/errors),
@@ -27,9 +28,7 @@
 #' @param extra_legend_fun
 #'
 #' @return
-#' @export
-#'
-#' @examples
+#' @keywords internal
 space_time_video <- function(the_brick,
                              the_brick_upper = NULL,
                              the_brick_lower = NULL,
@@ -42,7 +41,7 @@ space_time_video <- function(the_brick,
                              zbreaks = NULL,
                              zlab,
                              zaxis,
-                             zcolors = rev(brewer.pal(11, "RdYlBu")),
+                             zcolors = rev(RColorBrewer::brewer.pal(11, "RdYlBu")),
                              fig_width = 6.5,
                              graph_height = 1.5,
                              margin = 0.1,
@@ -55,7 +54,7 @@ space_time_video <- function(the_brick,
   dir.create(out_dir)
 
   if (isTRUE(smooth)) {
-    smoother <- dnorm(seq(-10, 10, 1), sd = 5)
+    smoother <- stats::dnorm(seq(-10, 10, 1), sd = 5)
   } else if (is.numeric(smooth)) {
     smoother <- smooth
   } else {
@@ -64,13 +63,13 @@ space_time_video <- function(the_brick,
 
   if (!raster::inMemory(the_brick)) {
     the_brick %<>%
-      raster:::readAll()
+      raster::readAll()
   }
 
   mean.all <- mean(the_brick[], na.rm = T)
   mean.spatial <- mean(the_brick, na.rm = T)
   mean.temporal <- raster::cellStats(the_brick, mean, na.rm = T)
-  ci.temporal <- raster::cellStats(the_brick, quantile, probs = c(0.25, 0.75), na.rm = T)
+  ci.temporal <- raster::cellStats(the_brick, stats::quantile, probs = c(0.25, 0.75), na.rm = T)
 
   if (!is.null(smoother)) {
     mean.temporal %<>% stats::filter(filter = smoother)
@@ -107,11 +106,12 @@ space_time_video <- function(the_brick,
     )
   }
 
-  colors <- colorRampPalette(zcolors)(length(zbreaks))
+  colors <- grDevices::colorRampPalette(zcolors)(length(zbreaks))
 
-  for (layer in 1:nlayers(the_brick)) {
-    png(
-      filename = stringr::str_c(out_dir, "/image", stringi::stri_pad_left(layer, width = 4, pad = 0), ".png"),
+  for (layer in 1:raster::nlayers(the_brick)) {
+    grDevices::png(
+      filename = stringr::str_c(out_dir, "/image",
+                                stringi::stri_pad_left(layer, width = 4, pad = 0), ".png"),
       width = fig_width,
       height = fig_height,
       units = "in",
@@ -121,7 +121,7 @@ space_time_video <- function(the_brick,
       res = 600
     )
 
-    par(
+    graphics::par(
       mai = c(
         graph_height + (margin * 2),
         margin,
@@ -131,30 +131,31 @@ space_time_video <- function(the_brick,
       xpd = F
     )
 
-    plot(1,
+    graphics::plot(1,
       type = "n",
       xlab = "",
       ylab = "",
-      xlim = c(extent(the_brick)@xmin, extent(the_brick)@xmax),
-      ylim = c(extent(the_brick)@ymin, extent(the_brick)@ymax),
+      xlim = c(raster::extent(the_brick)@xmin, raster::extent(the_brick)@xmax),
+      ylim = c(raster::extent(the_brick)@ymin, raster::extent(the_brick)@ymax),
       xaxs = "i",
       yaxs = "i",
       axes = FALSE,
       main = ""
     )
 
-    plot(the_brick[[layer]],
-      maxpixels = ncell(the_brick),
+    graphics::plot(the_brick[[layer]],
+      maxpixels = raster::ncell(the_brick),
       zlim = range(zbreaks),
       add = T,
       col = colors,
       colNA = "gray90",
-      useRaster = TRUE, legend = FALSE
+      useRaster = TRUE,
+      legend = FALSE
     )
 
     if ((min(the_brick[[layer]][], na.rm = TRUE) != max(the_brick[[layer]][], na.rm = TRUE))) {
       raster::contour(the_brick[[layer]],
-        maxpixels = ncell(the_brick),
+        maxpixels = raster::ncell(the_brick),
         levels = 0.75,
         drawlabels = FALSE,
         col = "white",
@@ -165,7 +166,7 @@ space_time_video <- function(the_brick,
 
     if (!is.null(the_brick_upper) & (min(the_brick_upper[[layer]][], na.rm = TRUE) != max(the_brick_upper[[layer]][], na.rm = TRUE))) {
       raster::contour(the_brick_upper[[layer]],
-        maxpixels = ncell(the_brick_upper),
+        maxpixels = raster::ncell(the_brick_upper),
         levels = 0.75,
         drawlabels = FALSE,
         col = "white",
@@ -177,7 +178,7 @@ space_time_video <- function(the_brick,
 
     if (!is.null(the_brick_lower) & (min(the_brick_lower[[layer]][], na.rm = TRUE) != max(the_brick_lower[[layer]][], na.rm = TRUE))) {
       raster::contour(the_brick_lower[[layer]],
-        maxpixels = ncell(the_brick_lower),
+        maxpixels = raster::ncell(the_brick_lower),
         levels = 0.75,
         drawlabels = FALSE,
         col = "white",
@@ -195,14 +196,14 @@ space_time_video <- function(the_brick,
       extra_legend_fun()
     }
 
-    par(mai = c(
+    graphics::par(mai = c(
       (margin * 2),
       margin,
       (margin * 3) + plot_height,
       margin
     ), xpd = T, new = T)
 
-    plot(1,
+    graphics::plot(1,
       type = "n",
       xlab = "",
       ylab = "",
@@ -214,9 +215,11 @@ space_time_video <- function(the_brick,
       main = ""
     )
 
-    legend.breaks <- seq(from = head(zbreaks, 1), to = tail(zbreaks, 1), length.out = (length(zbreaks) + 1))
+    legend.breaks <- seq(from = utils::head(zbreaks, 1),
+                         to = utils::tail(zbreaks, 1),
+                         length.out = (length(zbreaks) + 1))
 
-    rect(
+    graphics::rect(
       col = colors,
       border = NA,
       ybottom = zbreaks[1:(length(zbreaks) - 1)],
@@ -226,12 +229,12 @@ space_time_video <- function(the_brick,
       xpd = T
     )
 
-    abline(
+    graphics::abline(
       h = 0.75,
       col = "white"
     )
 
-    text(
+    graphics::text(
       x = 0,
       y = mean(zbreaks),
       labels = zlab,
@@ -241,23 +244,23 @@ space_time_video <- function(the_brick,
       font = 2
     )
 
-    text(
+    graphics::text(
       x = 0.5,
       y = c(
-        head(zbreaks, 1),
-        tail(zbreaks, 1),
+        utils::head(zbreaks, 1),
+        utils::tail(zbreaks, 1),
         zaxis
       ),
       labels = c(
-        head(zbreaks, 1),
-        tail(zbreaks, 1),
+        utils::head(zbreaks, 1),
+        utils::tail(zbreaks, 1),
         zaxis
       ),
       adj = c(0.5, 0.5),
       cex = 0.8
     )
 
-    text(
+    graphics::text(
       x = 0,
       y = max(zbreaks),
       labels = title,
@@ -266,7 +269,7 @@ space_time_video <- function(the_brick,
       font = 2
     )
 
-    text(
+    graphics::text(
       x = fig_width,
       y = max(zbreaks),
       labels = time[[layer]] %>%
@@ -276,7 +279,7 @@ space_time_video <- function(the_brick,
       font = 2
     )
 
-    par(
+    graphics::par(
       mai = c(
         (margin * 2),
         margin * 8,
@@ -287,23 +290,32 @@ space_time_video <- function(the_brick,
       new = T
     )
 
-    plot(1, type = "n", xlab = "", ylab = "", xlim = timelim, ylim = range(zbreaks), xaxs = "i", yaxs = "i", axes = FALSE, main = "")
+    graphics::plot(1,
+                   type = "n",
+                   xlab = "",
+                   ylab = "",
+                   xlim = timelim,
+                   ylim = range(zbreaks),
+                   xaxs = "i",
+                   yaxs = "i",
+                   axes = FALSE,
+                   main = "")
 
 
-    polygon(
+    graphics::polygon(
       x = c(time, rev(time)),
       y = c(ci.temporal[1, ], rev(ci.temporal[2, ])),
       border = NA,
       col = "gray90"
     )
 
-    lines(
+    graphics::lines(
       y = mean.temporal,
       x = time,
       lwd = 1.5
     )
 
-    abline(
+    graphics::abline(
       h = mean.all,
       lty = 2,
       lwd = 1.5,
@@ -311,14 +323,14 @@ space_time_video <- function(the_brick,
     )
 
     if (!is.null(the_brick_lower)) {
-      lines(
+      graphics::lines(
         y = mean.temporal.lower,
         x = time,
         lwd = 0.5,
         lty = 1
       )
 
-      abline(
+      graphics::abline(
         h = mean.all.lower,
         lty = 2,
         lwd = 0.5,
@@ -327,14 +339,14 @@ space_time_video <- function(the_brick,
     }
 
     if (!is.null(the_brick_upper)) {
-      lines(
+      graphics::lines(
         y = mean.temporal.upper,
         x = time,
         lwd = 0.5,
         lty = 1
       )
 
-      abline(
+      graphics::abline(
         h = mean.all.upper,
         lty = 2,
         lwd = 0.5,
@@ -342,7 +354,7 @@ space_time_video <- function(the_brick,
       )
     }
 
-    abline(
+    graphics::abline(
       v = time[[layer]],
       lty = 1,
       lwd = 1.5,
@@ -350,16 +362,16 @@ space_time_video <- function(the_brick,
       xpd = FALSE
     )
 
-    axis(2,
+    graphics::axis(2,
       at = c(
-        head(zbreaks, 1),
-        tail(zbreaks, 1),
+        utils::head(zbreaks, 1),
+        utils::tail(zbreaks, 1),
         zaxis
       ),
       labels = F
     )
 
-    par(
+    graphics::par(
       mai = c(
         margin,
         margin * 8,
@@ -369,8 +381,17 @@ space_time_video <- function(the_brick,
       xpd = T,
       new = T
     )
-    plot(1, type = "n", xlab = "", ylab = "", xlim = timelim, ylim = c(0, graph_height), xaxs = "i", yaxs = "i", axes = FALSE, main = "")
-    segments(
+    graphics::plot(1,
+                   type = "n",
+                   xlab = "",
+                   ylab = "",
+                   xlim = timelim,
+                   ylim = c(0, graph_height),
+                   xaxs = "i",
+                   yaxs = "i",
+                   axes = FALSE,
+                   main = "")
+    graphics::segments(
       x0 = timeaxis,
       x1 = timeaxis,
       y0 = (margin * 1),
@@ -378,14 +399,14 @@ space_time_video <- function(the_brick,
       col = "gray50",
       lty = 3
     )
-    text(
+    graphics::text(
       x = timeaxis,
       y = 0,
       labels = timeaxis,
       adj = c(0.5, 0),
       cex = 0.8
     )
-    text(
+    graphics::text(
       x = timelim[1],
       y = 0,
       labels = timelab,
@@ -394,7 +415,7 @@ space_time_video <- function(the_brick,
       font = 2
     )
 
-    dev.off()
+    grDevices::dev.off()
   }
 
   movie.width <- 1600
@@ -402,6 +423,15 @@ space_time_video <- function(the_brick,
   if (movie.height %% 2 != 0) movie.height <- movie.height + 1
 
   # Create the video
-  fps <- nlayers(the_brick) / length
-  system(stringr::str_c("ffmpeg -r ", fps, " -i ", out_dir, "/image%04d.png -s:v ", movie.width, "x", movie.height, " -c:v libx264 -crf 30 -profile:v High -pix_fmt yuv420p ", out_file, " -y"))
+  fps <- raster::nlayers(the_brick) / length
+  system(stringr::str_c("ffmpeg",
+                        " -r ", fps,
+                        " -i ", out_dir, "/image%04d.png",
+                        " -s:v ", movie.width, "x", movie.height,
+                        " -c:v libx264",
+                        " -crf 30",
+                        " -profile:v High",
+                        " -pix_fmt yuv420p",
+                        " ",
+                        out_file, " -y"))
 }

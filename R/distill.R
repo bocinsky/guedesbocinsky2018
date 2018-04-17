@@ -1,12 +1,10 @@
 #' Use ghostscript to distill a PDF, possibly to grayscale.
 #'
-#' @param file
-#' @param gray
+#' @param file A file name
+#' @param gray Whether the output should be grayscale
 #'
-#' @return
+#' @return NULL
 #' @export
-#'
-#' @examples
 distill <- function(file,
                     gray = F) {
   if (!gray) {

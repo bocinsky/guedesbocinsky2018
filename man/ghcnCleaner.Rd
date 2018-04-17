@@ -7,7 +7,16 @@
 ghcnCleaner(data.list, year.range, na.cutoff, min.years = length(year.range))
 }
 \arguments{
-\item{min.years}{}
+\item{data.list}{a list of GHCN data sets}
+
+\item{year.range}{the intended years}
+
+\item{na.cutoff}{the maximum length of gaps, above which a dataset is excluded.}
+
+\item{min.years}{the minimum number of years a dataset must include, below which a dataset is excluded.}
+}
+\value{
+a clean set of ghcn data
 }
 \description{
 (1) crop to year.range
