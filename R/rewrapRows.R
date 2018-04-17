@@ -10,14 +10,14 @@
 #' @export
 #'
 #' @examples
-rewrapRows <- function(vec,n){
-  list.out <- vector('list',length(n))
-  n.sums <- c(0,cumsum(n))
-  for(i in 2:length(n.sums)){
-    temp.out <- vector('numeric',31)
+rewrapRows <- function(vec, n) {
+  list.out <- vector("list", length(n))
+  n.sums <- c(0, cumsum(n))
+  for (i in 2:length(n.sums)) {
+    temp.out <- vector("numeric", 31)
     temp.out[] <- NA
-    temp.out[1:length((n.sums[i-1]+1):n.sums[i])] <- vec[(n.sums[i-1]+1):n.sums[i]]
+    temp.out[1:length((n.sums[i - 1] + 1):n.sums[i])] <- vec[(n.sums[i - 1] + 1):n.sums[i]]
     list.out[[i]] <- temp.out
   }
-  return(do.call(rbind,list.out))
+  return(do.call(rbind, list.out))
 }

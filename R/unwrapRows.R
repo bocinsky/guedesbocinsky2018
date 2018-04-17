@@ -9,11 +9,11 @@
 #' @export
 #'
 #' @examples
-unwrapRows <- function(mat,n){
-  n <- rep_len(n,nrow(mat))
+unwrapRows <- function(mat, n) {
+  n <- rep_len(n, nrow(mat))
   i <- 0
-  out <- lapply(1:nrow(mat),function(i){
-    return(mat[i,1:n[i]])
+  out <- lapply(1:nrow(mat), function(i) {
+    return(mat[i, 1:n[i]])
   })
-  return(as.numeric(do.call(c,out)))
+  return(as.numeric(do.call(c, out)))
 }
