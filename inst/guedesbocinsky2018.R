@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-# FedData provides functions for getting GHCN data, 
+# FedData provides functions for getting GHCN data,
 # and the `pkg_test` function for installing/loading other packages
 #install.packages("devtools")
 # devtools::install_cran("FedData")
@@ -16,7 +16,7 @@ slurm_cores <- as.numeric(Sys.getenv("SLURM_NTASKS_PER_NODE"))
 option_list = list(
   make_option(c("-o", "--output_dir"),
               type = "character",
-              default = "./OUTPUT/", 
+              default = "./OUTPUT/",
               help = "Output directory [default = %default]",
               metavar = "character"),
   make_option(c("-n", "--cores"),
@@ -27,7 +27,7 @@ option_list = list(
               action = "store_true",
               default = FALSE,
               help = "Delete output directory and re-run all analyses? [default= %default]")
-); 
+);
 
 opt_parser = OptionParser(option_list = option_list);
 opt = parse_args(opt_parser);
@@ -38,21 +38,7 @@ start_time <- Sys.time()
 message("guedesbocinsky2018.R started at ", start_time)
 
 ## This is the code for the pan-Asian niche reconstructions
-
-## Load all packages
-all_packages <- c("foreach", "doParallel", # Packages for parallel processeing
-                  "FedData", # Package for data aquisition
-                  "R.utils", "Hmisc", "zoo", "abind", "mgcv", "rgbif", "fields", # Packages offering general utilities
-                  "sf", "rgdal", "ncdf4", "raster", "geomapdata", "maptools", "mapproj", # Packages for spatial processing
-                  "Bchron", "mclust", # Packages for chronometric analysis
-                  "magrittr", "tidyverse", "ggthemes", "purrrlyr", # Packages for tidy code
-                  "RColorBrewer", "htmlwidgets", "plotly", "bibtex", "knitcitations") # Plotting and rmarkdown
-
-purrr::walk(all_packages, library, character.only = TRUE)
-
-# Load all functions
-list.files("./src",full.names=T) %>%
-  purrr::walk(source)
+library(GuedesBocinsky2018)
 
 # Force Raster to load large rasters into memory
 rasterOptions(chunksize=2e+08,maxmemory=2e+09)
@@ -62,7 +48,7 @@ rasterOptions(chunksize=2e+08,maxmemory=2e+09)
 # Delete the output directory if requested, then create it
 opt$output_dir <- ifelse(stringr::str_sub(opt$output_dir,-1) != "/",
                          stringr::str_c(opt$output_dir,"/"),
-                         opt$output_dir) 
+                         opt$output_dir)
 if(opt$clean) unlink(opt$output_dir,
                      recursive = TRUE,
                      force = TRUE)

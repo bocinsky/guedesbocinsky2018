@@ -8,8 +8,39 @@ Authors@R: c(person(given = "Kyle", family = "Bocinsky",
        email = "bocinsky@gmail.com", role = c("aut", "cre", "cph")),
        person(given = "Jade", family = "d'Alpoim Guedes",
        email = "jguedes@ucsd.edu", role = c("aut", "ctb", "cph", "dtc")))
-License: What license it uses
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-Imports: bookdown
+Remotes:
+    hadley/purrrlyr
+Imports: 
+    bookdown,
+    foreach,
+    doParallel,
+    FedData,
+    R.utils,
+    Hmisc,
+    abind,
+    mgcv,
+    rgbif,
+    fields,
+    sf,
+    rgdal,
+    ncdf4,
+    raster,
+    geomapdata,
+    maptools,
+    mapproj,
+    Bchron,
+    mclust,
+    magrittr,
+    dplyr,
+    purrr,
+    purrrlyr,
+    RColorBrewer,
+    htmlwidgets,
+    plotly,
+    bibtex,
+    ggplot2,
+    knitcitations
