@@ -2,6 +2,15 @@ defaults: &steps
   steps:
     - checkout
 
+    ## install dev devtools -------------------------------
+
+    - run:
+        name: Install dev version of devtools
+        command: |
+          Rscript \
+          -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
+          -e devtools::install_github("r-lib/devtools")
+
     ## setup -------------------------------
 
     - run:
@@ -19,7 +28,6 @@ defaults: &steps
         name: Install devtools and dependencies
         command: |
           Rscript \
-            -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
             -e 'devtools::install_deps(dependencies = TRUE)'
 
     ## build and test -----------------
