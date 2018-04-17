@@ -1,11 +1,6 @@
 defaults: &steps
   steps:
       - checkout
-      - restore_cache:
-          keys:
-            - deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
-            - deps1-{{ .Branch }}
-            - deps1-
       - run:
           name: Install dev version of devtools
           command: |
@@ -16,21 +11,24 @@ defaults: &steps
           name: Install package dependencies
           command: |
             R -e 'devtools::install_deps(dependencies = TRUE)'
-      - save_cache:
-          name: Save cache
-          key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
-          paths:
-            - "/usr/local/lib/R/site-library"
       - run:
           name: Check and test
           command: |
             R -e 'results <- devtools::check(); stopifnot(length(results$errors) == 0)'
-      - store_artifacts:
-          path: man/
-          destination: man
 
 version: 2
 jobs:
+
+  "r-3.4.2":
+     docker:
+       - image: rocker/geospatial:3.4.2
+     <<: *steps
+
+  "r-3.4.3":
+     docker:
+       - image: rocker/geospatial:3.4.3
+     <<: *steps
+
   "r-release":
      docker:
        - image: rocker/geospatial:latest
@@ -45,6 +43,8 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - "r-3.4.2"
+      - "r-3.4.3"
       - "r-release"
       - "r-devel"
 
