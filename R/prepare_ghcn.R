@@ -1,8 +1,15 @@
-## PREPARE_GHCN.R
-## A script in support of d'Alpoim Guedes, Manning, Butler, and Bocinsky 2015.
-## This script downloads and cleans daily climate records from the Global Historical Climate Database.
-# It should be run from ./GUEDES_ET_AL_2015_FINAL.R
-
+#' Download and clean daily climate records from the Global Historical Climate Database.
+#'
+#' @param region
+#' @param label
+#' @param calibration.years
+#' @param google_maps_elevation_api_key
+#' @param force.redo
+#'
+#' @return
+#' @export
+#'
+#' @examples
 prepare_ghcn <- function(region,
                          label,
                          calibration.years,
@@ -11,7 +18,7 @@ prepare_ghcn <- function(region,
   # Keep only the clean stations
   if(!force.redo & file.exists(out("DATA/GHCN/ghcn_data_final.Rds"))){
     GHCN.data.final <- readr::read_rds(out('DATA/GHCN/ghcn_data_final.Rds'))
-    
+
     return(GHCN.data.final)
   }
 
@@ -27,38 +34,38 @@ prepare_ghcn <- function(region,
     standardize = TRUE,
     force.redo = force.redo
   )
-  
+
   GHCN.stations <- GHCN.data[[1]] # The spatial station data
   GHCN.data <- GHCN.data[[2]] # The actual temperature data
   GHCN.stations <- GHCN.stations[!duplicated(GHCN.stations$ID),] # Remove duplicated station location data
   GHCN.data <- GHCN.data[as.character(GHCN.stations$ID)] # Ensure that the order of the two datasets are the same
-  
+
   # Some stations have the same "location", but not the same data. Remove these points.
   nonduplicates <- !duplicated(coordinates(GHCN.stations)) * !duplicated(coordinates(GHCN.stations),fromLast=T)
   GHCN.stations <- GHCN.stations[nonduplicates,]
   GHCN.data <- GHCN.data[nonduplicates]
-  
+
   # Remove empty records
   GHCN.data <- GHCN.data[!(GHCN.data %>% sapply(length) < 2)]
-  
+
   ## Clean the GHCN data
   if(force.redo | !file.exists(out("DATA/GHCN/ghcn_data_clean.Rds"))){
-    
+
     # Get run length encoding of missing data
     all.rles <- do.call(c,lapply(GHCN.data,function(test){
       tryCatch(getMissingRLE(test),error=function(e) NULL)
     }))
-    
+
     # Calculate the cutoff length of data gaps.
     # Years with gaps longer than "cutoff" will be dropped
-    cutoff <- calcGapCutoff(rleVector=all.rles, 
+    cutoff <- calcGapCutoff(rleVector=all.rles,
                             pLevel=0.95)
-    
+
     GHCN.data.clean <- lapply(GHCN.data,function(station.data){
       # cat(station.data$TMAX$STATION[[1]],"\n")
-      test <- ghcnCleaner(data.list = station.data, 
-                          min.years = 10, 
-                          year.range = calibration.years, 
+      test <- ghcnCleaner(data.list = station.data,
+                          min.years = 10,
+                          year.range = calibration.years,
                           na.cutoff = cutoff)
     })
     names(GHCN.data.clean) <- names(GHCN.data)
@@ -68,21 +75,21 @@ prepare_ghcn <- function(region,
                      compress = "gz")
   }
   GHCN.data.clean <- readr::read_rds(out("DATA/GHCN/ghcn_data_clean.Rds"))
-  
-  
+
+
   # Keep only the clean stations
   if(force.redo | !file.exists(out("ghcn_data_final.Rds"))){
-    
+
     GHCN.stations <- GHCN.stations[GHCN.stations$ID %in% names(GHCN.data.clean),]
-    
+
     # Get the station elevations using google maps API
     GHCN.stations$elevation <- rgbif::elevation(latitude = GHCN.stations@coords[,2], longitude = GHCN.stations@coords[,1], key = google_maps_elevation_api_key)[,"elevation"]
-    
+
     # Get all stations averages over the calibration period
     GHCN.data.averages <- lapply(GHCN.data.clean, function(station){
       return(lapply(station,calcDailyMeanSD))
     })
-    
+
     # Create a final dataset
     GHCN.data.final <- list(spatial = GHCN.stations,
                             weather = GHCN.data.clean,
@@ -93,7 +100,7 @@ prepare_ghcn <- function(region,
                      compress = "gz")
   }
   GHCN.data.final <- readr::read_rds(out('DATA/GHCN/ghcn_data_final.Rds'))
-  
+
   return(GHCN.data.final)
 }
 

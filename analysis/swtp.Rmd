@@ -1,0 +1,1468 @@
+---
+title: "The Southwestern Taphonomic Protocol"
+author:
+  - Tiffany Clark
+  - Katherine A. Spielmann
+  - R. Kyle Bocinsky
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+    bookdown::html_document2:
+      df_print: paged
+      fig_caption: yes
+      toc: yes
+      toc_depth: 3
+      toc_float:
+        collapsed: no
+      includes:
+        after_body: tabset-dropdown.html
+bibliography: references.bib
+csl: "../templates/society-for-american-archaeology.csl" # Insert path for the bib-style
+link-citations: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE, collapse=TRUE, results = 'hide'}
+# Load the package for this vignette
+library(swtp)
+
+# Set the behavior for printing scientific notation
+options(digits = 3, scipen = -2)
+
+# Set the knitting behavior
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE,
+                      error = FALSE,
+                      collapse = TRUE, 
+                      results = 'hold',
+                      cache = FALSE,
+                      out.width = "100%",
+                      fig.height = 5
+)
+
+# A function that summarizes the data for a variable by dataset
+var_summary <- function(x, var){
+  quo_var <- rlang::enquo(var)
+  x %>%
+    dplyr::select(Dataset, !!quo_var) %>%
+    dplyr::group_by(Dataset, !!quo_var) %>%
+    dplyr::count() %>%
+    dplyr::group_by(Dataset) %>%
+    tidyr::spread(!!quo_var,
+                  n,
+                  drop = FALSE) %>%
+    dplyr::mutate_all(.funs = function(x){
+      ifelse(is.na(x), 0, x)
+    }) %>%
+    dplyr::ungroup()
+}
+
+# A function to further summarize variable data
+affected_summary <- function(x, ...){
+  affected_var <- rlang::quos(...)
+  
+  x %>%
+    dplyr::mutate(
+      `n total` = rowSums(
+        dplyr::select(.,
+                      -Dataset,
+        )
+      ) %>%
+        as.integer(),
+      `n recorded` = rowSums(
+        dplyr::select(.,
+                      -Dataset,
+                      -`Not Recorded`,
+                      -MISSING,
+                      -`NULL`,
+                      -UNMAPPED,
+                      -Indeterminate)
+      ) %>% 
+        as.integer(),
+      `p recorded` = `n recorded` / `n total`,
+      `n affected` = rowSums(
+        dplyr::select(.,
+                      !!!affected_var)
+      ) %>% 
+        as.integer(),
+      `p affected` = `n affected`/`n recorded`,
+      `p affected CI lower` = purrr::map2_dbl(`n affected`,
+                                              `n recorded`,
+                                              function(x,y){
+                                                ifelse(y > 0, 
+                                                       binom.test(x,y)$conf.int[[1]],
+                                                       NA)
+                                              }),
+      `p affected CI upper` = purrr::map2_dbl(`n affected`,
+                                              `n recorded`,
+                                              function(x,y){
+                                                ifelse(y > 0, 
+                                                       binom.test(x,y)$conf.int[[2]],
+                                                       NA)
+                                              })
+    ) %>%
+    dplyr::select(Dataset,
+                  `n total`,
+                  `n recorded`,
+                  `p recorded`:`p affected CI upper`)
+  
+}
+
+# Thresholds for inclusion used in this study
+apply_thresholds <- function(x){
+  x %>%
+    dplyr::mutate(`p affected` = ifelse(!(`n total` >= 25 & 
+                                            `p recorded` >= 0.4), 
+                                        NA, 
+                                        `p affected`),
+                  `p affected CI lower` = ifelse(!(`n total` >= 25 & 
+                                                     `p recorded` >= 0.4), 
+                                                 NA, 
+                                                 `p affected CI lower`),
+                  `p affected CI upper` = ifelse(!(`n total` >= 25 & 
+                                                     `p recorded` >= 0.4), 
+                                                 NA, 
+                                                 `p affected CI upper`))
+}
+
+# A plotting function for the summary data
+plot_summary <- function(x){
+  (x %>% 
+     dplyr::arrange(-`p affected`,`p affected CI lower`) %>%
+     ggplot2::ggplot(mapping = ggplot2::aes(x = Dataset %>%
+                                              reorder(-`p affected CI lower`) %>%
+                                              reorder(-`p affected`),
+                                            y = `p affected`
+     )) +
+     ggplot2::geom_pointrange(ggplot2::aes(ymin = `p affected CI lower`,
+                                           ymax = `p affected CI upper`,
+                                           text = paste0(Dataset,"\n",
+                                                         "Taxon NISP recorded: ", `n recorded`,"\n",
+                                                         "Prop. affected: ", `p affected` %>% 
+                                                           round(digits = 3),"\n"
+                                           ))) +
+     ggplot2::xlab("") +
+     ggplot2::ylab("Proportion Affected") +
+     # coord_flip() +
+     ggplot2::theme(legend.position = "none",
+                    axis.text.x = ggplot2::element_text(angle = 90,
+                                                        hjust = 1,
+                                                        vjust = 0.5))) %>%
+    plotly::ggplotly(tooltip = "text") %>%
+    plotly::config(displaylogo = F,
+                   scrollZoom = F,
+                   collaborate = FALSE,
+                   modeBarButtonsToRemove = list("toggleSpikelines",
+                                                 "hoverClosestCartesian",
+                                                 "hoverCompareCartesian",
+                                                 "resetScale2d",
+                                                 "select2d",
+                                                 "lasso2d")) %>% 
+    plotly::layout(margin = list(b=150, l=50))
+}
+
+
+# A function that creates a table in a standard format used
+# in this report
+tabler <- function(x){
+  x %>%
+    dplyr::mutate_if(is.double, ~round(., digits = 3)) %>%
+    DT::datatable(style = "bootstrap",
+                  extensions = c('FixedColumns'),
+                  options = list(
+                    scrollX = TRUE,
+                    fixedColumns = list(leftColumns = 1),
+                    pageLength = 5),
+                  rownames = FALSE)
+}
+
+```
+
+The NSF-funded *Faunal Resource Depression and Intensification in the North American Southwest: Digital Data and Regional Synthesis* project seeks to examine the relationship between faunal resource procurement and demographic, social organizational, and environmental change in the late prehistoric period (A.D. 1200--1500) of the American Southwest. Regional patterns of resource depression and intensification will be assessed in this study using faunal datasets drawn from numerous archaeological projects undertaken in the Ancestral Pueblo (Colorado Plateau and Rio Grande) and Mogollon Southwest (Mogollon Highlands and portions of the Basin and Range). The integrative analysis of multiple datasets requires an examination of the degree to which zooarchaeological remains from different sites have been affected by similar taphonomic processes [@Bar-Oz2003;  @Gifford1981; @Lyman1994; @Lyman2010].
+
+To assess taphonomic variability among faunal datasets from the late prehistoric Southwest, a protocol was developed that explores the influence and effect that different taphonomic factors may have played in assemblage formation. The protocol involved a three-step analysis in which different taphonomic factors are examined that focus on: 1) bone surface modification, 2) degree of fragmentation, and 3) *in situ* and density-mediated attrition. Data obtained from this assessment provide a basis with which to evaluate the relative degree of taphonomic comparability among assemblages and to identify individual datasets (or components therein) that display substantial taphonomic bias. In this way, a baseline of taphonomic comparability among the sample assemblages may be established. We call it the Southwestern Taphonomic Protocol (SWTP).
+
+The development of the taphonomic protocol was a multi-step process. The first step involved a review of the taphonomic literature and the identification of a broad range of variables that had potential use in the protocol. In the second step, the applicability of each variable was initially assessed using taphonomic data compiled from a small sample of archaeological faunal datasets. Results of this analysis provided a basis with which to identify the most relevant variables for inclusion in the taphonomic protocol. Taphonomic data from an expanded sample of zooarchaeological assemblages were then used to evaluate the revised set of variables and make further refinements to the protocol. The final step in the development of the protocol was the delineation of quantitative methods that may be used to effectively evaluate the multivariate taphonomic data and identify individual faunal assemblages subjected to differential taphonomic processes. Each of these steps is described in detail below, along with the decision making process by which the specific variables and methods were selected for use.
+
+This is an *R Markdown* document---essentially, it is a text file that includes computer code in the *R* statistical language that runs all of the analyses discussed here and produces the figures and tables in this document. The HTML or PDF version of this paper (which you are probably reading) is "compiled" from that original text document and related data files, which are archived at [ARCHIVE URL HERE]. *R Markdown* allows for dynamic, data-driven analysis and report writing, and fosters reproducible research. As such, we hope that this document will not only serve as an introduction to the SWTP, but will also be a template for others' implementations of (or alterations to) the SWTP. Details on using *R Markdown* can be found at <http://rmarkdown.rstudio.com>.
+
+## Integrations {-}
+Our analysis starts with datasets available from the Digital Archaeological Record, which we have combined using TDAR's integration tool [@Kintigh2018].
+"Select values that appear in **Any column**."
+
+One issue occurs when multiple variables in the source dataset are integrated to a single ontology variable. The user has to select which source variable to include in the integration. Different users performing the integration will do this inconsistently. For Example, Crow Canyon datasets (Albert Porter, Castle Rock, Sand Canyon, Shields, Woods Canyon, and Yellow Jacket) have three modification columns ("Modification1", "Modification2", and "Modification3") which are mapped to several ontologies, including burning, gnawing, and butchering. The Bryant Ranch and SCARP faunal datasets also contain two gnawing variables each ("RODGNAW" and "CARNGNAW"); the Holomovi IV dataset includes two mapped variables for completeness ("PCT" and "STATE"); and the Peña Blanca dataset contains two variables mapped to the Butchering ontology ("Proc1" and "Proc2").
+
+```{r process-tdar-integration, cache=TRUE, results="hide"}
+
+integration_xlsx <- "../data/raw_data/tdar-integration-SWTP-3.xlsx"
+
+tdar::tdar_login()
+
+integration.data <- 
+  integration_xlsx %>%
+  # Read the integration data into R
+  readxl::read_excel(col_types = "text") %>%
+  # Remove blank rows
+  dplyr::filter(!is.na(`Dataset/Table Name`)) %>% 
+  dplyr::mutate(`Dataset/Table Name` = factor(`Dataset/Table Name`)) %>%
+  # Rename "display column" to "Weight"
+  dplyr::rename(Weight = `display column`) %>%
+  dplyr::mutate(Weight = as.numeric(Weight),
+                Weight = ifelse(Weight == 0, NA, Weight)) %>%
+  # Set the count column to 1 if NA, otherwise don't change
+  dplyr::mutate(count = as.character(`count column`),
+                count = dplyr::if_else(is.na(count) | count == ".", "1.0", count),
+                count = as.integer(count)) %>%
+  # Repeat rows with more than observation per record
+  dplyr::slice(rep(1:n(),times = count)) %>%
+  # Remove count column (it is no longer meaningful)
+  dplyr::select(-`count`,
+                -`count column`) %>%
+  # Drop the sort columns; we will get sort orders from ontologies
+  dplyr::select(`Dataset/Table Name`,
+                Weight,
+                dplyr::contains("mapped-"))
+
+# Turn ontological variables into trees
+for(variable in names(integration.data)){
+  if(!variable %>% stringr::str_detect("mapped-"))
+    next
+  
+  ontology <- variable %>%
+    stringr::str_extract("\\d+") %>%
+    as.integer()
+  
+  integration.data[[variable]] <- 
+    treecats::tct_tree(integration.data[[variable]],
+                       tct_levels = tdar::tdar_get_ontology(ontology)) %>%
+    forcats::fct_expand("Not Recorded",
+                        "MISSING",
+                        "UNMAPPED",
+                        "NULL") %>%
+    forcats::fct_relevel("Not Recorded",
+                         "MISSING",
+                         "UNMAPPED",
+                         "NULL",
+                         after = Inf)
+}
+
+tdar::tdar_logout()
+
+names(integration.data) <- names(integration.data) %>%
+  stringr::str_remove_all("mapped-") %>%
+  stringr::str_remove_all("\\(.*")
+
+# Rename variables to something nicer
+integration.data %<>%
+  dplyr::rename(Dataset = `Dataset/Table Name`,
+                Taxon = `Fauna Taxon - Southwest US`,
+                Element = `Fauna Element`,
+                `Proximal/distal` = `Fauna Proximal-Distal/Portion`,
+                Weathering = `Fauna Weathering`,
+                `Burning` = `Fauna Burning Intensity`,
+                Gnawing = `Fauna Gnawing`,
+                Completeness = `Fauna Completeness`,
+                Butchering = `Fauna Butchering`)
+
+# OPTIONAL: Rename datasets
+integration.data %<>%
+  dplyr::mutate(Dataset = forcats::fct_recode(Dataset,
+                                              "Castle Rock Pueblo" = "Castle Rock Pueblo faunal dataset - castle-rock-fauna-march2018",
+                                              "Sand Canyon Pueblo" = "Sand Canyon Pueblo faunal dataset - sand-canyon-fauna-march2018",
+                                              "Woods Canyon Pueblo" = "Woods Canyon Pueblo faunal dataset (2018) - woods-canyon-fauna-march2018",
+                                              "Rowe Pueblo" = "Rowe Pueblo Fauna - Rowe-Pueblo-Fauna",                                          
+                                              "LA 4618" = "LA 4618 Fauna - excavation",                                                     
+                                              "Grasshopper Pueblo" = "Grasshopper Pueblo Fauna - Grasshopper",                                         
+                                              "SCARP" = "SCARP Fauna - FAUNA",                                                            
+                                              "Arroyo Hondo" = "Arroyo Hondo Fauna - Arroyo Hondo",                                              
+                                              "Shields Pueblo" = "Shields Pueblo faunal dataset - shields-fauna-march2018",                          
+                                              "Gran Quivira" = "Gran Quivira faunal data - dataset_2414_la120_fauna-march2018",                    
+                                              "Yellow Jacket Pueblo" = "Yellow Jacket Pueblo faunal dataset - yellow-jacket-fauna-march2018",              
+                                              "Albert Porter Pueblo" = "Albert Porter Pueblo faunal dataset - albert-porter-fauna-march2018",              
+                                              "Kite Pueblo" = "Kite Pueblo Fauna (LA 199) - Sorted by prov, then bone eleme",                   
+                                              "Franks Ruin" = "Franks Ruin (LA 9032) Fauna - LA9032-fauna",                                     
+                                              "Homolovi III" = "Homolovi III fauna - H3FAUNAall",                                                
+                                              "San Antonio de Padua" = "San Antonio de Padua (LA 24) Fauna - San-Antonio-Fauna",                         
+                                              "Alameda School Site" = "Alameda School Site, LA 421, 2008 excavation faunal data - Alameda-School-Fauna",
+                                              "Bryant Ranch" = "Bryant Ranch Fauna - Bryant-Faunal-Data",                                        
+                                              "Homolovi IV" = "Homolovi IV fauna - H4BONE",                                                     
+                                              "Pueblo Colorado" = "Pueblo Colorado faunal data - revised-pcfauna-added-period-08172010-march2018",                  
+                                              "Peña Blanca" = "Pena Blanca Fauna - pena-blanca",                                                
+                                              "ULCPP" = "ULCPP Faunal Database - LLSPFAUN",                                               
+                                              "LA 12587" = "LA 12587 - Sheet1",                                                              
+                                              "Pueblo Blanco" = "Pueblo Blanco faunal data - dataset_2419_la51_fauna-march2018",                            
+                                              "Quarai Pueblo" = "Quarai Pueblo Faunal Data - dataset_2472_la95_fauna-march2018",                                             
+                                              "HARP" = "HARP Fauna Database - HARP_Fauna_w_Prov",                                        
+                                              "Chaves-Hummingbird" = "Chaves-Hummingbird Fauna (LA578) - all",                                         
+                                              "CARP" = "CARP Fauna Database - carp_faunaperiodcorr-2",                                   
+                                              "RCAP" = "RCAP Fauna Database - RCAPBONE",                                                 
+                                              "Pottery Mound" = "Pottery Mound Fauna (LA416) - LA416_Fauna",                                      
+                                              "EMVPP" = "EMVPP Fauna Database - emvpp2004faunafinal2",                                    
+                                              "OBAP" = "OBAP (Ojo Bonito) Faunal Database - OBAP"))
+
+integration.data %T>%
+  readr::write_csv("../data/derived_data/tdar-integration-SWTP_final.csv") %>%
+  readr::write_rds("../data/derived_data/tdar-integration-SWTP_final.Rds", 
+                   compress = "bz")
+
+```
+
+
+### Collapsing taxon data {-}
+Collapse into the order Artiodactyla, order Lagomorpha, and recodeing all large birds as Meleagris gallopavo.
+
+```{r collapse-taxa}
+integration.data %<>%
+  dplyr::mutate(Taxon = Taxon %>%
+                  treecats::tct_collapse("Artiodactyla") %>%
+                  treecats::tct_collapse("Lagomorpha") %>%
+                  forcats::fct_recode("Meleagris gallopavo" = "large aves"),
+                Weathering = Weathering %>%
+                  treecats::tct_collapse("Weathered"),
+                Burning = Burning %>%
+                  treecats::tct_collapse("Burned"),
+                Gnawing = Gnawing %>%
+                  treecats::tct_collapse("Gnawed"), 
+                Butchering = Butchering %>%
+                  treecats::tct_collapse("Butchered")
+  )
+
+```
+
+-----
+
+## Data overview {-}
+This table summarizes the datasets, including the counts of samples with valid measurements across each variable reviewed in the Southwest Taphonomic Protocol.
+
+```{r data-overview}
+data_overview <- integration.data %>%
+  dplyr::group_by(Dataset) %>%
+  dplyr::summarise(#`N. of sites` = sum(!duplicated(Site)),
+    `Total NISP` = n(),
+    `Art. NISP` = sum(Taxon %in% c("Artiodactyla")),
+    `Lag. NISP` = sum(Taxon %in% c("Lagomorpha")),
+    `Meg. NISP` = sum(Taxon %in% c("Meleagris gallopavo")),
+    `Burning` = sum(!(`Burning` %in% c("Not Recorded","NULL","MISSING","UNMAPPED","Indeterminate"))),
+    `Butchering` = sum(!(`Butchering` %in% c("Not Recorded","NULL","MISSING","UNMAPPED","Indeterminate"))),
+    `Completeness` = sum(!(`Completeness` %in% c("Not Recorded","NULL","MISSING","UNMAPPED","Indeterminate"))),
+    `Gnawing` = sum(!(`Gnawing` %in% c("Not Recorded","NULL","MISSING","UNMAPPED","Indeterminate"))),
+    `Weathering` = sum(!(`Weathering` %in% c("Not Recorded","NULL","MISSING","UNMAPPED","Indeterminate")))
+  )
+
+tabler(data_overview)
+
+```
+
+-----
+
+## Identification of taphonomic variables and quantification methods {-}
+The first step in constructing the taphonomic protocol was to identify the variables that could be used to assess the impact of different natural and cultural processes on assemblage formation. A review of the literature found a diversity of attributes has been employed to evaluate taphonomic biases in faunal assemblages [@Bar-Oz2003; @Bar-Oz2004; @Behrensmeyer1991; @Lyman1984; @Lyman1985; @Lyman1994; @Marean1991; @Morlan1994; @Pickering2003; @Orton2012; @Stiner1992; @Stiner1994]. Although much of this research has focused on examining a single or small set of variables (e.g., density-mediated attrition or fragmentation), several recent studies have sought to provide a more integrated approach to the study of faunal taphonomy [see @Bar-Oz2004; @Marciniak2001; @Marciniak2005; and @Orton2012]. These analytic schemes incorporate numerous variables in order to evaluate the varying effects that different taphonomic agents may have had on faunal assemblages. The approach developed by @Bar-Oz2004, for example, involves a three-step analysis that consists of: 1) a descriptive phase summarizing the key taphonomic variables of the assemblages; 2) the analytic phase that focuses on assessing variables related to the completeness and fragmentation of the assemblages; and 3) a comparative phase in which subgroup variation is examined within each assemblage.
+
+The relatively comprehensive sets of variables that have been employed by @Bar-Oz2004 provide a basis with which to begin to define the attributes that are most appropriate for the taphonomic protocol. However, the authors caution that the influence and combination of taphonomic factors that affect assemblages may differ significantly among time periods and geographic regions and as such, it is important that researchers evaluate the suitability of individual taphonomic variables to address their specific research questions. Towards this end, a subset of the variables evaluated by @Bar-Oz2004 was identified for possible inclusion in the taphonomic protocol for the Southwestern faunal resource depression and intensification study. Analyses assessing these variables have the potential not only to inform on the natural agents (weathering, gnawing, density-mediated attrition, and *in situ* attrition) that were involved in assemblage formation, but also on the degree of influence of various anthropogenic factors (human transport, processing, and disposal).  This list is not meant to be exhaustive but rather, represents the selection of those taphonomic variables that appear to be most applicable to the examination of taphonomic processes in the prehistoric Southwest (Table 1).
+
+**Table 1. List of possible taphonomic variables.**
+
+Variable | Potential Taphonomic Information
+------------------------------------ | -----------------------------------------------
+Proportion of weathering of artiodactyl bone (NISP) | Damage from natural peri-depositional formation processes
+Proportion of gnawing on artiodactyl bone (NISP) | Damage from natural peri-depositional formation processes
+Proportion of burning of artiodactyl bone (NISP) | Damage by human subsistence behaviors
+Proportion of cut marks on artiodactyl bone (NISP) | Damage by human subsistence behaviors
+Degree of completeness of artiodactyl bone (NISP) | Fragmentation from both natural and cultural agents
+Artiodactyl average bone weight (grams) | Fragmentation from both natural and cultural agents
+Proportion of complete astragals (NISP) | *In situ* attrition
+Relationship between bone survivorship (NISP) and bone mineral density | Density-mediated attrition
+Skeletal part completeness (% NISP by anatomical region) | Human transport and disposal behaviors
+Bone survivorship (NISP) and food utility index | Human transport behavior
+Frequency of burning of artiodactyl, lagomorph, and turkey bone (NISP) | Intertaxonomic differences in damage by human subsistence behaviors
+Frequency of cut marks on artiodactyl, lagomorph, and turkey bone (NISP) | Intertaxonomic differences in damage by human subsistence behaviors
+Degree of bone completeness for artiodactyls, lagomorphs, and turkeys (NISP) | Intertaxonomic differences in natural and cultural agents
+Bone survivorship (NISP) and bone mineral density of artiodactyls, lagomorphs, and turkeys | Intertaxonomic differences in natural and cultural agents
+
+
+The variables fall into five broad analytical categories that include bone surface modification, assemblage completeness, element representation, fragmentation intensity, and intertaxonomic comparison. With the exception of this last category, most of the identified variables focus on assessing artiodactyl remains within the assemblage. While the Number of Identified Specimens (NISP) is used as the primary method of quantification, the Minimum Number of Individuals (MNI) is also calculated for select variables. Analyses of bone survivorship are undertaken using both NISP and MNI counts in order to evaluate the comparability of the results obtained with different quantification methods. A short description of each variable, including its interpretative potential and means of assessment, is provided below.
+
+-----
+
+### Bone surface modification {- .tabset .tabset-fade .tabset-pills}
+
+#### Burning {- .tabset .tabset-dropdown}
+Proportion of assemblage showing evidence of burning
+: Burning is often a result of food preparation or refuse disposal practices and as such, can be an important cultural agent in assemblage formation. However, because burning renders bones more susceptible to fragmentation [@Stiner1995], this variable may also provide insight into post-depositional processes. Burning is assessed by calculating the proportion of specimens (NISP) in the artiodactyl, lagomorph, and *Meleagris gallopavo* assemblages showing signs of exposure to heat (e.g., partial charring, charring, or calcined); these were mapped to "Burned" or "Probably Burned" in the [SWUS Fauna Burning Intensity Ontology](http://core.tdar.org/ontology/3443/fauna-burning-intensity-ontology).
+
+**Select a taxon to view its burning data:**
+
+```{r burning}
+burning <- function(taxon){
+  integration.data %>%
+    dplyr::filter(Taxon %in% taxon) %>%
+    var_summary(`Burning`) %>%
+    affected_summary(Burned, `Probably Burned`) %>%
+    apply_thresholds()
+}
+```
+
+##### Artiodactyla {-}
+```{r art-burning}
+out <- "Artiodactyla" %>%
+  burning()
+
+tabler(out)
+plot_summary(out)
+```
+
+##### Lagomorpha {-}
+```{r lag-burning}
+out <- "Lagomorpha" %>%
+  burning()
+
+tabler(out)
+plot_summary(out)
+```
+
+##### Meleagris gallopavo {-}
+```{r meg-burning}
+out <- "Meleagris gallopavo" %>%
+  burning()
+
+tabler(out)
+plot_summary(out)
+```
+
+#### Butchering {- .tabset .tabset-dropdown}
+Proportion of assemblage showing butchering marks
+: The occurrence cut marks in a faunal assemblage may directly inform on butchering practices and processing techniques. The analysis of cut marks is used in the taphonomic study to evaluate the extent of damage resulting from human subsistence behavior. This variable is assessed by calculating the proportion of specimens (NISP) in the artiodactyl, lagomorph, and *Meleagris gallopavo* assemblages that show evidence of butchering or cut marks; these were mapped to "Butchered" or "Probably Butchered" in the [SWUS Fauna Butchering Ontology](http://core.tdar.org/ontology/3989/fauna-butchering-ontology).
+
+**Select a taxon to view its butchering data:**
+
+```{r butchering}
+butchering <- function(taxon){
+  integration.data %>%
+    dplyr::filter(Taxon %in% taxon) %>%
+    var_summary(`Butchering`) %>%
+    affected_summary(Butchered,
+                     `Probably Butchered`) %>%
+    apply_thresholds()
+}
+```
+
+##### Artiodactyla {-}
+```{r art-butchering}
+out <- "Artiodactyla" %>%
+  butchering()
+
+tabler(out)
+plot_summary(out)
+```
+
+##### Lagomorpha {-}
+```{r lag-butchering}
+out <- "Lagomorpha" %>%
+  butchering()
+
+tabler(out)
+plot_summary(out)
+```
+
+##### Meleagris gallopavo {-}
+```{r meg-butchering}
+out <- "Meleagris gallopavo" %>%
+  butchering()
+
+tabler(out)
+plot_summary(out)
+```
+
+#### Gnawing {- .tabset .tabset-dropdown}
+Proportion of assemblage showing evidence of gnawing
+: The extent of rodent and carnivore gnawing in an assemblage may provide direct information regarding peri-depositional formation processes. This variable is assessed by calculating the proportion of specimens (NISP) in the artiodactyl, lagomorph, and *Meleagris gallopavo* assemblages that were mapped to "Gnawed" in the [SWUS Fauna Gnawing Ontology](http://core.tdar.org/ontology/3033/fauna-gnawing-ontology).
+
+**Select a taxon to view its gnawing data:**
+
+```{r gnawing}
+gnawing <- function(taxon){
+  integration.data %>%
+    dplyr::filter(Taxon %in% taxon) %>%
+    var_summary(`Gnawing`) %>%
+    affected_summary(Gnawed) %>%
+    apply_thresholds()
+}
+```
+
+##### Artiodactyla {-}
+```{r art-gnawing}
+out <- "Artiodactyla" %>%
+  gnawing()
+
+tabler(out)
+plot_summary(out)
+```
+
+##### Lagomorpha {-}
+```{r lag-gnawing}
+out <- "Lagomorpha" %>%
+  gnawing()
+
+tabler(out)
+plot_summary(out)
+```
+
+##### Meleagris gallopavo {-}
+```{r meg-gnawing}
+out <- "Meleagris gallopavo" %>%
+  gnawing()
+
+tabler(out)
+plot_summary(out)
+```
+
+#### Weathering {- .tabset .tabset-dropdown}
+Proportion of assemblage showing evidence of weathering
+: The extent of weathering within an assemblage may provide direct information regarding peri-depositional formation processes. Weathering is assessed by calculating the proportion of specimens (NISP) in the artiodactyl, lagomorph, and *Meleagris gallopavo* assemblages that were mapped to "Weathered" in the [SWUS Fauna Weathering Ontology](http://core.tdar.org/ontology/3032/fauna-weathering-ontology).
+
+**Select a taxon to view its weathering data:**
+
+```{r weathering}
+weathering <- function(taxon){
+  integration.data %>%
+    dplyr::filter(Taxon %in% taxon) %>%
+    var_summary(`Weathering`) %>%
+    affected_summary(Weathered) %>%
+    apply_thresholds()
+}
+```
+
+##### Artiodactyla {-}
+```{r art-weathering}
+out <- "Artiodactyla" %>%
+  weathering()
+
+tabler(out)
+plot_summary(out)
+
+```
+
+##### Lagomorpha {-}
+```{r lag-weathering}
+out <- "Lagomorpha" %>%
+  weathering()
+
+tabler(out)
+plot_summary(out)
+```
+
+##### Meleagris gallopavo {-}
+```{r meg-weathering}
+out <- "Meleagris gallopavo" %>%
+  weathering()
+
+tabler(out)
+plot_summary(out)
+```
+
+
+### Fragmentation intensity {- .tabset .tabset-fade .tabset-pills}
+
+#### Fragmentation {- .tabset .tabset-dropdown}
+Proportion of assemblage that is highly fragmented
+: The proportion of highly fragmented bone can be used to evaluate the overall degree of fragmentation among assemblages. As noted by Todd and Rapson [-@Todd1988,pp. 33--35], a variety of different processes may result in the higher amounts of fragmentation elements within an assemblage. These may include pre-depositional factors related to grease and marrow extraction activities or post-depositional damage resulting from overburden/sedimentary compaction or trampling. The degree of fragmentation of artiodactyl, lagomorph, and *Meleagris gallopavo* bone was assessed in this study by calculating the proportion of bone within each assemblage that was less than 25 percent complete; these were mapped to "<25%" in the [SWUS Fauna Completeness Ontology](http://core.tdar.org/ontology/376370/fauna-completeness-ontology).
+
+**Select a taxon to view its fragmentation data:**
+
+```{r fragmentation}
+fragmentation <- function(taxon){
+  integration.data %>%
+    dplyr::filter(Taxon %in% taxon) %>%
+    var_summary(`Completeness`) %>%
+    affected_summary(`<25%`) %>%
+    apply_thresholds()
+}
+```
+
+##### Artiodactyla {-}
+```{r art-fragmentation}
+out <- "Artiodactyla" %>%
+  fragmentation()
+
+tabler(out)
+plot_summary(out)
+
+```
+
+##### Lagomorpha {-}
+```{r lag-fragmentation}
+out <- "Lagomorpha" %>%
+  fragmentation()
+
+tabler(out)
+plot_summary(out)
+```
+
+##### Meleagris gallopavo {-}
+```{r meg-fragmentation}
+out <- "Meleagris gallopavo" %>%
+  fragmentation()
+
+tabler(out)
+plot_summary(out)
+```
+
+
+#### Weight{- .tabset .tabset-dropdown}
+Bone weight
+: There is a broad correlation between fragment size, count, and weight [@Lyman2008, pp. 102--103]. Calculating the median bone weight for taxa can provide a means for evaluating the degree of fragmentation associated with a specific assemblage. Here, we show the mean, median, and interquartile range (IQR) of bone weights. In the graph below, the closed circles represent the medians, and the open circles represent the means. Unsurprisingly, the weight distributions are universally right skewed, with low numbers of heavier elements increasing the mean well above the median bone weight.
+```{r bone-weight}
+bone_weight <- function(taxon){
+  integration.data %>%
+    dplyr::filter(Taxon %in% taxon) %>%
+    dplyr::group_by(Dataset) %>%
+    dplyr::summarise(
+      `n taxon` = n(),
+      `n weight recorded` = sum(!is.na(Weight)),
+      `Weight (mean)` = mean(Weight, na.rm = T) %>% 
+        round(digits = 1),
+      `Weight (median)` = median(Weight, na.rm = T) %>% 
+        round(digits = 1),
+      `Weight (IQR—lower)` = quantile(Weight,
+                                      probs = 0.25, 
+                                      na.rm = T) %>% 
+        round(digits = 1),    
+      `Weight (IQR—upper)` = quantile(Weight,
+                                      probs = 0.75, 
+                                      na.rm = T) %>% 
+        round(digits = 1)
+    )
+}
+
+bone_weight_plot <- function(x){
+  (x %>%
+     dplyr::arrange(-`Weight (median)`) %>%
+     ggplot2::ggplot(mapping = ggplot2::aes(x = Dataset %>%
+                                              reorder(-`Weight (median)`),
+                                            y = `Weight (median)`#,
+                                            # color = Dataset %>%
+                                            #   reorder(-`Weight (median)`)
+     )) +
+     ggplot2::geom_pointrange(ggplot2::aes(ymin = `Weight (IQR—lower)`,
+                                           ymax = `Weight (IQR—upper)`,
+                                           text = paste0(Dataset,"\n",
+                                                         "Median bone weight: ", `Weight (median)` %>%
+                                                           round(digits = 3),"\n",
+                                                         "Mean bone weight: ", `Weight (mean)` %>%
+                                                           round(digits = 3),"\n"))) +
+     ggplot2::geom_point(ggplot2::aes(y = `Weight (mean)`,
+                                      text = paste0(Dataset,"\n",
+                                                    "Median bone weight: ", `Weight (median)` %>%
+                                                      round(digits = 3),"\n",
+                                                    "Mean bone weight: ", `Weight (mean)` %>%
+                                                      round(digits = 3),"\n")),
+                         shape = 21,
+                         fill = NA) +
+     ggplot2::xlab("") +
+     ggplot2::ylab("Bone Weight (g)") +
+     # coord_flip() +
+     ggplot2::theme(legend.position = "none",
+                    axis.text.x = ggplot2::element_text(angle = 90,
+                                                        hjust = 1,
+                                                        vjust = 0.5))) %>%
+    plotly::ggplotly(tooltip = "text") %>%
+    plotly::config(displaylogo = F,
+                   scrollZoom = F,
+                   collaborate = FALSE,
+                   modeBarButtonsToRemove = list("toggleSpikelines",
+                                                 "hoverClosestCartesian",
+                                                 "hoverCompareCartesian",
+                                                 "resetScale2d",
+                                                 "select2d",
+                                                 "lasso2d")) %>% 
+    plotly::layout(margin = list(b=150,l=50))
+}
+```
+
+
+##### Artiodactyla {-}
+```{r art-bone-weight}
+out <- "Artiodactyla" %>%
+  bone_weight()
+
+tabler(out)
+bone_weight_plot(out)
+
+```
+
+##### Lagomorpha {-}
+```{r lag-bone-weight}
+out <- "Lagomorpha" %>%
+  bone_weight()
+
+tabler(out)
+bone_weight_plot(out)
+```
+
+##### Meleagris gallopavo {-}
+```{r meg-bone-weight}
+out <- "Meleagris gallopavo" %>%
+  bone_weight()
+
+tabler(out)
+bone_weight_plot(out)
+```
+
+
+### Assemblage completeness {- .tabset .tabset-fade .tabset-pills}
+```{r assemblage_completeness}
+apply_element_thresholds <- function(x){
+  x %>%
+    dplyr::mutate(`p affected` = ifelse(!(`n recorded` >= 5), 
+                                        NA, 
+                                        `p affected`),
+                  `p affected CI lower` = ifelse(!(`n recorded` >= 5), 
+                                                 NA, 
+                                                 `p affected CI lower`),
+                  `p affected CI upper` = ifelse(!(`n recorded` >= 5), 
+                                                 NA, 
+                                                 `p affected CI upper`))
+}
+```
+
+
+#### Astragal completeness {-}
+Proportion of complete artiodactyl astragals
+: @Marean1991 has argued that the extent of completeness of certain dense bone elements, such as carpals and tarsals, within an assemblage may be used to indirectly measure the degree of in situ attrition. Specifically, he posits that because these elements have little or no grease or marrow, they should not be subject to bone fragmenting behaviors by humans or carnivores. Rather, a high degree of fragmentation of large mammal carpals and tarsals more likely reflects the post-burial destruction of bones. Marean [-@Marean1991, p. 687] further notes that if elements as dense as the astragalus or calcaneus are severely damaged within an assemblage, then it is likely that less dense bones have been completely destroyed. To evaluate in situ attritional processes in the current study, the proportion of complete artiodactyl astragals was calculated for each assemblage using the [SWUS Fauna Completeness Ontology](http://core.tdar.org/ontology/376370/fauna-completeness-ontology) as above.
+
+```{r art-phalanxes}
+
+art_phalanxes <- integration.data %>%
+  dplyr::filter(Taxon %in% c("Artiodactyla"),
+                Element %in% (integration.data$Element %>% treecats::tct_get_descendents("3rd Phalanx"))) %>%
+  var_summary(Completeness) %>%
+  affected_summary(`<25%`) %>%
+  apply_element_thresholds()
+
+tabler(art_phalanxes)
+
+```
+
+
+```{r art-phalanxes-plot}
+
+art_phalanxes %>%
+  plot_summary()
+
+```
+
+#### 3rd Phalanx completeness {-}
+Proportion of complete artiodactyl 3rd phalanxes
+: As stated above, @Marean1991 hypothesized that because dense bones of the carpals and tarsals have little or no grease or marrow, these elements will only rarely be processed by humans for consumption. As such, the degree of fragmentation associated with carpals and tarsals may more directly reflect post-depositional attritional processes. The addition of a second completeness variable---the proportion of completeness for the slightly less dense third phalanx (0.25 bone density value for *Odocoileus spp.*; @Lyman1994)---allows for more detailed examination of the taphonomic patterns associated with *in situ* bone attrition. The proportion of complete 3rd phalanxes was calculated for each assemblage using the [SWUS Fauna Completeness Ontology](http://core.tdar.org/ontology/376370/fauna-completeness-ontology) as above.
+
+```{r art-astragals}
+
+art_astragals <- integration.data %>%
+  dplyr::filter(Taxon %in% c("Artiodactyla"),
+                Element %in% c("Astragalus")) %>%
+  var_summary(Completeness) %>%
+  affected_summary(`<25%`) %>%
+  apply_element_thresholds()
+
+tabler(art_astragals)
+
+```
+
+
+```{r art-astragals-plot}
+
+art_astragals %>%
+  plot_summary()
+
+```
+
+#### Bone survivorship and mineral density {-}
+Artiodactyl bone survivorship and bone mineral density
+: A number of taphonomic studies have shown that bone mineral density may be an important factor in skeletal element representation [@Binford1981; @Kreutzer1992; @Lyman1984; -@Lyman1994; -@Lyman1992]. This research indicates that certain parts of the skeletons are consistently better preserved in archaeological assemblages due to their high structural density [@Lyman1994, pp. 234--258]. To determine if elemental representation within any of the faunal assemblages included in this study had been affected by differential density-mediated attrition, NISP values for 16 different artiodactyl element bone parts---femur (distal/proximal), humerus (distal/proximal), radius (distal/proximal), tibia (distal/proximal), ulna (distal/proximal), pelvis, astragalus, atlas, calcaneus, mandible, and scapula---were compared with bone structural density data [@Lyman1984;-@Lyman1994]. The strength of the relationship between element abundance and bone density was assessed using Spearman’s rank correlation coefficient.
+
+```{r art-survivorship}
+art_elements <-
+  integration.data %>%
+  dplyr::filter(Taxon %in% c("Artiodactyla")) %>%
+  dplyr::select(Dataset,
+                Element,
+                `Proximal/distal`) %>%
+  dplyr::mutate(Element = as.character(Element))
+
+art_elements$Element[art_elements$Element %in% (integration.data$Element %>% treecats::tct_get_descendents("Pelvic Girdle"))] <- "Pelvis"
+
+art_elements %<>%
+  dplyr::filter(Element %in% c("Femur",
+                               "Humerus",
+                               "Radius",
+                               "Tibia",
+                               "Ulna"),
+                `Proximal/distal` == "Complete"
+  ) %>%
+  dplyr::mutate(`Proximal/distal` = "Proximal") %>%
+  dplyr::bind_rows(art_elements %>%
+                     dplyr::filter(Element %in% c("Femur",
+                                                  "Humerus",
+                                                  "Radius",
+                                                  "Tibia",
+                                                  "Ulna"),
+                                   `Proximal/distal` == "Complete"
+                     ) %>%
+                     dplyr::mutate(`Proximal/distal` = "Distal")) %>%
+  dplyr::bind_rows(art_elements %>%
+                     dplyr::filter(Element %in% c("Femur",
+                                                  "Humerus",
+                                                  "Radius",
+                                                  "Tibia",
+                                                  "Ulna"),
+                                   `Proximal/distal` %in% c("Proximal","Distal")
+                     )) %>%
+  dplyr::bind_rows(art_elements %>%
+                     dplyr::filter(Element %in% c("Astragalus",
+                                                  "Atlas",
+                                                  "Calcaneus",
+                                                  "Mandible",
+                                                  "Pelvis",
+                                                  "Scapula")) %>%
+                     dplyr::mutate(`Proximal/distal` = NA)) %>%
+  dplyr::group_by_all() %>%
+  dplyr::count() %>%
+  dplyr::right_join(expand.grid(Dataset = integration.data$Dataset %>% 
+                                  unique(),
+                                Element = c("Femur",
+                                            "Humerus",
+                                            "Radius",
+                                            "Tibia",
+                                            "Ulna"),
+                                `Proximal/distal` = c("Proximal","Distal"),
+                                stringsAsFactors = FALSE) %>%
+                      tibble::as_tibble() %>%
+                      dplyr::bind_rows(expand.grid(Dataset = integration.data$Dataset %>% 
+                                                     unique(),
+                                                   Element = c("Astragalus",
+                                                               "Atlas",
+                                                               "Calcaneus",
+                                                               "Mandible",
+                                                               "Pelvis",
+                                                               "Scapula"),
+                                                   stringsAsFactors = FALSE))) %>%
+  dplyr::mutate(n = ifelse(is.na(n),0,n))
+
+art_survivorship <- art_elements %>%
+  dplyr::left_join(readr::read_csv("../data/raw_data/Artiodactyl_density.csv")) %>%
+  dplyr::group_by(Dataset) %>%
+  dplyr::summarize(`Spearman's rho` = cor.test(n, Density,
+                                               method = "spearman",
+                                               continuity = TRUE,
+                                               exact = FALSE)$estimate,
+                   `p` = cor.test(n, Density,
+                                  method = "spearman",
+                                  continuity = TRUE,
+                                  exact = FALSE)$p.value,                   
+                   `CI lower` = psych::cor.ci(data.frame(n, Density),
+                                              method = "spearman",
+                                              plot = FALSE,
+                                              overlap = TRUE,
+                                              n.iter = 999)$ci[["low.e"]],
+                   `CI upper` = psych::cor.ci(data.frame(n, Density),
+                                              method = "spearman",
+                                              plot = FALSE,
+                                              overlap = TRUE,
+                                              n.iter = 999)$ci[["up.e"]])
+
+
+tabler(art_survivorship)
+
+```
+
+```{r art-survivorship-plot}
+
+(art_survivorship %>%
+   ggplot2::ggplot(mapping = ggplot2::aes(x = Dataset %>%
+                                            reorder(-`Spearman's rho`) %>%
+                                            reorder(`p`),
+                                          y = `Spearman's rho`#,
+                                          # color = Dataset %>%
+                                          #   reorder(-`Spearman's rho`) %>%
+                                          #   reorder(`p`)
+   )) +
+   ggplot2::geom_pointrange(ggplot2::aes(ymin = `CI lower`,
+                                         ymax = `CI upper`,
+                                         text = paste0(Dataset,"\n",
+                                                       "Spearman's rho: ", `Spearman's rho` %>%
+                                                         round(digits = 3),"\n",
+                                                       "p: ",`p` %>%
+                                                         round(digits = 3)
+                                         ))) +
+   ggplot2::xlab("") +
+   ggplot2::ylab("Spearman's rho") +
+   ggplot2::theme(legend.position = "none",
+                  axis.text.x = ggplot2::element_text(angle = 90,
+                                                      hjust = 1,
+                                                      vjust = 0.5))) %>%
+  plotly::ggplotly(tooltip = "text") %>%
+  plotly::config(displaylogo = F,
+                 scrollZoom = F,
+                 collaborate = FALSE,
+                 modeBarButtonsToRemove = list("toggleSpikelines",
+                                               "hoverClosestCartesian",
+                                               "hoverCompareCartesian",
+                                               "resetScale2d",
+                                               "select2d",
+                                               "lasso2d")) %>% 
+  plotly::layout(margin = list(b=150, l=50))
+
+```
+
+<!-- ----- -->
+
+<!-- ### Element representation {- .tabset .tabset-fade .tabset-pills} -->
+
+<!-- #### Completeness {-} -->
+<!-- Artiodactyl skeletal part completeness -->
+<!-- : Stiner [-@Stiner1991; -@Stiner1994; -@Stiner2002] has proposed that an effective means of assessing skeletal biases resulting from the transport and carcass processing of large game is through a regional-based approach to body part representation. In this method, skeletal elements are grouped into one of eight anatomical regions (horn, skull, axial skeleton, upper forelimb, lower forelimb, upper hind limb, lower hind limb, and feet). Stiner maintains that the resulting pattern can be used to determine if entire skeletons, or just select portions of the carcass, were transported to the sites. Anatomical frequencies of artiodactyls are calculated in this study using NISP. -->
+
+<!-- ```{r element-completeness} -->
+
+<!-- skeletal_completeness <- integration.data %>% -->
+<!--   dplyr::filter(Taxon %in% "Artiodactyla") %>% -->
+<!--   dplyr::select(Dataset,  -->
+<!--                 Element,  -->
+<!--                 `Completeness`) %>% -->
+<!--   dplyr::mutate(Element = fct_collapse(Element,  -->
+<!--                                        "Horn" = c("Antler","Antler or Horncore","Horncore","Horn Sheath"), -->
+<!--                                        "Skull" = integration.data$Element %>% tct_get_descendents("Skull"), -->
+<!--                                        "Axial" = integration.data$Element %>% tct_get_descendents("Axial"), -->
+<!--                                        "Upper Forelimb" = "Humerus", -->
+<!--                                        "Lower Forelimb" = c("Radius", "Radius or Radioulna", "Radius or Ulna","Ulna"), -->
+<!--                                        "Upper Hindlimb" = "Femur", -->
+<!--                                        "Lower Hindlimb" = c("Fibula","Patella","Tibia","Tibia or Fibula","Tibiofibula","Tibiotarsus"), -->
+<!--                                        "Carpals/Tarsals/Phalanges" = integration.data$Element %>% tct_get_descendents("Foot/Wing"))) %>% -->
+<!--   dplyr::filter(Element %in% c("Horn", -->
+<!--                                "Skull", -->
+<!--                                "Axial", -->
+<!--                                "Upper Forelimb", -->
+<!--                                "Lower Forelimb", -->
+<!--                                "Upper Hindlimb", -->
+<!--                                "Lower Hindlimb", -->
+<!--                                "Carpals/Tarsals/Phalanges")) %>% -->
+<!--   dplyr::mutate(Element = tct_drop(Element)) %>% -->
+<!--   dplyr::group_by_all() %>% -->
+<!--   count() %>% -->
+<!--   dplyr::group_by(Dataset,Element) %>% -->
+<!--   tidyr::spread(`Completeness`,n) %>% -->
+<!--   dplyr::mutate_all(.funs = function(x){ifelse(is.na(x),0,x)}) %>% -->
+<!--   dplyr::mutate(`n recorded` = (Complete + `>=50%` + `<50%` + Indeterminate), -->
+<!--                 `n total` = (Complete + `>=50%` + `<50%` + Indeterminate + `Not Recorded` + `NULL` + MISSING), -->
+<!--                 `p recorded` = `n recorded` / `n total`, -->
+<!--                 `n complete` = (Complete + `>=50%`), -->
+<!--                 `p complete` = `n complete`/`n recorded`, -->
+<!--                 `p complete CI lower` = map2_dbl(`n complete`, -->
+<!--                                                  `n recorded`, -->
+<!--                                                  function(x,y){ -->
+<!--                                                    ifelse(y > 0,  -->
+<!--                                                           binom.test(x,y)$conf.int[[1]], -->
+<!--                                                           NA) -->
+<!--                                                  }), -->
+<!--                 `p complete CI upper` = map2_dbl(`n complete`, -->
+<!--                                                  `n recorded`, -->
+<!--                                                  function(x,y){ -->
+<!--                                                    ifelse(y > 0,  -->
+<!--                                                           binom.test(x,y)$conf.int[[2]], -->
+<!--                                                           NA) -->
+<!--                                                  })) %>% -->
+<!--   dplyr::select(Dataset, Element, `n total`, `n recorded`:`p complete CI upper`) -->
+
+<!-- tabler(skeletal_completeness) -->
+<!-- ``` -->
+
+<!-- #### Bone survivorship and food utility {-} -->
+<!-- Bone survivorship and food utility -->
+<!-- : This variable assesses the relationship between relative skeletal abundance and economic utility in order to determine if skeletal biases are present in assemblages that result from the selective transport of high utility artiodactyl elements. @Metcalfe1988 have developed a food utility index (FUI) that ranks artiodacytl bone elements in relation to one another based on the weight of usable meat, fat, and marrow. To determine if higher utility elements are disproportionately represented in the assemblage, the NISP for 16 different artiodactyl element bone parts were calculated and compared to their respective food utility index values. The strength of the relationship between bone survivorship and food utility was then statistically assessed using Spearman’s rank correlation coefficient. -->
+
+<!-- ```{r art-survivorship-utility} -->
+<!-- # NOTE: Not finding all elements in @Metcalfe1988 -->
+<!-- art_survivorship_utility <- art_elements %>% -->
+<!--   dplyr::left_join(readr::read_csv("./data/raw_data/Artiodactyl_density.csv")) %>% -->
+<!--   dplyr::group_by(Dataset) %>% -->
+<!--   dplyr::summarize(`Spearman's rho` = cor.test(n, FUI, -->
+<!--                                                method = "spearman", -->
+<!--                                                continuity = TRUE)$estimate, -->
+<!--                    `p` = cor.test(n, FUI, -->
+<!--                                   method = "spearman", -->
+<!--                                   continuity = TRUE)$p.value, -->
+<!--                    `CI lower` = psych::cor.ci(data.frame(n, FUI), -->
+<!--                                               method = "spearman", -->
+<!--                                               plot = FALSE, -->
+<!--                                               overlap = TRUE, -->
+<!--                                               n.iter = 999)$ci[["low.e"]], -->
+<!--                    `CI upper` = psych::cor.ci(data.frame(n, FUI), -->
+<!--                                               method = "spearman", -->
+<!--                                               plot = FALSE, -->
+<!--                                               overlap = TRUE, -->
+<!--                                               n.iter = 999)$ci[["up.e"]]) -->
+
+<!-- tabler(art_survivorship_utility) -->
+
+<!-- ``` -->
+
+<!-- ```{r art-survivorship-utility-plot} -->
+
+<!-- (art_survivorship_utility %>% -->
+<!--    ggplot(mapping = aes(x = Dataset %>% -->
+<!--                           reorder(-`Spearman's rho`) %>% -->
+<!--                           reorder(`p`), -->
+<!--                         y = `Spearman's rho`#, -->
+<!--                         # color = Dataset %>% -->
+<!--                         #   reorder(-`Spearman's rho`) %>% -->
+<!--                         #   reorder(`p`) -->
+<!--    )) + -->
+<!--    ggplot2::geom_pointrange(aes(ymin = `CI lower`, -->
+<!--                                 ymax = `CI upper`, -->
+<!--                                 text = paste0(Dataset,"\n", -->
+<!--                                               "Spearman's rho: ", `Spearman's rho` %>% -->
+<!--                                                 round(digits = 3),"\n", -->
+<!--                                               "p: ",`p` %>% -->
+<!--                                                 round(digits = 3) -->
+<!--                                 ))) + -->
+<!--    xlab("") + -->
+<!--    ylab("Spearman's rho") + -->
+<!--    theme(legend.position="none", -->
+<!--          axis.text.x=element_text(angle = 90, -->
+<!--                                   hjust = 1, -->
+<!--                                   vjust = 0.5))) %>% -->
+<!--   plotly::ggplotly(tooltip = "text") %>% -->
+<!--   config(displaylogo = F, -->
+<!--          scrollZoom = F, -->
+<!--          collaborate = FALSE, -->
+<!--          modeBarButtonsToRemove = list("toggleSpikelines", -->
+<!--                                        "hoverClosestCartesian", -->
+<!--                                        "hoverCompareCartesian", -->
+<!--                                        "resetScale2d", -->
+<!--                                        "select2d", -->
+<!--                                        "lasso2d")) %>%  -->
+<!--   layout(margin = list(b=150, l=50)) -->
+
+<!-- ``` -->
+
+<!-- ### {-} -->
+
+
+### Intertaxonomic comparison {- .tabset .tabset-fade .tabset-pills}
+```{r tax-compare}
+tax_summary <- function(x, taxa, var){
+  quo_var <- rlang::enquo(var)
+  
+  x %>%
+    dplyr::filter(Taxon %in% taxa) %>%
+    dplyr::select(Dataset, Taxon, !!quo_var) %>%
+    # dplyr::mutate(Taxon = fct_collapse(Taxon, "Meleagris gallopavo" = c("Meleagris gallopavo"))) %>%
+    dplyr::mutate(Taxon = treecats::tct_drop(Taxon)) %>%
+    dplyr::group_by(Dataset, Taxon, !!quo_var) %>%
+    dplyr::count() %>%
+    dplyr::group_by(Dataset,Taxon) %>%
+    tidyr::spread(!!quo_var,
+                  n,
+                  drop = FALSE) %>%
+    dplyr::mutate_all(.funs = function(x){
+      ifelse(is.na(x),
+             0,
+             x)
+    }) %>%
+    dplyr::ungroup()
+}
+
+# A function to further summarize variable data
+tax_affected_summary <- function(x, ...){
+  affected_var <- rlang::quos(...)
+  
+  x %>%
+    dplyr::mutate(
+      `n total` = rowSums(dplyr::select(.,
+                                        -Dataset,
+                                        -Taxon
+      )),
+      `n recorded` = rowSums(dplyr::select(.,
+                                           -Dataset,
+                                           -Taxon,
+                                           -`Not Recorded`,
+                                           -MISSING,
+                                           -`NULL`,
+                                           -UNMAPPED)) %>% 
+        as.integer(),
+      `p recorded` = `n recorded` / `n total`,
+      `n affected` = rowSums(dplyr::select(.,
+                                           !!!affected_var)) %>% 
+        as.integer(),
+      `p affected` = `n affected`/`n recorded`,
+      `p affected CI lower` = purrr::map2_dbl(`n affected`,
+                                       `n recorded`,
+                                       function(x,y){
+                                         ifelse(y > 0, 
+                                                binom.test(x,y)$conf.int[[1]],
+                                                NA)
+                                       }),
+      `p affected CI upper` = purrr::map2_dbl(`n affected`,
+                                       `n recorded`,
+                                       function(x,y){
+                                         ifelse(y > 0, 
+                                                binom.test(x,y)$conf.int[[2]],
+                                                NA)
+                                       }))  %>%
+    dplyr::select(Dataset,
+                  Taxon,
+                  `n total`,
+                  `n recorded`,
+                  `p recorded`:`p affected CI upper`)
+  
+}
+
+dodge <- ggplot2::position_dodge2(width=0.25)
+
+# A plotting function for the intertaxonomic data
+tax_plotter <- function(x){
+  (x %>% 
+     # dplyr::mutate(order = rank(`p affected`, ties.method = "first"),
+     #               order = ifelse(Taxon == "Artiodactyla",order,NA)) %>%
+     # dplyr::arrange(-order,Taxon,Dataset) %>%
+     ggplot2::ggplot(mapping = ggplot2::aes(x = Dataset,
+                                            y = `p affected`,
+                                            color = Taxon
+     )) +
+     ggplot2::geom_pointrange(ggplot2::aes(ymin = `p affected CI lower`,
+                                           ymax = `p affected CI upper`,
+                                           text = paste0(Dataset,"\n",
+                                                         Taxon,"\n",
+                                                         "Prop. affected: ", `p affected` %>% 
+                                                           round(digits = 3),"\n"
+                                           )),
+                              position = dodge) +
+     ggplot2::scale_color_brewer(type = "qual", palette = "Dark2") +
+     ggplot2::xlab("") +
+     ggplot2::ylab("Proportion Affected") +
+     ggplot2::labs(color="Taxon") +
+     # coord_flip() +
+     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90,
+                                                        hjust = 1,
+                                                        vjust = 0.5))) %>%
+    plotly::ggplotly(tooltip = "text") %>%
+    plotly::config(displaylogo = F,
+                   scrollZoom = F,
+                   collaborate = FALSE,
+                   modeBarButtonsToRemove = list("toggleSpikelines",
+                                                 "hoverClosestCartesian",
+                                                 "hoverCompareCartesian",
+                                                 "resetScale2d",
+                                                 "select2d",
+                                                 "lasso2d")) %>% 
+    plotly::layout(margin = list(b=150, l=50),
+                   legend = list(
+                     orientation = "h",
+                     y = 1,
+                     yanchor = "bottom"
+                   ))
+}
+
+tax_tabler <- function(x){
+  x %>%
+    dplyr::mutate_if(is.double, ~round(., digits = 3)) %>%
+    DT::datatable(style = "bootstrap",
+                  extensions = c('FixedColumns'),
+                  options = list(
+                    scrollX = TRUE,
+                    fixedColumns = list(leftColumns = 2),
+                    pageLength = 5),
+                  rownames = FALSE)
+}
+
+```
+
+#### Burning {-}
+Proportion of burning of artiodactyl, lagomorph, and turkey bone
+: This variable compares the pattern of burning among subgroups in the assemblage in order to determine if artiodactyl, lagomorph, and turkey remains were differentially affected by food preparation or refuse disposal behaviors. Burning is assessed by calculating the proportion of artiodactyl, lagomorph, and turkey specimens (NISP) in the assemblages that show evidence of exposure to heat (e.g., partial charring, charring, or calcined).
+```{r tax-burning}
+tax_burning <- integration.data %>%
+  tax_summary(taxa = c("Artiodactyla","Lagomorpha","Meleagris gallopavo"),
+              `Burning`) %>%
+  tax_affected_summary(Burned,
+                       `Probably Burned`) %>%
+  apply_thresholds()
+
+tax_tabler(tax_burning)
+
+tax_plotter(tax_burning)
+
+```
+
+#### Butchering {-}
+Proportion of butchering marks on artiodactyl, lagomorph, and turkey bone
+: This variable compares the proportion of butchering marks among artiodactyl, lagomorph, and turkey remains to examine intertaxonomic variability in the extent of damage resulting from human subsistence behavior. This variable is evaluated by calculating the proportion of artiodactyl, lagomorph, and turkey specimens (NISP) in each artiodactyl that shows evidence of butchering or cut marks.
+```{r tax-butchering}
+tax_butchering <- integration.data %>%
+  tax_summary(taxa = c("Artiodactyla","Lagomorpha","Meleagris gallopavo"),
+              `Butchering`) %>%
+  tax_affected_summary(Butchered,
+                       `Probably Butchered`) %>%
+  apply_thresholds()
+
+tax_tabler(tax_butchering)
+tax_plotter(tax_butchering)
+
+```
+
+#### Completeness {-}
+Degree of completeness of artiodactyls, lagomorphs, and turkeys
+: To assess intertaxonomic variability in fragmentation patterns, the proportion of complete bone within the assemblage was calculated for artiodactyls, lagomorphs, and turkeys. Significant variation in proportion values among these groups may indicate that taphonomic agents differently affected the bones of specific taxon. This variable is determined by calculating the proportion of bone that more than 50 percent complete (NISP) within the artiodactyl, lagomorph, and turkey assemblages.
+```{r tax-complete}
+tax_complete <- integration.data %>%
+  tax_summary(taxa = c("Artiodactyla","Lagomorpha","Meleagris gallopavo"),
+              `Completeness`) %>%
+  tax_affected_summary(`<25%`) %>%
+  apply_thresholds()
+
+tax_tabler(tax_complete)
+tax_plotter(tax_complete)
+
+```
+
+#### Bone survivorship {-}
+Bone survivorship and bone mineral density of artiodactyls, lagomorphs, and turkeys
+: This variable compares the relationship between bone survivorship and bone mineral density among taxonomic subgroups in order to assess the differential effects of density-mediated attrition on artiodactyl, lagomorph, and turkey remains. To determine if certain subgroups were differentially affected by this bias, NISP values for a number of bone element parts were calculated for artiodactyl, lagomorph, and turkey. The abundance of these elements was then compared with bone structural density data from *Odocoileus spp.* [@Lyman1984; -@Lyman1994], leporid [@Pavao1999], and *Meleagris gallopavo* [@Dirrigl2001], respectively. The strength of the relationship between element abundance and bone density for each subgroup was assessed using Spearman’s rank correlation coefficient.
+
+```{r tax-survivorship}
+lag_elements <-
+  integration.data %>%
+  dplyr::filter(Taxon %in% c("Lagomorpha")) %>%
+  dplyr::select(Dataset,
+                Element,
+                `Proximal/distal`) %>%
+  dplyr::mutate(Element = as.character(Element))
+
+lag_elements$Element[lag_elements$Element %in% (integration.data$Element %>% treecats::tct_get_descendents("Pelvic Girdle"))] <- "Pelvis"
+
+
+lag_elements %<>%
+  dplyr::filter(Element %in% c("Femur",
+                               "Humerus",
+                               "Radius",
+                               "Tibia",
+                               "Ulna"),
+                `Proximal/distal` == "Complete"
+  ) %>%
+  dplyr::mutate(`Proximal/distal` = "Proximal") %>%
+  dplyr::bind_rows(lag_elements %>%
+                     dplyr::filter(Element %in% c("Femur",
+                                                  "Humerus",
+                                                  "Radius",
+                                                  "Tibia",
+                                                  "Ulna"),
+                                   `Proximal/distal` == "Complete"
+                     ) %>%
+                     dplyr::mutate(`Proximal/distal` = "Distal")) %>%
+  dplyr::bind_rows(lag_elements %>%
+                     dplyr::filter(Element %in% c("Femur",
+                                                  "Humerus",
+                                                  "Radius",
+                                                  "Tibia",
+                                                  "Ulna"),
+                                   `Proximal/distal` %in% c("Proximal","Distal")
+                     )) %>%
+  dplyr::bind_rows(lag_elements %>%
+                     dplyr::filter(Element %in% c("Astragalus",
+                                                  "Atlas",
+                                                  "Calcaneus",
+                                                  "Mandible",
+                                                  "Pelvis",
+                                                  "Scapula")) %>%
+                     dplyr::mutate(`Proximal/distal` = NA)) %>%
+  dplyr::group_by_all() %>%
+  dplyr::count() %>%
+  dplyr::right_join(expand.grid(Dataset = integration.data$Dataset %>% unique(),
+                                Element = c("Femur",
+                                            "Humerus",
+                                            "Radius",
+                                            "Tibia",
+                                            "Ulna"),
+                                `Proximal/distal` = c("Proximal","Distal"),
+                                stringsAsFactors = FALSE) %>%
+                      tibble::as_tibble() %>%
+                      dplyr::bind_rows(expand.grid(Dataset = integration.data$Dataset %>% unique(),
+                                                   Element = c("Astragalus",
+                                                               "Atlas",
+                                                               "Calcaneus",
+                                                               "Mandible",
+                                                               "Pelvis",
+                                                               "Scapula"),
+                                                   stringsAsFactors = FALSE))) %>%
+  dplyr::mutate(n = ifelse(is.na(n),0,n))
+
+lag_survivorship <- lag_elements %>%
+  dplyr::left_join(readr::read_csv("../data/raw_data/Lagomorph_density.csv")) %>%
+  dplyr::group_by(Dataset) %>%
+  dplyr::summarize(`Spearman's rho` = cor.test(n, Density,
+                                               method = "spearman",
+                                               continuity = TRUE)$estimate,
+                   `p` = cor.test(n, Density,
+                                  method = "spearman",
+                                  continuity = TRUE)$p.value,
+                   `CI lower` = psych::cor.ci(data.frame(n, Density),
+                                              method = "spearman",
+                                              plot = FALSE,
+                                              overlap = TRUE,
+                                              n.iter = 999)$ci[["low.e"]],
+                   `CI upper` = psych::cor.ci(data.frame(n, Density),
+                                              method = "spearman",
+                                              plot = FALSE,
+                                              overlap = TRUE,
+                                              n.iter = 999)$ci[["up.e"]]) %>%
+  dplyr::mutate(Taxon = "Lagomorpha")
+
+## Meleagris
+meg_elements <-
+  integration.data %>%
+  dplyr::filter(Taxon %in% c("Meleagris gallopavo")) %>%
+  dplyr::select(Dataset,
+                Element,
+                `Proximal/distal`) %>%
+  dplyr::mutate(Element = as.character(Element))
+
+meg_elements %<>%
+  dplyr::filter(Element %in% c("Carpometacarpus",
+                               "Scapula",
+                               "Humerus",
+                               "Ulna",
+                               "Tarsometatarsus",
+                               "Femur",
+                               "Tibiotarsus"),
+                `Proximal/distal` == "Complete"
+  ) %>%
+  dplyr::mutate(`Proximal/distal` = "Proximal") %>%
+  dplyr::bind_rows(meg_elements %<>%
+                     dplyr::filter(Element %in% c("Carpometacarpus",
+                                                  "Scapula",
+                                                  "Humerus",
+                                                  "Ulna",
+                                                  "Tarsometatarsus",
+                                                  "Femur",
+                                                  "Tibiotarsus"),
+                                   `Proximal/distal` == "Complete"
+                     ) %>%
+                     dplyr::mutate(`Proximal/distal` = "Distal")) %>%
+  dplyr::bind_rows(meg_elements %<>%
+                     dplyr::filter(Element %in% c("Carpometacarpus",
+                                                  "Scapula",
+                                                  "Humerus",
+                                                  "Ulna",
+                                                  "Tarsometatarsus",
+                                                  "Femur",
+                                                  "Tibiotarsus"),
+                                   `Proximal/distal` %in% c("Proximal","Distal")
+                     )) %>%
+  dplyr::group_by_all() %>%
+  dplyr::count() %>%
+  dplyr::right_join(expand.grid(Dataset = integration.data$Dataset %>% unique(),
+                                Element = c("Carpometacarpus",
+                                            "Scapula",
+                                            "Humerus",
+                                            "Ulna",
+                                            "Tarsometatarsus",
+                                            "Femur",
+                                            "Tibiotarsus"),
+                                `Proximal/distal` = c("Proximal","Distal"),
+                                stringsAsFactors = FALSE) %>%
+                      tibble::as_tibble()) %>%
+  dplyr::mutate(n = ifelse(is.na(n),0,n))
+
+meg_survivorship <- meg_elements %>%
+  dplyr::left_join(readr::read_csv("../data/raw_data/Meleagris_density.csv")) %>%
+  dplyr::group_by(Dataset) %>%
+  dplyr::summarize(`Spearman's rho` = cor.test(n, Density,
+                                               method = "spearman",
+                                               continuity = TRUE)$estimate,
+                   `p` = cor.test(n, Density,
+                                  method = "spearman",
+                                  continuity = TRUE)$p.value,
+                   `CI lower` = psych::cor.ci(data.frame(n, Density),
+                                              method = "spearman",
+                                              plot = FALSE,
+                                              overlap = TRUE,
+                                              n.iter = 999)$ci[["low.e"]],
+                   `CI upper` = psych::cor.ci(data.frame(n, Density),
+                                              method = "spearman",
+                                              plot = FALSE,
+                                              overlap = TRUE,
+                                              n.iter = 999)$ci[["up.e"]]) %>%
+  dplyr::mutate(Taxon = "Meleagris gallopavo")
+
+
+art_survivorship %>%
+  dplyr::mutate(Taxon = "Artiodactyla") %>%
+  dplyr::bind_rows(lag_survivorship) %>%
+  dplyr::bind_rows(meg_survivorship) %>%
+  tabler()
+
+(art_survivorship %>%
+    dplyr::mutate(Taxon = "Artiodactyla") %>%
+    dplyr::bind_rows(lag_survivorship) %>%
+    dplyr::bind_rows(meg_survivorship) %>%
+    dplyr::arrange(Dataset,Taxon) %>%
+    ggplot2::ggplot(mapping = ggplot2::aes(x = Dataset,
+                                           y = `Spearman's rho`,
+                                           color = Taxon
+    )) +
+    ggplot2::geom_pointrange(ggplot2::aes(ymin = `CI lower`,
+                                          ymax = `CI upper`,
+                                          text = paste0(Dataset,"\n",
+                                                        "Spearman's rho: ", `Spearman's rho` %>%
+                                                          round(digits = 3),"\n",
+                                                        "p: ",`p` %>%
+                                                          round(digits = 3)
+                                          )),
+                             position = dodge) +
+    ggplot2::scale_color_brewer(type = "qual", palette = "Dark2") +
+    ggplot2::xlab("") +
+    ggplot2::ylab("Spearman's rho") +
+    ggplot2::labs(color="Taxon") +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90,
+                                                       hjust = 1,
+                                                       vjust = 0.5))) %>%
+  plotly::ggplotly(tooltip = "text") %>%
+  plotly::config(displaylogo = F,
+                 scrollZoom = F,
+                 collaborate = FALSE,
+                 modeBarButtonsToRemove = list("toggleSpikelines",
+                                               "hoverClosestCartesian",
+                                               "hoverCompareCartesian",
+                                               "resetScale2d",
+                                               "select2d",
+                                               "lasso2d")) %>% 
+  plotly::layout(margin = list(b=150, l=50),
+                 legend = list(
+                   orientation = "h",
+                   y = 1,
+                   yanchor = "bottom"
+                 ))
+```
+
+## References {-}
+
+<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
+<div id="refs"></div>
+
+### Colophon {-}
+
+This report was generated on `r Sys.time()` using the following computational environment and dependencies: 
+
+```{r colophon, cache = FALSE}
+# which R packages and versions?
+devtools::session_info()
+```
+
+The current Git commit details are:
+
+```{r}
+# what commit is this file at? You may need to change the path value
+# if your Rmd is not in analysis/paper/
+git2r::repository("../..")
+```

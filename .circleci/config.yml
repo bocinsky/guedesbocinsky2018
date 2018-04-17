@@ -34,6 +34,11 @@ jobs:
        - image: rocker/geospatial:devel
      <<: *steps
 
+  "bocin_base":
+     docker:
+       - image: bocinsky/bocin_base:latest
+     <<: *steps
+
 workflows:
   version: 2
   build_and_test:
@@ -41,4 +46,5 @@ workflows:
       - "r-3.4.3"
       - "r-release"
       - "r-devel"
+      - "bocin_base"
 

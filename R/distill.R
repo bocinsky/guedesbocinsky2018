@@ -1,4 +1,14 @@
-distill <- function(file, gray = F){
+#' Use ghostscript to distill a PDF, possibly to grayscale.
+#'
+#' @param file
+#' @param gray
+#'
+#' @return
+#' @export
+#'
+#' @examples
+distill <- function(file,
+                    gray = F){
   if(!gray){
     system(paste0("gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dCompatibilityLevel=1.4 -sColorConversionStrategy=/CMYK -dPDFSETTINGS=/prepress -dEmbedAllFonts=true -dSubsetFonts=false -dAutoRotatePages=/None -sOutputFile=./temp.pdf ",file))
   }else{

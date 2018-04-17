@@ -8,10 +8,9 @@ COPY . /guedesbocinsky2018
 
 # go into the repo directory
 RUN . /etc/environment \
-
+  # Install dev version of devtools
+  && R -e 'devtools::install_github("r-lib/devtools")' \
   # build this compendium package
-  && R -e "devtools::install('/guedesbocinsky2018', dep=TRUE)"
-
- # render the manuscript into a docx, you'll need to edit this if you've
- # customised the location and name of your main Rmd file
- # && R -e "rmarkdown::render('/guedesbocinsky2018/analysis/paper/paper.Rmd')"
+  && R -e "devtools::install('/guedesbocinsky2018', dep = TRUE, upgrade_dependencies = FALSE)" \
+  # render the analysis
+  && R -e "rmarkdown::render('/guedesbocinsky2018/analysis/analysis.Rmd')"

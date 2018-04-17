@@ -1,6 +1,15 @@
-## A function that rewraps a vector into a matrix
-## given a vector (n)  specifying the length of rows.
-## n can be either a constant (in which case it will be repeated), or a vector
+#' A function that rewraps a vector into a matrix.
+#'
+#' User must provide a vector (n) specifying the length of rows.
+#' n can be either a constant (in which case it will be repeated), or a vector.
+#'
+#' @param vec
+#' @param n
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rewrapRows <- function(vec,n){
   list.out <- vector('list',length(n))
   n.sums <- c(0,cumsum(n))

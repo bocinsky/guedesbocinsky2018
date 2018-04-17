@@ -1,5 +1,14 @@
-## A function that unwraps a matrix and only keeps the first n elements
-## n can be either a constant (in which case it will be repeated), or a vector
+#' A function that unwraps a matrix and only keeps the first n elements.
+#'
+#' n can be either a constant (in which case it will be repeated), or a vector.
+#'
+#' @param mat
+#' @param n
+#'
+#' @return
+#' @export
+#'
+#' @examples
 unwrapRows <- function(mat,n){
   n <- rep_len(n,nrow(mat))
   i <- 0

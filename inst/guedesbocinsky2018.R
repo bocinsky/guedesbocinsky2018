@@ -225,7 +225,7 @@ time_check <-  Sys.time()
 sample.points <- -20:20
 
 # Read in data on different crop GDD needs
-crop_GDD <- readr::read_csv("./DATA/crops.csv",
+crop_GDD <- readr::read_csv("./data/raw_data/crops.csv",
                             col_types = readr::cols(
                               cultivar_long = col_character(),
                               cultivar = col_character(),
@@ -233,12 +233,12 @@ crop_GDD <- readr::read_csv("./DATA/crops.csv",
                               crop = col_character(),
                               t_base = col_double(),
                               min_gdd = col_integer()
-                            )) %>%
-  dplyr::filter(crop %in% c("foxtail_millet",
-                            "broomcorn_millet",
-                            "wheat",
-                            "barley",
-                            "buckwheat"))
+                            )) #%>%
+# dplyr::filter(crop %in% c("foxtail_millet",
+#                           "broomcorn_millet",
+#                           "wheat",
+#                           "barley",
+#                           "buckwheat"))
 
 # create the cluster for parallel computation
 cl <- makeCluster(opt$cores, type = "PSOCK")
@@ -740,8 +740,8 @@ write_lines(c("Sites data (after spatial and crop filtering)",
                        Site %>%
                        unique() %>%
                        length())
-              ),
-            out("sites.txt"))
+),
+out("sites.txt"))
 
 
 # A function to calibrate either 14C dates (using BchronCalibrate), or
