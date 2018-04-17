@@ -1,4 +1,4 @@
-# get the base image, the rocker/verse has R, RStudio and pandoc
+# get the base image
 FROM bocinsky/bocin_base:latest
 
 # required

@@ -1,8 +1,13 @@
 Package: GuedesBocinsky2018
-Version: 0.0.0.9000
-Title: What the Package Does (One Line, Title Case)
-Description: What the package does (one paragraph).
-Authors@R: person("First", "Last", , "first.last@example.com", c("aut", "cre"))
+Version: 1.0.0.9000
+Title: Research Compendium for d'Alpoim Guedes and Bocinsky (in review)
+Description: This R package repository is a research compendium for d'Alpoim Guedes and Bocinsky (in review). 
+  The compendium contains all code associated with the analyses described and presented in the publication, 
+  as well as a Docker environment for running the code.
+Authors@R: c(person(given = "Kyle", family = "Bocinsky",
+       email = "bocinsky@gmail.com", role = c("aut", "cre", "cph")),
+       person(given = "Jade", family = "d'Alpoim Guedes",
+       email = "jguedes@ucsd.edu", role = c("aut", "ctb", "cph", "dtc")))
 License: What license it uses
 Encoding: UTF-8
 LazyData: true
