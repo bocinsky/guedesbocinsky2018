@@ -4,46 +4,33 @@ Title: Research Compendium for d'Alpoim Guedes and Bocinsky (in Review)
 Description: This R package repository is a research compendium for d'Alpoim Guedes and Bocinsky (in review). 
   The compendium contains all code associated with the analyses described and presented in the publication, 
   as well as a Docker environment for running the code.
-Authors@R: c(person(given = "Kyle", family = "Bocinsky",
-       email = "bocinsky@gmail.com", role = c("aut", "cre", "cph")),
-       person(given = "Jade", family = "d'Alpoim Guedes",
-       email = "jguedes@ucsd.edu", role = c("aut", "ctb", "cph", "dtc")))
+Authors@R: c(
+              person( given = "Kyle", 
+                      family = "Bocinsky",
+                      email = "bocinsky@gmail.com", 
+                      role = c("aut", "cre", "cph")),
+              person( given = "Jade", 
+                      family = "d'Alpoim Guedes",
+                      email = "jguedes@ucsd.edu", 
+                      role = c("aut", "ctb", "cph", "dtc"))
+            )
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 Requires: R (>= 3.4.3)
-Remotes: hadley/purrrlyr,
+Remotes: 
+    tidyverse/ggplot2,
+    hadley/purrrlyr,
     bocinsky/tdar
 Imports: 
-    bookdown,
-    foreach,
-    doParallel,
     FedData,
-    R.utils,
     Hmisc,
     abind,
     mgcv,
     rgbif,
-    fields,
-    sf,
-    rgdal,
-    ncdf4,
     raster,
-    geomapdata,
-    maptools,
-    mapproj,
-    Bchron,
-    mclust,
     magrittr,
-    dplyr,
-    purrr,
-    RColorBrewer,
-    htmlwidgets,
-    plotly,
-    bibtex,
-    ggplot2,
-    knitcitations,
     plotrix,
     plyr,
     tibble,
@@ -52,6 +39,32 @@ Imports:
     stringi,
     stringr,
     R.oo,
-    zoo
+    zoo,
+    sp,
+    ggplot2
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown,
+    Bchron,
+    R.utils,
+    RColorBrewer,
+    bibtex,
+    bookdown,
+    devtools,
+    doParallel,
+    dplyr,
+    fields,
+    foreach,
+    geomapdata,
+    htmlwidgets,
+    knitcitations,
+    mapproj,
+    maptools,
+    mclust,
+    ncdf4,
+    plotly,
+    purrr,
+    rgdal,
+    sf
+VignetteBuilder: knitr

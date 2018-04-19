@@ -1,36 +1,32 @@
 # Restricted archaeological site data
-/DATA/DALPOIMGUEDES_BOCINSKY_2017.xlsx
-
+DALPOIMGUEDES_BOCINSKY_2017.xlsx
 # Output
-/OUTPUT
-/OUTPUT/*
-
+/vignettes/data
+/vignettes/data/*
+/vignettes/figures
+/vignettes/figures/*
+/vignettes/guedesbocinsky2018_cache
+/vignettes/guedesbocinsky2018_cache/*
 # Zenodo
 /Zenodo
 /Zenodo/*
-
 # Nature
 /Nature
 /Nature/*
-
 # Tar archives for Zenodo
 *.tar.gz
-
 # Mac trash files
 .DS_Store
 */.DS_Store
-
 # History files
 .Rhistory
 .Rapp.history
-
 # Session Data files
 .RData
-
 # RStudio files
 .Rproj.user/
 .Rproj.user
-
 # SLURM output
 *.err
 *.out
+inst/doc

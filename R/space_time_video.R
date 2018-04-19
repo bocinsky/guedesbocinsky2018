@@ -1,4 +1,3 @@
-utils::globalVariables(c("sd.temporal"))
 #' A space-time video
 #'
 #' Given a raster brick (and possibly uncertainties/errors),
@@ -67,24 +66,23 @@ space_time_video <- function(the_brick,
   }
 
   mean.all <- mean(the_brick[], na.rm = T)
-  mean.spatial <- mean(the_brick, na.rm = T)
+  mean.spatial <- raster::mean(the_brick, na.rm = T)
   mean.temporal <- raster::cellStats(the_brick, mean, na.rm = T)
   ci.temporal <- raster::cellStats(the_brick, stats::quantile, probs = c(0.25, 0.75), na.rm = T)
 
   if (!is.null(smoother)) {
     mean.temporal %<>% stats::filter(filter = smoother)
-    sd.temporal %<>% stats::filter(filter = smoother)
   }
 
   if (!is.null(the_brick_upper)) {
     mean.all.upper <- mean(the_brick_upper[], na.rm = T)
-    mean.spatial.upper <- mean(the_brick_upper, na.rm = T)
+    mean.spatial.upper <- raster::mean(the_brick_upper, na.rm = T)
     mean.temporal.upper <- raster::cellStats(the_brick_upper, mean, na.rm = T)
   }
 
   if (!is.null(the_brick_lower)) {
     mean.all.lower <- mean(the_brick_lower[], na.rm = T)
-    mean.spatial.lower <- mean(the_brick_lower, na.rm = T)
+    mean.spatial.lower <- raster::mean(the_brick_lower, na.rm = T)
     mean.temporal.lower <- raster::cellStats(the_brick_lower, mean, na.rm = T)
   }
 
@@ -106,7 +104,7 @@ space_time_video <- function(the_brick,
     )
   }
 
-  colors <- grDevices::colorRampPalette(zcolors)(length(zbreaks))
+  colors <- grDevices::colorRampPalette(zcolors)(length(zbreaks) - 1)
 
   for (layer in 1:raster::nlayers(the_brick)) {
     grDevices::png(
@@ -143,9 +141,10 @@ space_time_video <- function(the_brick,
       main = ""
     )
 
-    graphics::plot(the_brick[[layer]],
+    raster::plot(the_brick[[layer]],
       maxpixels = raster::ncell(the_brick),
       zlim = range(zbreaks),
+      breaks = zbreaks,
       add = T,
       col = colors,
       colNA = "gray90",

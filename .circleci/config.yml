@@ -14,7 +14,7 @@ defaults: &steps
       - run:
           name: Check and test
           command: |
-            R -e 'results <- devtools::check(); stopifnot(length(results$errors) == 0)'
+            R -e 'results <- devtools::check(args = c('--no-build-vignettes')); stopifnot(length(results$errors) == 0)'
 
 version: 2
 jobs:

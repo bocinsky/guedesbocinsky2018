@@ -5,7 +5,8 @@
 \title{Download and clean daily climate records from the Global Historical Climate Database.}
 \usage{
 prepare_ghcn(region, label, calibration.years, google_maps_elevation_api_key,
-  force.redo = FALSE)
+  raw_dir = "./data/raw_data/ghcn/",
+  derived_dir = "./data/derived_data/ghcn/", force.redo = FALSE)
 }
 \arguments{
 \item{region}{A spatial object defining the region}
@@ -15,6 +16,10 @@ prepare_ghcn(region, label, calibration.years, google_maps_elevation_api_key,
 \item{calibration.years}{The years for defining climatology}
 
 \item{google_maps_elevation_api_key}{the users Google Maps Elevation API key}
+
+\item{raw_dir}{a directory in which to store the raw GHCN downloads}
+
+\item{derived_dir}{a directory in which to store the processed GHCN output}
 
 \item{force.redo}{Should the GHCN data be re-processed?}
 }

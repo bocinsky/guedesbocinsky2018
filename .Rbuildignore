@@ -1,6 +1,8 @@
-^GuedesBocinsky2018\.Rproj$
+^guedesbocinsky2018\.Rproj$
 ^\.Rproj\.user$
-analysis
+vignettes/data
+vignettes/figures
+vignettes/guedesbocinsky2018_cache
 ^README\.Rmd$
 ^README-.*\.png$
 ^CONDUCT\.md$
@@ -8,3 +10,4 @@ analysis
 .circleci
 ^Dockerfile$
 ^LICENSE\.md$
+^\.travis\.yml$

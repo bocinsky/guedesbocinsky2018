@@ -11,6 +11,6 @@ RUN . /etc/environment \
   # Install dev version of devtools
   && R -e 'devtools::install_github("r-lib/devtools")' \
   # build this compendium package
-  && R -e "devtools::install('/guedesbocinsky2018', dep = TRUE, upgrade_dependencies = FALSE)" \
+  && R -e "devtools::install('/guedesbocinsky2018', dep = TRUE, upgrade_dependencies = FALSE)"# \
   # render the analysis
-  && R -e "rmarkdown::render('/guedesbocinsky2018/analysis/analysis.Rmd')"
+  # && R -e "rmarkdown::render('/guedesbocinsky2018/vignettes/analysis.Rmd')"
