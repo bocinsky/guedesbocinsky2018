@@ -47,23 +47,3 @@ docker cp guedesbocinsky2018:/guedesbocinsky2018 ./docker_out/
 ## Stop the Docker container
 docker stop guedesbocinsky2018
 
-## Create a compressed tar archive of the output
-tar -zcf ./docker_out/guedesbocinsky2018-$VERSION-output.tar.gz data ./docker_out/
-
-## Make the Submission directory
-rm -r Submission; mkdir Submission
-
-## Copy and rename the figures, tables, and supplementary data sets for submission
-cp ./figures/crop_map.pdf ./Submission/Figure_1.pdf
-cp ./OUTPUT/FIGURES/facet_niche.pdf ./Submission/Figure_2.pdf
-cp ./OUTPUT/FIGURES/All_crossplot.pdf ./Submission/Figure_3.pdf
-cp ./OUTPUT/FIGURES/All_crossplot.html ./Submission/Supplementary_Data_1.html
-cp ./OUTPUT/FIGURES/All_wheat.mov ./Submission/Supplementary_Video_1.mov
-cp ./OUTPUT/FIGURES/All_barley.mov ./Submission/Supplementary_Video_2.mov
-cp ./OUTPUT/FIGURES/All_broomcorn_millet.mov ./Submission/Supplementary_Video_3.mov
-cp ./OUTPUT/FIGURES/All_foxtail_millet.mov ./Submission/Supplementary_Video_4.mov
-cp ./OUTPUT/FIGURES/All_buckwheat.mov ./Submission/Supplementary_Video_5.mov
-cp ./DATA/crops.csv ./Submission/Supplementary_Table_1.csv
-cp ./OUTPUT/TABLES/sites_dates_raw.csv ./Submission/Supplementary_Table_2.csv
-cp ./OUTPUT/TABLES/age_niche_estimates.csv ./Submission/Supplementary_Table_3.csv
-curl -L https://codeload.github.com/bocinsky/guedesbocinsky2018/tar.gz/$VERSION

@@ -17,7 +17,7 @@ library(magrittr)
 [![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-brightgreen.svg)](https://github.com/bocinsky/guedesbocinsky2018/commits/master) 
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-`r as.character(getRversion())`-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/) 
-[![DOI](https://zenodo.org/badge/52899692.svg)](https://zenodo.org/badge/latestdoi/52899692)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1239106.svg)](https://doi.org/10.5281/zenodo.1239106)
 
 ## Research compendium package for d'Alpoim Guedes and Bocinsky (2018)
 
@@ -25,13 +25,13 @@ library(magrittr)
 
 d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Climate change stimulated agricultural innovation and exchange across Asia. In review.
 
-d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Research compendium for: *Climate change stimulated agricultural innovation and exchange across Asia*, in review. Version 1.0.0. Zenodo. http://doi.org/10.5281/zenodo.583157
+d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Research compendium for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. https://doi.org/10.5281/zenodo.1239106
 
-d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Data output for: *Climate change stimulated agricultural innovation and exchange across Asia*, in review. Version 1.0.0. Zenodo. http://doi.org/10.5281/zenodo.583154
+d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Data output for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. http://doi.org/10.5281/zenodo.583154
 
 ### Compendium DOI: 
  
-[![DOI](https://zenodo.org/badge/52899692.svg)](https://zenodo.org/badge/latestdoi/52899692)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1239106.svg)](https://doi.org/10.5281/zenodo.1239106)
 
 The files at the URL above will generate the results as found in the publication. The files hosted at [https://github.com/bocinsky/guedesbocinsky2018](https://github.com/bocinsky/guedesbocinsky2018) are the development versions and may have changed since this compendium was released.
 
@@ -41,7 +41,7 @@ The files at the URL above will generate the results as found in the publication
 - Jade d'Alpoim Guedes ([jadeguedes@gmail.com](mailto:jadeguedes@gmail.com))
 
 ### Overview of contents
-This repository is a research compendium package for d'Alpoim Guedes and Bocinsky (in review). The compendium contains all code associated with the analyses described and presented in the publication, as well as a Docker environment (described in the `Dockerfile`) for running the code.
+This repository is a research compendium package for d'Alpoim Guedes and Bocinsky (2018). The compendium contains all code associated with the analyses described and presented in the publication, as well as a Docker environment (described in the `Dockerfile`) for running the code.
 
 This compendium is an R package, meaning that by installing it you are also installing most required dependencies. See below for hints on installing some of the command-line tools necessary in this analysis on macOS and Linux.
 
@@ -109,13 +109,14 @@ This analysis uses the tDAR application programming interface (API) to authentic
 ### The Docker container
 [Docker](https://www.docker.com/) is a virtual computing environment that facilitates reproducible research---it allows for research results to be produced independent of the machine on which they are computed. Docker users describe computing environments in a text format called a "Dockerfile", which when read by the Docker software builds a virtual machine, or "container". Other users can then load the container on their own computers. Users can upload container images to [Docker Hub](https://hub.docker.com/), and the image for this research (without the analyses run) is available at [https://hub.docker.com/r/bocinsky/guedesbocinsky2018/](https://hub.docker.com/r/bocinsky/guedesbocinsky2018/).
 
-We have included a Dockerfile which builds a Docker container for running the analyses described in the paper. It uses [`rocker/geospatial:3.3.3`](https://hub.docker.com/r/rocker/geospatial/), which provides R, [RStudio Server](https://www.rstudio.com/products/rstudio/download-server/), the [tidyverse](http://tidyverse.org/) of R packages as its base image and adds several geospatial software packages ([GDAL](http://www.gdal.org/), [GEOS](https://trac.osgeo.org/geos/), and [proj.4](http://proj4.org/). The Dockerimage (1) adds ffmpeg, (2) updates the R packages, and (3) installs the R software packages required by the script.
+We have included a Dockerfile which builds a Docker container for running the analyses described in the paper. It uses [`rocker/geospatial:3.4.3`](https://hub.docker.com/r/rocker/geospatial/), which provides R, [RStudio Server](https://www.rstudio.com/products/rstudio/download-server/), the [tidyverse](http://tidyverse.org/) of R packages as its base image and adds several geospatial software packages ([GDAL](http://www.gdal.org/), [GEOS](https://trac.osgeo.org/geos/), and [proj.4](http://proj4.org/). The Dockerimage (1) adds ffmpeg, (2) updates the R packages, and (3) installs the R software packages required by the script.
 
 #### Downloading and running the Docker container image
 The commands below demonstrate three ways to run the docker container. See this [Docker cheat sheet](https://github.com/wsargent/docker-cheat-sheet) for other arguments. Using the ":1.0.0" tag will ensure you are running the version of the code that generates the d'Alpoim Guedes and Bocinsky (2018) results---the first time you run the Docker image, it will download it from the Docker Hub.
 
 ##### Run the analysis directly
 To run the analyses directly, render the `guedesbocinsky2018.Rmd` RMarkdown vignette at the end of the run command:
+
 ```bash
 docker run bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesbocinsky2018/vignettes/guedesbocinsky2018.Rmd', \
                                                                               params = list(cores = 1, \
@@ -127,6 +128,7 @@ docker run bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesboc
 
 ##### Run the analysis interactively from the terminal
 Alternatively, you can run the container in interactive mode and load the script yourself:
+
 ```bash
 docker run -it bocinsky/guedesbocinsky2018:1.0.0 bash
 ```
@@ -135,9 +137,11 @@ You can use the `exit` command to stop the container.
 
 ##### Run the analysis from within a Dockerized RStudio IDE
 Finally, you can host RStudio Server locally to use the RStudio browser-based IDE. Run:
+
 ```bash
 docker run -p 8787:8787 bocinsky/guedesbocinsky2018:1.0.0
 ```
+
 Then, open a browser (we find [Chrome](https://www.google.com/chrome/) works best) and navigate to "localhost:8787" or or run `docker-machine ip default` in the shell to find the correct IP address, and log in with **rstudio**/**rstudio** as the user name and password. In the explorer (lower right pane in RStudio), navigate to the `guedesbocinsky2018` directory, and click the `guedesbocinsky2018.Rproj` to open the project.
 
 #### Building the Docker container from scratch
@@ -154,7 +158,7 @@ This analysis has been designed to take advantage of modern multi-core or multi-
 ### Output
 The GitHub repository for this project does not contain the output generated by the script---`r "vignettes" %>% list.files(all.files = TRUE, recursive = TRUE, full.names = TRUE) %>% file.size() %>% sum() %>% magrittr::divide_by(1000000000) %>% round(digits = 2)` GB of uncompressed data. All output data is available as a separate Zenodo archive at:
 
-[http://doi.org/10.5281/zenodo.583154](http://doi.org/10.5281/zenodo.583154)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.788601.svg)](https://doi.org/10.5281/zenodo.788601)
 
 The `vignettes/` directory contains all data generated by the `guedesbocinsky2018.Rmd` RMarkdown vignette:
 
@@ -183,6 +187,3 @@ The Research Institute at Crow Canyon Archaeological Center<br>
 
 ### R package citations
 The following R packages were used for this analysis:
-
-
-
