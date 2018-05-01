@@ -4,28 +4,28 @@
 #' plot a map of the average across time, and a
 #' graph of the average across space.
 #'
-#' @param the_brick
-#' @param the_brick_upper
-#' @param the_brick_lower
-#' @param out_file
-#' @param title
-#' @param time
-#' @param timelim
-#' @param timeaxis
-#' @param timelab
-#' @param zbreaks
-#' @param zlab
-#' @param zaxis
-#' @param zcolors
-#' @param fig_width
-#' @param graph_height
-#' @param margin
-#' @param pt_size
-#' @param smooth
-#' @param extra_plot_fun
-#' @param extra_legend_fun
+#' @param the_brick The data to plot
+#' @param the_brick_upper The upper CI data
+#' @param the_brick_lower The lower CI data
+#' @param out_file Where to write the output
+#' @param title The Title of the plot
+#' @param time The timeseries of the plot
+#' @param timelim The time limits of the plot
+#' @param timeaxis The time limits of the axis
+#' @param timelab The label of the time axis
+#' @param zbreaks The color breaks for plotting
+#' @param zlab The label for the data
+#' @param zaxis The axis breaks for the data
+#' @param zcolors The colors for the data
+#' @param fig_width The width of the figure
+#' @param graph_height The height of the time series graph
+#' @param margin The margin
+#' @param pt_size The point size
+#' @param smooth Should the timeseries be smoothed by kernel estimation
+#' @param extra_plot_fun Any extra plotting functions
+#' @param extra_legend_fun Any extra legend functions
 #'
-#' @return
+#' @return NULL
 #' @keywords internal
 #' @importFrom magrittr %<>%
 space_time_plot <- function(the_brick,

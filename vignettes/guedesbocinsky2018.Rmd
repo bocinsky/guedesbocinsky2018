@@ -19,8 +19,6 @@ output:
       toc: true
       toc_float: true
       toc_depth: 3
-bibliography: references.bib
-csl: "./templates/science.csl" # Insert path for the bib-style
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEncoding{UTF-8}
@@ -54,7 +52,6 @@ knitr::opts_chunk$set(echo = TRUE,
 library(guedesbocinsky2018)
 library(sf)
 library(magrittr)
-library(furrr)
 
 # Set the behavior for printing scientific notation
 # options(digits = 3, scipen = -2)
@@ -66,7 +63,7 @@ raster::rasterOptions(chunksize = 2e+08,
                       maxmemory = 2e+09)
 
 # Create the plan for (possibly parallel) execution
-future::plan(multisession, 
+future::plan(future::multisession, 
              workers = min(future::availableCores(), 
                            params$cores),
              gc = TRUE)
@@ -1772,6 +1769,21 @@ suppressWarnings(utils::tar("./submission/Data_file_S3_research_compendium.tar.g
                                "'vignettes/submission'",
                                "'vignettes/guedesbocinsky2018_cache'")))
 
+```
+
+
+## Create Zenodo archive {-}
+
+```{r zenodo}
+unlink("./zenodo",
+       recursive = TRUE, 
+       force = TRUE)
+
+dir.create("./zenodo",
+           recursive = TRUE,
+           showWarnings = FALSE)
+
+system("tar -zcf ./zenodo/guedesbocinsky2018-1.0.0-output.tar.gz submission figures data")
 ```
 
 <!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->

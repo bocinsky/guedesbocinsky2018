@@ -6,10 +6,8 @@ utils::globalVariables(c("out"))
 #' @param raw_dir a directory in which to store the raw downloads
 #' @param derived_dir a directory in which to store the processed output
 #'
-#' @return
+#' @return the Marcott dataset
 #' @export
-#'
-#' @examples
 prepare_marcott <- function(calibration.years,
                             raw_dir = "./data/raw_data/",
                             derived_dir = "./data/derived_data/") {
@@ -19,7 +17,7 @@ prepare_marcott <- function(calibration.years,
   message("Downloading Mann et al. 2008 infilled instrumental temperature data.")
   dir.create(raw_dir, showWarnings = FALSE, recursive = TRUE)
   dir.create(derived_dir, showWarnings = FALSE, recursive = TRUE)
-  download.file("ftp://ftp.ncdc.noaa.gov/pub/data/paleo/contributions_by_author/mann2008/instrument.zip",
+  utils::download.file("ftp://ftp.ncdc.noaa.gov/pub/data/paleo/contributions_by_author/mann2008/instrument.zip",
                 destfile = paste0(raw_dir, "/instrument.zip"))
   utils::unzip(paste0(raw_dir, "/instrument.zip"),
                exdir = raw_dir)

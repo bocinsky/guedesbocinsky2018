@@ -5,6 +5,10 @@ DALPOIMGUEDES_BOCINSKY_2017.xlsx
 /vignettes/data/*
 /vignettes/figures
 /vignettes/figures/*
+/vignettes/submission
+/vignettes/submission/*
+/vignettes/zenodo
+/vignettes/zenodo/*
 /vignettes/guedesbocinsky2018_cache
 /vignettes/guedesbocinsky2018_cache/*
 # Zenodo

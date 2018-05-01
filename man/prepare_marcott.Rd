@@ -14,6 +14,9 @@ prepare_marcott(calibration.years, raw_dir = "./data/raw_data/",
 
 \item{derived_dir}{a directory in which to store the processed output}
 }
+\value{
+the Marcott dataset
+}
 \description{
 Download and prepare data from Mann et al. 2008 and Marcott et al. 2013.
 }

@@ -12,7 +12,45 @@ space_time_plot(the_brick, the_brick_upper = NULL, the_brick_lower = NULL,
   extra_plot_fun = NULL, extra_legend_fun = NULL)
 }
 \arguments{
-\item{extra_legend_fun}{}
+\item{the_brick}{The data to plot}
+
+\item{the_brick_upper}{The upper CI data}
+
+\item{the_brick_lower}{The lower CI data}
+
+\item{out_file}{Where to write the output}
+
+\item{title}{The Title of the plot}
+
+\item{time}{The timeseries of the plot}
+
+\item{timelim}{The time limits of the plot}
+
+\item{timeaxis}{The time limits of the axis}
+
+\item{timelab}{The label of the time axis}
+
+\item{zbreaks}{The color breaks for plotting}
+
+\item{zlab}{The label for the data}
+
+\item{zaxis}{The axis breaks for the data}
+
+\item{zcolors}{The colors for the data}
+
+\item{fig_width}{The width of the figure}
+
+\item{graph_height}{The height of the time series graph}
+
+\item{margin}{The margin}
+
+\item{pt_size}{The point size}
+
+\item{smooth}{Should the timeseries be smoothed by kernel estimation}
+
+\item{extra_plot_fun}{Any extra plotting functions}
+
+\item{extra_legend_fun}{Any extra legend functions}
 }
 \description{
 Given a raster brick (and possibly uncertainties/errors),

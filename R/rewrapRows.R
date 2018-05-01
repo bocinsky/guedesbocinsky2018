@@ -6,10 +6,9 @@
 #' @param vec A vector
 #' @param n the length of each row.
 #'
-#' @return
+#' @return A matrix
 #' @export
 #'
-#' @examples
 rewrapRows <- function(vec, n) {
   list.out <- vector("list", length(n))
   n.sums <- c(0, cumsum(n))

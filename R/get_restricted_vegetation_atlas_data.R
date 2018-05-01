@@ -1,3 +1,8 @@
+utils::globalVariables(c("VEGE_ID",
+                         "Vegetation_ID",
+                         "Vegetation_formation_and_sub-formation",
+                         "Vegetation_type",
+                         "crop"))
 #' Get the restricted vegetation_atlas data from tDAR
 #'
 #' @param tdar_user Your tDAR user name
@@ -21,7 +26,7 @@ get_restricted_vegetation_atlas_data <- function(tdar_user = Sys.getenv('tdar_un
             httr::write_disk(paste0(tempdir(),"/vegetation.zip"),
                                                          overwrite = TRUE))
   paste0(tempdir(),"/vegetation.zip") %>%
-    unzip(exdir = paste0(tempdir(),"/vegetation/"))
+    utils::unzip(exdir = paste0(tempdir(),"/vegetation/"))
 
   out <- sf::st_read(paste0(tempdir(),"/vegetation/vegetation.shp")) %>%
     dplyr::select(VEGE_ID) %>%

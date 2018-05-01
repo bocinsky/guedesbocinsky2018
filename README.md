@@ -1,12 +1,12 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--04--19-brightgreen.svg)](https://github.com/bocinsky/asian_niche/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--05--01-brightgreen.svg)](https://github.com/bocinsky/guedesbocinsky2018/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.4.4-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![DOI](https://zenodo.org/badge/52899692.svg)](https://zenodo.org/badge/latestdoi/52899692)
 
-## Research compendium for d’Alpoim Guedes and Bocinsky *in review*
+## Research compendium package for d’Alpoim Guedes and Bocinsky (2018)
 
 **When using the code included in this research compendium, please cite
 *all* of the following:**
@@ -16,12 +16,12 @@ agricultural innovation and exchange across Asia. In review.
 
 d’Alpoim Guedes, Jade and R. Kyle Bocinsky. Research compendium for:
 *Climate change stimulated agricultural innovation and exchange across
-Asia*, in review. Version 0.9.0. Zenodo.
+Asia*, in review. Version 1.0.0. Zenodo.
 <http://doi.org/10.5281/zenodo.583157>
 
 d’Alpoim Guedes, Jade and R. Kyle Bocinsky. Data output for: *Climate
 change stimulated agricultural innovation and exchange across Asia*, in
-review. Version 0.9.0. Zenodo.
+review. Version 1.0.0. Zenodo.
 <http://doi.org/10.5281/zenodo.583154>
 
 ### Compendium DOI:
@@ -30,8 +30,8 @@ review. Version 0.9.0. Zenodo.
 
 The files at the URL above will generate the results as found in the
 publication. The files hosted at
-<https://github.com/bocinsky/asian_niche> are the development versions
-and may have changed since this compendium was released.
+<https://github.com/bocinsky/guedesbocinsky2018> are the development
+versions and may have changed since this compendium was released.
 
 ### Authors of this repository:
 
@@ -40,46 +40,93 @@ and may have changed since this compendium was released.
 
 ### Overview of contents
 
-This repository is a research compendium for d’Alpoim Guedes and
+This repository is a research compendium package for d’Alpoim Guedes and
 Bocinsky (in review). The compendium contains all code associated with
 the analyses described and presented in the publication, as well as a
 Docker environment (described in the `Dockerfile`) for running the code.
-The primary files contained in this reposity are:
 
-  - **`README.Rmd`**: An RMarkdown source file, and its knitted Markdown
-    output `README.md`
-  - **`asian_niche.Rproj`**: An RStudio project configuration file for
-    this study
-  - **`asian_niche.R`**: The R script that runs the entire analysis, and
-    is designed to be called from the command prompt
-  - **`asian_niche.sh`**: A Bash script for building the Docker
-    container (see below), running `asian_niche.R`, and compressing the
-    output for uploading to Zenodo
-  - **`Dockerfile`**: A text document that contains the instructions for
-    building the Docker container
-  - **`LICENSE`**: A text file of the MIT license for this repository
-    and the code within it
-  - **`src/`**: A directory containing auxiliary R code for functions
-    used in the `asian_niche.R` script
-  - **`DATA/`**: A directory containing input data for the analysis not
-    downloaded from elsewhere. This includes `crops.csv`, a table of
-    cultivars and their estimated thermal requirements.
+This compendium is an R package, meaning that by installing it you are
+also installing most required dependencies. See below for hints on
+installing some of the command-line tools necessary in this analysis on
+macOS and Linux.
 
-### The research compendium
+The analyses presented in Guedes and Bocinsky (2018) are performed in an
+RMarkdown vignette (`guedesbocinsky2018.Rmd`) located in the `vignettes`
+directory.
 
-To download this research compendium as you see it on GitHub, for
-offline browsing, [install git on your computer](https://git-scm.com/)
-and use this line at a Bash prompt (“Terminal” on macOS and Unix-alikes,
-“Command Prompt” on Windows):
+### Installing the compendium package
 
-``` bash
-git clone https://github.com/bocinsky/asian_niche.git
+Install the publication version of this compendium with
+
+``` r
+library(devtools)
+install_github("bocinsky/guedesbocinsky2018@1.0.0")
 ```
 
-**All commands described in this research compendium are meant to be run
-from a Bash prompt.**
+Install the current development version from github with
 
-### Archaeological site data
+``` r
+library(devtools)
+install_github("bocinsky/guedesbocinsky2018")
+```
+
+#### System requirements
+
+Among the system dependencies for this package are
+[GDAL](http://www.gdal.org/), [FFMPEG](https://www.ffmpeg.org/), and
+[Ghostscript](https://www.ghostscript.com/). These packages (and their
+respective dependencies) must be installed in order to run the analyses.
+Additionally, Cairo must be among the capabilities of your particular R
+installation (as it probably is if you installed from a pre-compiled
+binary download available on CRAN).
+
+##### macOS
+
+We strongly suggest using [Homebrew](https://brew.sh/) to install the
+system dependencies. Homebrew commands might be:
+
+    brew install gdal --with-complete --with-unsupported
+    brew install ffmpeg
+    brew install ghostscript
+
+##### Linux
+
+Please refer to the dockerfiles for
+[rocker/geospatial](https://github.com/rocker-org/geospatial/blob/master/Dockerfile)
+and
+[bocinsky/bocin\_base](https://github.com/bocinsky/bocin_base/blob/master/Dockerfile).
+
+##### Windows
+
+This software has not been tested on Windows, but should install and
+work fine if all system requirements are installed.
+
+### Authentication for the Google Elevation API and tDAR
+
+This analyses requires the user to have the Google Elevation API key and
+a tDAR user name and password either as environment variables or passed
+to the `guedesbocinsky2018.Rmd` RMarkdown vignette as parameters.
+
+On Unix-alike systems (including Linux and macOS), you can set
+environmental variables like so:
+
+``` bash
+export google_maps_elevation_api_key=YOUR_API_KEY
+export tdar_un=YOUR_TDAR_USER_NAME
+export tdar_pw=YOUR_TDAR_PASSWORD
+```
+
+Or, pass them as parameters when compiling the `guedesbocinsky2018.Rmd`
+RMarkdown vignette:
+
+``` bash
+Rscript -e "rmarkdown::render('./vignettes/guedesbocinsky2018.Rmd', \
+                              params = list(google_maps_elevation_api_key = 'YOUR_API_KEY', \
+                              tdar_un = 'YOUR_TDAR_USER_NAME',\
+                              tdar_pw = 'YOUR_TDAR_PASSWORD'))"
+```
+
+#### Archaeological site data from tDAR
 
 Archaeological site location data are sensitive information due to the
 possibility of looting, and archaeological ethics require that we
@@ -91,9 +138,6 @@ necessary to run this analysis with the [Digital Archaeological Record
 to run this analysis need to request access through tDAR, which we will
 provide to any researcher with a reasonable affiliation (academic or
 otherwise). The main purpose is to track to whom we provide access.
-Please [contact the
-authors](mailto:bocinsky@gmail.com,jadeguedes@gmail.com) if you wish to
-use these data in your research or share them with others.
 
 The data are available through tDAR at the following DOI:
 [10.6067/XCV8MK6G05](https://doi.org/10.6067/XCV8MK6G05). Please go to
@@ -103,10 +147,9 @@ tDAR user account](https://core.tdar.org/account/new) and agree to the
 [tDAR user
 agreement](https://www.tdar.org/about/policies/terms-of-use/).
 
-Once you have access, you should be able to download the
-`DALPOIMGUEDES_BOCINSKY_2017.xlsx` Microsoft Excel file. Place the file
-in the `asian_niche/DATA/` directory, where you should also find the
-`crops.csv` file.
+This analysis uses the tDAR application programming interface (API) to
+authenticate a user into tDAR and access and download the archaeological
+site data.
 
 ### The Docker container
 
@@ -117,8 +160,9 @@ Docker users describe computing environments in a text format called a
 “Dockerfile”, which when read by the Docker software builds a virtual
 machine, or “container”. Other users can then load the container on
 their own computers. Users can upload container images to [Docker
-Hub](https://hub.docker.com/), and the image for this research is
-available at <https://hub.docker.com/r/bocinsky/asian_niche/>.
+Hub](https://hub.docker.com/), and the image for this research (without
+the analyses run) is available at
+<https://hub.docker.com/r/bocinsky/guedesbocinsky2018/>.
 
 We have included a Dockerfile which builds a Docker container for
 running the analyses described in the paper. It uses
@@ -128,37 +172,32 @@ Server](https://www.rstudio.com/products/rstudio/download-server/), the
 [tidyverse](http://tidyverse.org/) of R packages as its base image and
 adds several geospatial software packages ([GDAL](http://www.gdal.org/),
 [GEOS](https://trac.osgeo.org/geos/), and [proj.4](http://proj4.org/).
-The Dockerimage (1) adds ffmpeg, (2) updates the R packages to the
-[2017-05-15 MRAN snapshot](https://mran.microsoft.com/timemachine/), and
-(3) installs the R software packages required by the script (based on
-the same MRAN snapshot).
+The Dockerimage (1) adds ffmpeg, (2) updates the R packages, and (3)
+installs the R software packages required by the script.
 
 #### Downloading and running the Docker container image
 
 The commands below demonstrate three ways to run the docker container.
-In each, we use the `-w` argument to set the working directory to
-`/asian_niche`. See this [Docker cheat
+See this [Docker cheat
 sheet](https://github.com/wsargent/docker-cheat-sheet) for other
-arguments. Using the “:0.9.0” tag will ensure you are running the
+arguments. Using the “:1.0.0” tag will ensure you are running the
 version of the code that generates the d’Alpoim Guedes and Bocinsky
-(2017) results—the first time you run the Docker image, it will download
+(2018) results—the first time you run the Docker image, it will download
 it from the Docker Hub.
-
-**Be sure to copy the archaeological site data into the
-`asian_niche/DATA/` directory prior to running the `asian_niche.R`
-script\!** One way you can do so by adding the archaeological site data
-to your local `asian_niche/DATA/` directory, commenting the
-`DALPOIMGUEDES_BOCINSKY_2017.xlsx` entry in the `.dockerignore` file,
-and rebuilding the docker image using the command below.
 
 ##### Run the analysis directly
 
-To run the analyses directly, call the `asian_niche.R` script at the end
-of the run
+To run the analyses directly, render the `guedesbocinsky2018.Rmd`
+RMarkdown vignette at the end of the run
 command:
 
 ``` bash
-docker run -w /asian_niche bocinsky/asian_niche:0.9.0 Rscript asian_niche.R
+docker run bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesbocinsky2018/vignettes/guedesbocinsky2018.Rmd', \
+                                                                              params = list(cores = 1, \
+                                                                              clean = FALSE, \
+                                                                              google_maps_elevation_api_key = '$google_maps_elevation_api_key', \
+                                                                              tdar_un = '$tdar_un',\
+                                                                              tdar_pw = '$tdar_pw'))"
 ```
 
 ##### Run the analysis interactively from the terminal
@@ -167,14 +206,8 @@ Alternatively, you can run the container in interactive mode and load
 the script yourself:
 
 ``` bash
-docker run -w /asian_niche -it bocinsky/asian_niche:0.9.0 bash
+docker run -it bocinsky/guedesbocinsky2018:1.0.0 bash
 ```
-
-The `asian_niche.R` script has been designed to be run from the shell
-using Python-style argument parsing. To run, simply enter `Rscript
---vanilla asian_niche.R` at the shell prompt. Passing the `--vanilla`
-option runs the script in a “fresh” R environment. Run `Rscript
-asian_niche.R --help` to see all available options.
 
 You can use the `exit` command to stop the container.
 
@@ -184,46 +217,27 @@ Finally, you can host RStudio Server locally to use the RStudio
 browser-based IDE. Run:
 
 ``` bash
-docker run -p 8787:8787 bocinsky/asian_niche:0.9.0
+docker run -p 8787:8787 bocinsky/guedesbocinsky2018:1.0.0
 ```
 
 Then, open a browser (we find [Chrome](https://www.google.com/chrome/)
 works best) and navigate to “localhost:8787” or or run `docker-machine
 ip default` in the shell to find the correct IP address, and log in with
 **rstudio**/**rstudio** as the user name and password. In the explorer
-(lower right pane in RStudio), navigate to the `asian_niche` directory,
-and click the `asian_niche.Rproj` to open the project.
+(lower right pane in RStudio), navigate to the `guedesbocinsky2018`
+directory, and click the `guedesbocinsky2018.Rproj` to open the project.
 
 #### Building the Docker container from scratch
 
 If you wish to build the Docker container locally for this project from
-scratch, simply `cd` into the `asian_niche/` directory and run:
+scratch, simply `cd` into this `guedesbocinsky2018/` directory and run:
 
 ``` bash
-docker build -t bocinsky/asian_niche .
+docker build -t bocinsky/guedesbocinsky2018 .
 ```
 
 The `-t` argument gives the resulting container image a name. You can
 then run the container as described above.
-
-### One script to rule them all
-
-Alternatively to everything above, you can run the **`asian_niche.sh`**
-script, which builds the Docker container, runs the analysis, exports
-the output for Zenodo archiving, and prepares all of the supplemental
-information included in the d’Alpoim Guedes and Bocinsky (2017) paper.
-**This is the master script we ran for d’Alpoim Guedes and Bocinsky
-(2017).**
-
-Be sure to set the `ARCH_SITES` variable at the top of `asian_niche.sh`
-to point to the location of the archaeological site data on your local
-file system.
-
-Run it all using bash:
-
-``` bash
-bash asian_niche.sh
-```
 
 ### A note on run time
 
@@ -234,37 +248,35 @@ twice as fast as on a single core. The analysis also consumes quite a
 bit of memory. On two (relatively high-speed) cores, run-time of the
 entire analysis is **approximately 12 hours**. This can be sortened
 dramatically by running with a higher number of cores/processors and
-amount of memory, if available. During testing, we were able to run the
-entire analysis in under three hours using a 20 core cluster.
+amount of memory, if available.
 
 ### Output
 
 The GitHub repository for this project does not contain the output
-generated by the script—25.15 GB of uncompressed data. All output data
-is available as a separate Zenodo archive at:
+generated by the script—3.93 GB of uncompressed data. All output data is
+available as a separate Zenodo archive at:
 
 <http://doi.org/10.5281/zenodo.583154>
 
-The `OUTPUT/` directory contains all data generated by the
-`asian_niche.R` script:
+The `vignettes/` directory contains all data generated by the
+`guedesbocinsky2018.Rmd` RMarkdown vignette:
 
-  - `session_info.txt` describes the computational infrastructure within
-    which the script was run
-  - `packages.bib` is a BibTeX bibliography file including all packages
-    loaded in the `asian_niche.R` script
-  - `DATA/` contains data downloaded from web sources for this
-    analysis  
-  - `MODELS/` contains R data objects describing the Kriging
-    interpolation models across the study area
-  - `RECONS/` contains NetCDF format raster bricks of the model output
-    (i.e., the reconstructed crop niches)
-  - `SITE_DENSITIES/` contains figures of the estimated chronometric
-    probability density for each site in our database
-  - `FIGURES/` contains all figures output by the script, including
+  - `data/raw_data` contains data downloaded from web sources for this
+    analysis
+  - `data/derived_data/` contains tables of the raw site chronometric
+    data without locational information, and the modeled chronometric
+    probability and niche information for each site.
+  - `data/derived_data/models/` contains R data objects describing the
+    Kriging interpolation models across the study area
+  - `data/derived_data/recons/` contains NetCDF format raster bricks of
+    the model output (i.e., the reconstructed crop niches)
+  - `figures/` contains all figures output by the script, including
     videos of how each crop niche changes over time
-  - `TABLES/` contains tables of the raw site chronometric data without
-    locational information, and the modeled chronometric probability and
-    niche information for each site.
+  - `figures/site_densities/` contains figures of the estimated
+    chronometric probability density for each site in our database
+  - `submission/` contains all of the figures, tables, movies, and
+    supplemental datasets included with d’Alpoim Guedes and Bocinsky
+    (2018)
 
 ### Licenses
 

@@ -1,3 +1,12 @@
+utils::globalVariables(c("Exclude?",
+                         "Site",
+                         "Longitude",
+                         "Latitude",
+                         "14C age BP",
+                         "Age range lower (BP)",
+                         "14C date on cereal?",
+                         "Notes",
+                         "Period"))
 #' Get the restricted archaeological site and chronometric data from tDAR
 #'
 #' @param tdar_user Your tDAR user name

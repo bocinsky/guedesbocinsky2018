@@ -3,6 +3,8 @@
 vignettes/data
 vignettes/figures
 vignettes/guedesbocinsky2018_cache
+vignettes/submission
+vignettes/zenodo
 ^README\.Rmd$
 ^README-.*\.png$
 ^CONDUCT\.md$
@@ -11,3 +13,4 @@ vignettes/guedesbocinsky2018_cache
 ^Dockerfile$
 ^LICENSE\.md$
 ^\.travis\.yml$
+^\.dockerignore$

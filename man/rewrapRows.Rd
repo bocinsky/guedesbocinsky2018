@@ -11,6 +11,9 @@ rewrapRows(vec, n)
 
 \item{n}{the length of each row.}
 }
+\value{
+A matrix
+}
 \description{
 User must provide a vector (n) specifying the length of rows.
 n can be either a constant (in which case it will be repeated), or a vector.
