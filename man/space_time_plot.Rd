@@ -5,11 +5,11 @@
 \title{A space-time plot.}
 \usage{
 space_time_plot(the_brick, the_brick_upper = NULL, the_brick_lower = NULL,
-  out_file, title = NULL, time, timelim, timeaxis, timelab = "Year AD",
-  zbreaks = NULL, zlab, zaxis, zcolors = rev(RColorBrewer::brewer.pal(11,
-  "RdYlBu")), fig_width = 6.5, graph_height = 1.5, margin = 0.1,
-  pt_size = 8, smooth = FALSE, extra_plot_fun = NULL,
-  extra_legend_fun = NULL)
+  out_file, line = 75, title = NULL, time, timelim, timeaxis,
+  timelab = "Year AD", zbreaks = NULL, zlab, zaxis,
+  zcolors = rev(RColorBrewer::brewer.pal(11, "RdYlBu")), fig_width = 6.5,
+  graph_height = 1.5, margin = 0.1, pt_size = 8, smooth = FALSE,
+  extra_plot_fun = NULL, extra_legend_fun = NULL)
 }
 \arguments{
 \item{extra_legend_fun}{}

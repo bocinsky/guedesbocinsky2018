@@ -6,11 +6,11 @@ MAINTAINER Kyle Bocinsky <bocinsky@gmail.com>
 
 COPY . /guedesbocinsky2018
 
-# go into the repo directory
-RUN . /etc/environment \
-  # Install dev version of devtools
-  && R -e 'devtools::install_github("r-lib/devtools")' \
-  # build this compendium package
-  && R -e "devtools::install('/guedesbocinsky2018', dep = TRUE, upgrade_dependencies = FALSE)"# \
-  # render the analysis
-  # && R -e "rmarkdown::render('/guedesbocinsky2018/vignettes/analysis.Rmd')"
+# Install dev version of devtools to facilitate installing from "remotes" field in DESCRIPTION
+RUN r -e 'devtools::install_github("r-lib/devtools")'
+
+# build this compendium package
+RUN r -e 'devtools::install("/guedesbocinsky2018", dep = TRUE, upgrade_dependencies = FALSE)'
+
+# render the analysis
+# && r -e "rmarkdown::render('/guedesbocinsky2018/vignettes/guedesbocinsky2018.Rmd')"

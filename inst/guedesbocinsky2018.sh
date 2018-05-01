@@ -1,49 +1,60 @@
 #!/bin/bash
-## Set the version as an environment variable
-VERSION="0.9.0"
-ARCH_SITES="../../DALPOIMGUEDES_BOCINSKY_2017.xlsx"
+## Set the version as a local environment variable
+VERSION="1.0.0"
 
-## Build the Docker image from the github repo
-docker build -t bocinsky/guedesbocinsky2018 https://github.com/bocinsky/guedesbocinsky2018.git#$VERSION
+## Set these parameters if not pre-loaded as environment variables
+# google_maps_elevation_api_key=""
+# tdar_un=""
+# tdar_pw=""
 
+# ### Build the vignette on the local machine
+# ## Change 'clean' to TRUE to remove all previous output
+# Rscript -e "rmarkdown::render('./vignettes/guedesbocinsky2018.Rmd', \
+#                                   params = list(cores = 2, \
+#                                   clean = FALSE, \
+#                                   google_maps_elevation_api_key = '$google_maps_elevation_api_key', \
+#                                   tdar_un = '$tdar_un',\
+#                                   tdar_pw = '$tdar_pw'))"
+
+### Or, build the vignette in a docker container
 ## Remove any previous containers
 docker rm guedesbocinsky2018
+docker rmi guedesbocinsky2018
+
+## Build the Docker image from the github repo
+docker build -t guedesbocinsky2018 .
 
 ## Create the Docker container
-docker create -w /guedesbocinsky2018 --name guedesbocinsky2018 bocinsky/guedesbocinsky2018
+docker create --name guedesbocinsky2018 guedesbocinsky2018
 
 ## Start the Docker container
 docker start guedesbocinsky2018
 
-## Copy the archaeological site data to the Docker container
-docker cp $ARCH_SITES guedesbocinsky2018:/guedesbocinsky2018/DATA/guedesbocinsky2018.xlsx
+## Build the vignette
+docker exec guedesbocinsky2018 r -e "rmarkdown::render('/guedesbocinsky2018/vignettes/guedesbocinsky2018.Rmd', \
+                                                        params = list(cores = 1, \
+                                                                      clean = FALSE, \
+                                                                      google_maps_elevation_api_key = '$google_maps_elevation_api_key', \
+                                                                      tdar_un = '$tdar_un',\
+                                                                      tdar_pw = '$tdar_pw'))"
 
-## Download and copy pre-run output into the container
-#docker cp ~/Desktop/OUTPUT guedesbocinsky2018:/guedesbocinsky2018/
-
-## Run the analysis in the docker container
-docker exec guedesbocinsky2018 Rscript guedesbocinsky2018.R
+## Make a Zenodo directory
+rm -r docker_out; mkdir docker_out
 
 ## Copy the output from the container to the host
-docker cp guedesbocinsky2018:/guedesbocinsky2018/OUTPUT ./
-
-## Copy README.md from the container to the host
-docker cp guedesbocinsky2018:/guedesbocinsky2018/README.md ./README.md
+docker cp guedesbocinsky2018:/guedesbocinsky2018 ./docker_out/
 
 ## Stop the Docker container
 docker stop guedesbocinsky2018
 
-## Make a Zenodo directory
-rm -r Zenodo; mkdir Zenodo
-
 ## Create a compressed tar archive of the output
-tar -zcf ./Zenodo/guedesbocinsky2018-$VERSION-OUTPUT.tar.gz OUTPUT
+tar -zcf ./docker_out/guedesbocinsky2018-$VERSION-output.tar.gz data ./docker_out/
 
 ## Make the Submission directory
 rm -r Submission; mkdir Submission
 
 ## Copy and rename the figures, tables, and supplementary data sets for submission
-cp ./OUTPUT/FIGURES/crop_map.pdf ./Submission/Figure_1.pdf
+cp ./figures/crop_map.pdf ./Submission/Figure_1.pdf
 cp ./OUTPUT/FIGURES/facet_niche.pdf ./Submission/Figure_2.pdf
 cp ./OUTPUT/FIGURES/All_crossplot.pdf ./Submission/Figure_3.pdf
 cp ./OUTPUT/FIGURES/All_crossplot.html ./Submission/Supplementary_Data_1.html

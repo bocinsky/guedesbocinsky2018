@@ -1,0 +1,62 @@
+﻿Country,Site,Inhabitants House surface area / 4m2 ,Pits per house,Mean pit L,Total liters per house,"Total caloric storage(wheat for Korea and Kazakstan, Millet for China) ",YRS_Storage,Estimated person p m2,Reference
+Korea,Daeheung-ri,3.50,4.8,715,3432,9166872,3.58781683,4,Bale 2011
+Korea,Ssancheong III,3.65,3.1,1344,4166.4,11128454.4,4.176563858,4,Bale 2011
+Korea,Gwanchang-ri II,5.93,0.6,756,453.6,1211565.6,0.280114583,4,Bale 2011
+Korea,Bunhyang-ri,6.60,2,780,1560,4166760,0.86483188,4,Bale 2011
+Korea,Hakam-ri II,4.20,0.9,2240,2016,5384736,0.351254795,4,Bale 2011
+Korea,Anyeong-ri,3.00,2.4,1190,2856,7628376,3.483276712,4,Bale 2011
+Korea,Tosil,5.85,7.8,900,7020,18750420,4.390684932,4,Bale 2011
+Korea,Majeon-ri,4.78,9.5,3648,34656,92566176,26.55559808,4,Bale 2011
+Korea,Bony'g-dong,3.40,10,1890,18900,50481900,20.33920226,4,Bale 2011
+Korea,Okbang 1b,3.08,0.8,540,432,1153872,0.514031407,4,Bale 2011
+Korea,Daepyeong 1,4.40,1.8,384,691.2,1846195.2,0.574780573,4,Bale 2011
+Korea,Daepyeong 2,5.83,3.6,442,1591.2,4250095.2,0.999493257,4,Bale 2011
+Korea,Daeya-ri,5.75,0.3,2280,684,1826964,0.435250506,4,Bale 2011
+Korea,Sawol-ri,6.42,1.6,966,1545.6,4128297.6,0.881330212,4,Bale 2011
+China,Jiangzhai F030,4.08,2,,4000,8280000,2.783427179,4,Peterson and Shelach 2012
+China,Jiangzhai F035,1.78,1,,9100,18837000,0.05159062,4,Peterson and Shelach 2012
+China,Jiangzhai F042,4.20,3,,5300,10971000,0.209598031,4,Peterson and Shelach 2012
+China,Jiangzhai F045,3.95,1,,300,621000,3.482487923,4,Peterson and Shelach 2012
+China,Jiangzhai F046,2.45,3,,17300,35811000,0.037457066,4,Peterson and Shelach 2012
+China,Jiangzhai F047,21.73,6,,12700,26289000,0.452449218,4,Peterson and Shelach 2012
+China,Jiangzhai  F049,3.98,4,,8700,18009000,0.120845827,4,Peterson and Shelach 2012
+China,Jiangzhai F085,6.65,1,,2800,5796000,0.62817029,4,Peterson and Shelach 2012
+China,Jiangzhai F086,9.70,6,,28400,58788000,0.090337314,4,Peterson and Shelach 2012
+China,Jiangzhai F001,31.40,4,,1900,3933000,4.37109077,4,Peterson and Shelach 2012
+China,Jiangzhai F010,1.50,1,,1000,2070000,0.39673913,4,Peterson and Shelach 2012
+China,Jiangzhai F017,7.68,6,,8900,18423000,0.228087852,4,Peterson and Shelach 2012
+China,Jiangzhai F020,2.13,2,,1600,3312000,0.351279438,4,Peterson and Shelach 2012
+China,Jiangzhai F022,2.68,2,,1200,2484000,0.58959843,4,Peterson and Shelach 2012
+China,Jiangzhai F024,3.75,8,,18700,38709000,0.053039991,4,Peterson and Shelach 2012
+China,Jiangzhai F029,5.88,2,,6100,12627000,0.254736873,4,Peterson and Shelach 2012
+China,Jiangzhai F097,2.65,3,,4900,10143000,0.143041999,4,Peterson and Shelach 2012
+China,Jiangzhai F117,1.20,2,,4000,8280000,0.079347826,4,Peterson and Shelach 2012
+China,Jiangzhai F119,0.80,3,,10900,22563000,0.019412312,4,Peterson and Shelach 2012
+China,Jiangzhai F130,2.45,2,,2000,4140000,0.324003623,4,Peterson and Shelach 2012
+China,Jiangzhai F131,3.30,1,,300,621000,2.90942029,4,Peterson and Shelach 2012
+China,Jiangzhai F144,2.55,11,,26600,55062000,0.025355508,4,Peterson and Shelach 2012
+China,Jiangzhai F139,2.08,1,,1800,3726000,0.304901369,4,Peterson and Shelach 2012
+China,Jiangzhai F079,3.15,1,,1800,3726000,0.462862319,4,Peterson and Shelach 2012
+China,Jiangzhai F88,4.28,2,,2100,4347000,0.538431677,4,Peterson and Shelach 2012
+China,Jiangzhai F095,4.40,3,,4400,9108000,0.264492754,4,Peterson and Shelach 2012
+China,Jiangzhai F098,4.65,2,,2100,4347000,0.585662526,4,Peterson and Shelach 2012
+China,Jiangzhai F100,3.30,2,,2800,5796000,0.311723602,4,Peterson and Shelach 2012
+China,Jiangzhai F104,1.20,1,,900,1863000,0.352657005,4,Peterson and Shelach 2012
+China,Jiangzhai F108,2.98,1,,1800,3726000,0.437147746,4,Peterson and Shelach 2012
+China,Jiangzhai F111,4.50,1,,8900,18423000,0.133732291,4,Peterson and Shelach 2012
+China,Jiangzhai F112,2.85,1,,900,1863000,0.837560386,4,Peterson and Shelach 2012
+China,Jiangzhai F127,2.53,1,,2100,4347000,0.318021049,4,Peterson and Shelach 2012
+China,Jianghzai F036,9.93,2,,2400,4968000,1.093787742,4,Peterson and Shelach 2012
+China,Jiangzhai F040,6.28,1,,2300,4761000,0.72160523,4,Peterson and Shelach 2012
+China,Jiangzhai F052,4.53,1,,8200,16974000,0.145954843,4,Peterson and Shelach 2012
+China,Jiangzhai F053,18.48,3,,132000,273240000,0.037018967,4,Peterson and Shelach 2012
+China,Jiangzhai F060,5.78,3,,112000,231840000,0.013637908,4,Peterson and Shelach 2012
+China,Jiangzhai F063,2.58,1,,136000,281520000,0.005007859,4,Peterson and Shelach 2012
+China,Jiangzhai F066,2.35,1,,1000,2070000,0.621557971,4,Peterson and Shelach 2012
+China,Jiangzhai F068,2.60,7,,33200,68724000,0.020713288,4,Peterson and Shelach 2012
+China,Jiangzhai F070,2.25,2,,1800,3726000,0.330615942,4,Peterson and Shelach 2012
+China,Jiangzhai F072,2.03,6,,36100,74727000,0.014836505,4,Peterson and Shelach 2012
+China,Jiangzhai F074,17.58,1,,5200,10764000,0.893934643,4,Peterson and Shelach 2012
+China,Jiangzhai F076,2.15,2,,3600,7452000,0.15796095,4,Peterson and Shelach 2012
+Kazakstan,Tusuzai,,,3176.5,15375,8484431.5,1.549667854,5.5,Chang 2017
+Kazakstan,Taldy Bulak 2,,,2357.7,,6297416.7,1.917021826,5.5,Chang 2017

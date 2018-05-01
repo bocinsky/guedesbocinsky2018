@@ -19,8 +19,8 @@ prepare_marcott <- function(calibration.years,
   message("Downloading Mann et al. 2008 infilled instrumental temperature data.")
   dir.create(raw_dir, showWarnings = FALSE, recursive = TRUE)
   dir.create(derived_dir, showWarnings = FALSE, recursive = TRUE)
-  FedData::download_data(url = "ftp://ftp.ncdc.noaa.gov/pub/data/paleo/contributions_by_author/mann2008/instrument.zip",
-                         destdir = raw_dir)
+  download.file("ftp://ftp.ncdc.noaa.gov/pub/data/paleo/contributions_by_author/mann2008/instrument.zip",
+                destfile = paste0(raw_dir, "/instrument.zip"))
   utils::unzip(paste0(raw_dir, "/instrument.zip"),
                exdir = raw_dir)
   # Get just the Northern Hemisphere HAD CRU V3 data.
@@ -48,8 +48,8 @@ prepare_marcott <- function(calibration.years,
   marcott2013$Z <- marcott2013$Temperature / calib.sd
   marcott2013$Z_Upper <- (marcott2013$Temperature + marcott2013$Uncertainty) / calib.sd
 
-  # Write the final Marcott dataset for the reconstruction
-  message("Exporting the standard score data for later use.")
-  readr::write_csv(marcott2013, paste0(derived_dir,"/MARCOTT2013_Z.csv"))
+  # # Write the final Marcott dataset for the reconstruction
+  # message("Exporting the standard score data for later use.")
+  # readr::write_csv(marcott2013, paste0(derived_dir,"/MARCOTT2013_Z.csv"))
   return(marcott2013)
 }

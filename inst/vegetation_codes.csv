@@ -1,0 +1,940 @@
+﻿Vegetation_ID,Vegetation_formation_and_sub-formation,Vegetation_type
+1,Larix gmelinii forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+2,Larix sibirica forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+3,Larix olgensis var. changpaiensis forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+4,Larix principis-rupprechtii forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+5,Larix kaempferi forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+6,Pinus pumila forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+7,Pinus sylvestris var. mongolica forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+8,"Pinus sibirica forest and P. sibirica, Larix sibirica forest",Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+9,Abies nephrolepis forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+10,Picea jezoensis forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+11,Picea wilsonii forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+12,Picea meyeri forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+13,Picea crassifolia forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+14,Picea schrenkiana forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+15,Sabina przewalskii forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+16,Sabina komarovii forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+17,Pinus tabulaeformis forest,Needleleaf forests in temperate zone
+18,Pinus densifora forest,Needleleaf forests in temperate zone
+19,Pinus thunbergii forst,Needleleaf forests in temperate zone
+20,Pinus bungeana forest,Needleleaf forests in temperate zone
+21,Platycladus orientalis forest,Needleleaf forests in temperate zone
+22,Juniperus rigida forest,Needleleaf forests in temperate zone
+23,Pinus massoniana forest,Needleleaf forests in subtropical zone
+24,Pinus yunnanensis forest,Needleleaf forests in subtropical zone
+25,Pinus yunanensis var. tenuifolia forest,Needleleaf forests in subtropical zone
+26,Pinus khasya forest,Needleleaf forests in subtropical zone
+27,Pinus taiwanensis forest,Needleleaf forests in subtropical zone
+28,Pinus armandii forest,Needleleaf forests in subtropical zone
+29,Pinus henryi forest,Needleleaf forests in subtropical zone
+30,Cunninghamia landceolata forest,Needleleaf forests in subtropical zone
+31,Cupressus funebris forest,Needleleaf forests in subtropical zone
+32,Pinus latterii forest,Needleleaf forests in tropical zone
+33,Pinus roxburghii forest,Needleleaf forests in tropical zone
+34,Pinus griffithii forest,Needleleaf forests on mountains in subtropical an tropical zones
+35,Larix chinensis forest,Needleleaf forests on mountains in subtropical an tropical zones
+36,Larix potaninii forest,Needleleaf forests on mountains in subtropical an tropical zones
+37,Larix potaninii var. macrocarpa forest,Needleleaf forests on mountains in subtropical an tropical zones
+38,"Tsuga formosana, Picea morrisonicola forest",Needleleaf forests on mountains in subtropical an tropical zones
+39,Tsuga dumosa forest,Needleleaf forests on mountains in subtropical an tropical zones
+40,Pinus densata forest,Needleleaf forests on mountains in subtropical an tropical zones
+41,Picea asperata forest,Needleleaf forests on mountains in subtropical an tropical zones
+42,Picea purpurea forest,Needleleaf forests on mountains in subtropical an tropical zones
+43,Picea brachytyla forest,Needleleaf forests on mountains in subtropical an tropical zones
+44,Picea likiangensis forest,Needleleaf forests on mountains in subtropical an tropical zones
+45,Picea likiangensis var. balfouriana forest,Needleleaf forests on mountains in subtropical an tropical zones
+46,Picea likiangensis var. linzhiensis forest,Needleleaf forests on mountains in subtropical an tropical zones
+47,Abies kawakamii forest,Needleleaf forests on mountains in subtropical an tropical zones
+48,Abies fargesii forest,Needleleaf forests on mountains in subtropical an tropical zones
+49,Abies fabri forest,Needleleaf forests on mountains in subtropical an tropical zones
+50,Abies faxoniana forest,Needleleaf forests on mountains in subtropical an tropical zones
+51,Abies forrestii forest,Needleleaf forests on mountains in subtropical an tropical zones
+52,Abies squamata forest,Needleleaf forests on mountains in subtropical an tropical zones
+53,Abies georgei forest,Needleleaf forests on mountains in subtropical an tropical zones
+54,Abies georgei var. smithii forest,Needleleaf forests on mountains in subtropical an tropical zones
+55,Abies delavayi forest,Needleleaf forests on mountains in subtropical an tropical zones
+56,Abies delavayi var. motuoensis forest,Needleleaf forests on mountains in subtropical an tropical zones
+57,"Abies densa, Picea spinulosa forest",Needleleaf forests on mountains in subtropical an tropical zones
+58,Abies spectabilis forest,Needleleaf forests on mountains in subtropical an tropical zones
+59,Sabina pingii var. fargesii forest,Needleleaf forests on mountains in subtropical an tropical zones
+60,Sabina tibetica forest,Needleleaf forests on mountains in subtropical an tropical zones
+61,Sabina saltuaria forest,Needleleaf forests on mountains in subtropical an tropical zones
+62,Sabina convallium forest,Needleleaf forests on mountains in subtropical an tropical zones
+63,Pinus koraiensis and deciduous broadleaf mixed forest,Needleleaf and deciduous broadleaf mixed forests in temperate zone 
+64,"Chamaecyparis formosensis, Ch. obtusa var. formosana, Cyclobalanopsis longinux, Trochodendron aralioides forest","Needeleleaf, evergreen and deciduous broadleaf mixed forests on mountains in subtropical zone"
+65,Tsuga chinensis and broadleaf mixed forest,"Needeleleaf, evergreen and deciduous broadleaf mixed forests on mountains in subtropical zone"
+66,Tsuga dumosa and broadleaf mixed forest,"Needeleleaf, evergreen and deciduous broadleaf mixed forests on mountains in subtropical zone"
+67,"Tilia, Acer forest",Broadleaf deciduous forests in temperate zone
+68,"Ulmus propinqua, Fraxinus mandshurica, Juglans mandshurica forest",Broadleaf deciduous forests in temperate zone
+69,Quercus mongolica forest,Broadleaf deciduous forests in temperate zone
+70,Quercus liaotungensis forest,Broadleaf deciduous forests in temperate zone
+71,Quercus aliena forest,Broadleaf deciduous forests in temperate zone
+72,Quercus dentata forest,Broadleaf deciduous forests in temperate zone
+73,Quercus acutissima forest,Broadleaf deciduous forests in temperate zone
+74,Quercus aliena var. acuteserrata forest,Broadleaf deciduous forests in temperate zone
+75,Quercus variabilis forest,Broadleaf deciduous forests in temperate zone
+76,Quercus baronii forest,Broadleaf deciduous forests in temperate zone
+77,Robinia pseudoacacia forest,Broadleaf deciduous forests in temperate zone
+78,Malus sieversii forest,Broadleaf deciduous forests in temperate zone
+79,Salix matsudana forest,Broadleaf deciduous forests in temperate zone
+80,Populus simonii forest,Broadleaf deciduous forests in temperate zone
+81,Populus nigra forest,Broadleaf deciduous forests in temperate zone
+82,"Populus spp., Salix spp, Ulmus spp. forest",Broadleaf deciduous forests in temperate zone
+83,Populus davidiana forest,Broadleaf deciduous forests in temperate zone
+84,Populus tremula forest,Broadleaf deciduous forests in temperate zone
+85,Populus przewalskii forest,Broadleaf deciduous forests in temperate zone
+86,"Chosenia arbutifolia, Populus suaveolens forest",Broadleaf deciduous forests in temperate zone
+87,Betula platyphylla forest,Broadleaf deciduous forests in temperate zone
+88,Betula albo-sinensis var. septentrionalis forest,Broadleaf deciduous forests in temperate zone
+89,Betula albo-sinensis forest,Broadleaf deciduous forests in temperate zone
+90,Betula ermanii elfin forest,Broadleaf deciduous forests in temperate zone
+91,Ulmus spp. woodland,Microphyllous deciduous woodlands in temperate zone
+92,Populus diversifolia woodland,Microphyllous deciduous woodlands in temperate zone
+93,Populus pruinosa woodland,Microphyllous deciduous woodlands in temperate zone
+94,"Toxicodendron vernicifluum, Acer mono forest",Broadleaf deciduous forests in subtropical zone 
+95,"Quercus fabri, Q. serrata var. brevipetiolata forest",Broadleaf deciduous forests in subtropical zone 
+96,Quercus serrata forest,Broadleaf deciduous forests in subtropical zone 
+97,"Quercus variabilis, Q. acutissima forest",Broadleaf deciduous forests in subtropical zone 
+98,Pterpceltis tatarinowii forest,Broadleaf deciduous forests in subtropical zone 
+99,"Castanea sequinii, Quercus serrata var. brevipetiolata, Platycarya strobilacea forest",Broadleaf deciduous forests in subtropical zone 
+100,Liquidambar formosana forest,Broadleaf deciduous forests in subtropical zone 
+101,"Platycarya strobilacea, Dalbergia hupeana forest",Broadleaf deciduous forests in subtropical zone 
+102,"Betula luminifera, Populus adenopoda forest",Broadleaf deciduous forests in subtropical zone 
+103,Alnus nepalensis forest,Broadleaf deciduous forests in subtropical zone 
+104,"Populus davidiana, Betula platyphylla var. szechuanica forest",Broadleaf deciduous forests in subtropical zone 
+105,Betula utilis forest,Broadleaf deciduous forests in subtropical zone 
+106,Quercus variabilis and evergreen broadleaf mixed forest,Broadleaf evergreen and deciduous mixed forests in subtropical zone
+107,"Quercus acutissima, Q. engleriana forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+108,"Quercus acutissima, Q. variabilis, Phoebe spp., Cyclobalanopsis spp. forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+109,"Cyclobalanopsis multinervis, Fagus longipetiolata forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+110,"Lithocarpus cleistocarpus, Davidia involucrata, Tetuacentron sinense forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+111,Cyclobalanopsis glauca and deciduous broadleaf mixde forest,Broadleaf evergreen and deciduous mixed forests in subtropical zone
+112,"Cyclobalanopsis glaucoides, Platycarya longipes forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+113,Castanopsis sclerophylla forest and Cyclobalanopsis glauca forest,Broadleaf evergreen forests in subtropical zone 
+114,Machilus thunbergii forest,Broadleaf evergreen forests in subtropical zone 
+115,"Castanopsis eyrei, C. carlesii forest",Broadleaf evergreen forests in subtropical zone 
+116,Castanopsis fargesii forest,Broadleaf evergreen forests in subtropical zone 
+117,"Castanopsis kawakamii, C. longinux forest",Broadleaf evergreen forests in subtropical zone 
+118,"Castanopsis hystrix, C. tonkinensis forest",Broadleaf evergreen forests in subtropical zone 
+119,Castanopsis platycantha forest,Broadleaf evergreen forests in subtropical zone 
+120,"Castanopsis delavayi forest, Cyclobalanopsis delavayi forest, C. glaucoides forest",Broadleaf evergreen forests in subtropical zone 
+121,Castanopsis orthacantha forest,Broadleaf evergreen forests in subtropical zone 
+122,"Castanopsis fabri, C. calathiformis forest",Broadleaf evergreen forests in subtropical zone 
+123,"Castanopsis indica, C. hystrix, Schima wallichii forest",Broadleaf evergreen forests in subtropical zone 
+124,"Castanopsis fleuryi, Lithocarpus truncatus forest",Broadleaf evergreen forests in subtropical zone 
+125,"Cyclobalanopsis glauca, Trochodendron aralioides forest",Broadleaf evergreen forests in subtropical zone 
+126,"Cyclobalanopsis longinux, Lithocarpus amygdalifolia, Trochodendron aralioides forest",Broadleaf evergreen forests in subtropical zone 
+127,"Lithocarpus megalophyllus, Castanopsis carlesii, Beilschmiedia erythrophloia forest",Broadleaf evergreen forests in subtropical zone 
+128,"Ficus spp., Persea japonica forest",Broadleaf evergreen forests in subtropical zone 
+129,"Cyclobalanopsis axyodon, C. gracilis forest",Broadleaf evergreen forests in subtropical zone 
+130,"Cryptocarya chinensis, Castanopsis chinensis, C. tonkinensis forest",Broadleaf evergreen forests in subtropical zone 
+131,"Altingia chinensis, Rhodoleia championi forest",Broadleaf evergreen forests in subtropical zone 
+132,Lithocarpus cleistocarpus forest,Broadleaf evergreen forests in subtropical zone 
+133,"Lithocarpus xylocarpus, L. hancei forests and Cyclobalanopsis lamellosa, Lithocarpus megalophyllus forest ",Broadleaf evergreen forests in subtropical zone 
+134,"Lithocarpus variolosus, Schima argentea forest",Broadleaf evergreen forests in subtropical zone 
+135,"Rhodoleia parvipetala, Manglietia forrestii forest",Broadleaf evergreen forests in subtropical zone 
+136,Quercus aquifolioides forest,Sclerophyllus broadleaf evergreen forests in subtropoical zone 
+137,Quercus pannosa forest,Sclerophyllus broadleaf evergreen forests in subtropoical zone 
+138,Quercus guyavaefolia forest an Q. longispica forest,Sclerophyllus broadleaf evergreen forests in subtropoical zone 
+139,Quercus semicarpifolia forest,Sclerophyllus broadleaf evergreen forests in subtropoical zone 
+140,"Quercus rehderiana, Q. senescens forest",Sclerophyllus broadleaf evergreen forests in subtropoical zone 
+141,Quercus cocciferoides forest,Sclerophyllus broadleaf evergreen forests in subtropoical zone 
+142,"Terminalia hainanensis, Lannea coromandelica forest",Tropical monsoon forests 
+143,"Bombax malabarica, Albizzia chinensis forest",Tropical monsoon forests 
+144,"Schima wallichii, Liquidambar formosana forest",Tropical monsoon forests 
+145,"Lysidce rhodostegia, Amesiodendron tienlinensis forest",Tropical monsoon forests 
+146,"Ficus altissima, Chukrasia tabularis forest",Tropical monsoon forests 
+147,"Dipterocarpus tonkinensis, Crypteronia paniculata forest",Tropical rain forests 
+148,"Dipterocarpus pilosus, Artocarpus chaplasha, Dysaxylum binectariferum forest",Tropical rain forests 
+149,"Ficus benjamina, Barringtonia asiatica, Herictiera littoralis forest",Tropical rain forests 
+150,Vatica astrotricha forest,Tropical rain forests 
+151,"Ficus spp., Sterculia lanceolata, Schefflera octophylla forest",Tropical rain forests 
+152,"Ficus championii, Bischofia javanica, Dysoxylum gobara zones",Tropical rain forests 
+153,"Eberharhardtia aurata, Madhuca subquincrncialis, Altingia chinensis forest",Tropical rain forests 
+154,"Terminalia myriocarpa, Pometia tomentosa forest",Tropical rain forests 
+155,Shorea wangtianshuea forest,Tropical rain forests 
+156,"Dysaxylum gobara, Terminalia myriocarpa, Altingia excelsa forest",Tropical rain forests 
+157,"Burretiodendron hsienmu, Garcinia chevalieri, Cephalomappa sinense forest",Tropical rain forests 
+158,"Podocarpus imbricatus, Hopea hainanensis, Adinandra hainanensis forest",Tropical rain forests 
+159,"Dacrydium pierrei, Lithocarpus fenzelianus, Madhuca hainanensis forest",Tropical rain forests 
+160,"Madhuca pasquieri, Altingia yunnanensis forest",Tropical rain forests 
+161,"Semecarpus reticulata, Phoebe nanmu forest",Tropical rain forests 
+162,Phyllostachys pubescens forest,Bamboo forests and scrubs in subtropical and tropical zones
+163,Phyllostachys makinoi forest,Bamboo forests and scrubs in subtropical and tropical zones
+164,Phyllostachys bambusoides forest,Bamboo forests and scrubs in subtropical and tropical zones
+165,Phyllostachys congesta scrub ,Bamboo forests and scrubs in subtropical and tropical zones
+166,Pleioblastus amarus forest,Bamboo forests and scrubs in subtropical and tropical zones
+167,Chimonobambusa tumidinoda scrub ,Bamboo forests and scrubs in subtropical and tropical zones
+168,Sinocalamus affinis forest,Bamboo forests and scrubs in subtropical and tropical zones
+169,"Bambusa oldhamii, Dendrocalamus latiflorus forest",Bamboo forests and scrubs in subtropical and tropical zones
+170,"Bambusa textilis forest, B. pervauiabilis forest, Lingnania chungii forest",Bamboo forests and scrubs in subtropical and tropical zones
+171,Indocalamus longiauritus scurb and Arundinaria contori scurb,Bamboo forests and scrubs in subtropical and tropical zones
+172,Pseudosasa amabilis scrub,Bamboo forests and scrubs in subtropical and tropical zones
+173,Dendrocalamus strictus forest,Bamboo forests and scrubs in subtropical and tropical zones
+174,Yushania niitakayamensis scrub,Bamboo forests and scrubs in subtropical and tropical zones
+175,Sinarundinaria spp. scrub,Bamboo forests and scrubs in subtropical and tropical zones
+176,Salix spp. scrub,Deciduous scrubs in temperate zone
+177,"Malus baccata, Prunus padus scrub ",Deciduous scrubs in temperate zone
+178,Corylus heterophylla scrub,Deciduous scrubs in temperate zone
+179,Lespedeza bicolor scrub ,Deciduous scrubs in temperate zone
+180,Prumus armeniaca var. ansu scrub,Deciduous scrubs in temperate zone
+181,Gleditsia heterophylla scrub ,Deciduous scrubs in temperate zone
+182,"Vitex negundo var. heterophylla, Ziziphus sativa var. spinosus scrub",Deciduous scrubs in temperate zone
+183,Cotinus coggygria var. cinerea scrub,Deciduous scrubs in temperate zone
+184,Berberis circumserrata scrub,Deciduous scrubs in temperate zone
+185,Spiraea spp. scrub,Deciduous scrubs in temperate zone
+186,Syringa oblata scrub,Deciduous scrubs in temperate zone
+187,Ostryopsis davidiana scrub,Deciduous scrubs in temperate zone
+188,Sophora viciifolia scrub,Deciduous scrubs in temperate zone
+189,Hippophae rhamnoides scrub,Deciduous scrubs in temperate zone
+190,Elaeognus umbellata scrub ,Deciduous scrubs in temperate zone
+191,Caragana spp. scrub,Deciduous scrubs in temperate zone
+192,"Rosa spp., Cotoneaster spp. scrub",Deciduous scrubs in temperate zone
+193,Amygdalus mongolica scrub,Deciduous scrubs in temperate zone
+194,Cotoneaster multiflorus scrub,Deciduous scrubs in temperate zone
+195,Myricaria squamosa scrub,Deciduous scrubs in temperate zone
+196,Tamarix chinensis scrub,Deciduous scrubs in temperate zone
+197,Tamarix ramosissima scrub,Deciduous scrubs in temperate zone
+198,"Castanea sequinii, Quercus fabri scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+199,"Quercus fabri, Q. serrata var. brevipetiolata scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+200,"Quercus variabilis, Q. acutissima scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+201,Vitex negundo scrub,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+202,"Exochorda racemosa, Rhododendron simsii scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+203,Liquidambar formosana scrub,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+204,"Weigela japonica var. sinica, Hydrangea paniculata scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+205,"Loropetalum chinense, Vaccinium bracteatum, Rhododendron simsii scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+206,"Lyonia ovalifolia, Myrica nana scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+207,Rhodomyrtus tomentasa scrub ,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+208,Baeckea frutescens scrub,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+209,"Rapanea linearis, Aporusa chinensis, Memecylon ligustrifolium scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+210,"Croton cascarilloids, Rhodomyrtus tomentosa scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+211,"Flacourtia indica, Carmona microphylla scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+212,Macaranga denticulata scrub,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+213,Coriaria sinica scrub,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+214,"Lespedeza spp., Pyracantha fortuneana scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+215,"Litsea populifolia, Rhus chinensis scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+216,Zanthoxylum planispinum scrub ,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+217,"Sageretia theezans, Rosa cymosa, Pyracantha fortuneana, Bauhinia championii scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+218,"Phyllanthus frachetianus, Mallotus barbatus, Indigofera pseudotinctoria scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+219,"Myrsine africana, Berberis wilsonae scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+220,"Pteroceltis tatarinowii, Alchornea trewioides, Cipadessa cinerascens scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+221,"Desmos cochinchinensis, Pleomele cambodiana, Psidium guajava scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+222,Phyllanthus emblica scrub ,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+223,Cotinus nana scrub and Desmodium yunnanense scrub,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+224,"Sophora viciifolia, Bauhinia faberi var. microphylla scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+225,Sophora moorcroftiana scrub,Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+226,"Pisonia grandis, Scaevola sericea scrub and dwarf forest",Broadleaf evergreen succulent scrub and dwarf forest on coral islands in tropical zone
+227,"Pandanus tectorius, Opuntia dillenii scrub ",Evergreen xeromorphic succulent thorny scrubs in subtropical and trpical zones
+228,"Hylocereus undatus, Opuntia monacantha scrub",Evergreen xeromorphic succulent thorny scrubs in subtropical and trpical zones
+229,"Opuntia dillenii, Acacia farnesiana scrub",Evergreen xeromorphic succulent thorny scrubs in subtropical and trpical zones
+230,"Euphorbia royleana, Opuntia monacantha scrub",Evergreen xeromorphic succulent thorny scrubs in subtropical and trpical zones
+231,Salix gilashania scrub,Subalpine broadleaf deciduous scrubs
+232,Salix sclerophylla scrub,Subalpine broadleaf deciduous scrubs
+233,Salix oritrepha scrub,Subalpine broadleaf deciduous scrubs
+234,Salix oritrepha var. amnematchinensis scrub,Subalpine broadleaf deciduous scrubs
+235,Salix vaccinioides scrub,Subalpine broadleaf deciduous scrubs
+236,Sibiraea angustata scrub,Subalpine broadleaf deciduous scrubs
+237,"Rose sericea, Cotoneaster adpressus scrub",Subalpine broadleaf deciduous scrubs
+238,Dasiphora fruticosa scrub ,Subalpine broadleaf deciduous scrubs
+239,Dasiphora parvifolia scrub,Subalpine broadleaf deciduous scrubs
+240,Dasiphora glabra var. veitchii scrub,Subalpine broadleaf deciduous scrubs
+241,Myricaria prostrata scrub,Subalpine broadleaf deciduous scrubs
+242,"Spiraea myrtilloides, S. alpina scrub",Subalpine broadleaf deciduous scrubs
+243,Caragana jubata scrub,Subalpine broadleaf deciduous scrubs
+244,Caragana tibetica scrub,Subalpine broadleaf deciduous scrubs
+245,Caragana versicolor scrub,Subalpine broadleaf deciduous scrubs
+246,Rhododendron purdomii scrub,Subalpine sclerophylla broadleaf evergreen scrubs
+247,"Rhododendron pseudochrysanthum, Rh. rubropilosum scrub",Subalpine sclerophylla broadleaf evergreen scrubs
+248,"Rhododendron rufum, Rh. przewalskii scrub",Subalpine sclerophylla broadleaf evergreen scrubs
+249,"Rhododendron capitatum, Rh. thymifolium scrub",Subalpine sclerophylla broadleaf evergreen scrubs
+250,Rhododendron fastigiatum scrub,Subalpine sclerophylla broadleaf evergreen scrubs
+251,Rhododendron flavidum scrub,Subalpine sclerophylla broadleaf evergreen scrubs
+252,Rhododendron heiliolepis scrub ,Subalpine sclerophylla broadleaf evergreen scrubs
+253,Rhododendron telmateium scrub,Subalpine sclerophylla broadleaf evergreen scrubs
+254,Rhododendron delavayi scrub,Subalpine sclerophylla broadleaf evergreen scrubs
+255,Rhododendron adenogynum scrub,Subalpine sclerophylla broadleaf evergreen scrubs
+256,Rhododendron racemosum scrub,Subalpine sclerophylla broadleaf evergreen scrubs
+257,"Rhododendron nivale, Rh. thymifolium scrub",Subalpine sclerophylla broadleaf evergreen scrubs
+258,Quercus monimotricha scrub,Subalpine sclerophylla broadleaf evergreen scrubs
+259,"Sabina pingii var. fargesii, Rhododendron pseudochrysanthum, Berberis morrisonensis scrub",Subalpine needleleaf evergreen scrubs
+260,Juniperus sibirica scrub,Subalpine needleleaf evergreen scrubs
+261,Sabina turkestanica scrub,Subalpine needleleaf evergreen scrubs
+262,"Sabina pingii var. wilsonii, S. squamata, S. wallichiana scrub",Subalpine needleleaf evergreen scrubs
+263,Sabina vulgaris scrub,Subalpine needleleaf evergreen scrubs
+264,Pinus densata var. pygmaea scrub,Subalpine needleleaf evergreen scrubs
+265,Haloxylon ammodendron desert,Dwarf semi-arboreous deserts
+266,Haloxylon persicum desert,Dwarf semi-arboreous deserts
+267,Ephedra przewalskii desert,Shrub deserts
+268,Ephedra kaschgarica desert,Shrub deserts
+269,Zygophyllum xanthaxylon desert,Shrub deserts
+270,Caragana leucophloea desert,Shrub deserts
+271,"Caragana camilii-schneideri, Stipa glareosa, Seriphidium kaschgaicum desert",Shrub deserts
+272,Dasiphora parvifolia desert,Shrub deserts
+273,Calligonum leucocladum desert,Shrub deserts
+274,Calligonum roborowskii desert,Shrub deserts
+275,Calligonum rubicundum desert,Shrub deserts
+276,Calligonum mongolicum desert,Shrub deserts
+277,Tamarix ramosissima desert,Shrub deserts
+278,Tamarix hohenackeri desert,Shrub deserts
+279,Tamarix hispida desert,Shrub deserts
+280,Nitraria sphaerocarpa desert,Shrub deserts
+281,Nitraria sibirica desert,Shrub deserts
+282,Nitraria roborowskii desert,Shrub deserts
+283,Gymnocarpos przewalskii desert,Shrub deserts
+284,Ammopiptanthus mongolicus desert,Steppe shrub deserts
+285,"Helianthemum soongoricum, low grass desert",Steppe shrub deserts
+286,"Convolvulus tragacanthoides, low grass desert",Steppe shrub deserts
+287,"Potaninia mongolica, low grass desert",Steppe shrub deserts
+288,"Caragana korshinskii, Calligonum mongolicum, Zygophyllum xanthoxylon, low grass desert",Steppe shrub deserts
+289,"Caragana pygmaea, low grass desert",Steppe shrub deserts
+290,"Caragana tibetica, low grass desert",Steppe shrub deserts
+291,"Oxytropis aciphylla, low grass desert",Steppe shrub deserts
+292,"Tetraena mongolica, low grass desert",Steppe shrub deserts
+293,Reaumuria soongorica desert,Semi-shrub and dwarf semi-shrub deserts 
+294,Reaumuria kaschgarica desert,Semi-shrub and dwarf semi-shrub deserts 
+295,Reaumuria trigyna desert,Semi-shrub and dwarf semi-shrub deserts 
+296,Ceratoides latens desert,Semi-shrub and dwarf semi-shrub deserts 
+297,Salsola laricifolia desert,Semi-shrub and dwarf semi-shrub deserts 
+298,Salsola passerina desert,Semi-shrub and dwarf semi-shrub deserts 
+299,Salsola abrotanoides desert,Semi-shrub and dwarf semi-shrub deserts 
+300,Salsola arbuscula desert,Semi-shrub and dwarf semi-shrub deserts 
+301,Salsola junatovii desert,Semi-shrub and dwarf semi-shrub deserts 
+302,Salsola orientalis desert,Semi-shrub and dwarf semi-shrub deserts 
+303,Sympegma regelii desert,Semi-shrub and dwarf semi-shrub deserts 
+304,"Camphorosma monspeliaca, Anabasis brevifolia desert",Semi-shrub and dwarf semi-shrub deserts 
+305,Nanophyton erinaceum desert,Semi-shrub and dwarf semi-shrub deserts 
+306,Iljinia regelii desert,Semi-shrub and dwarf semi-shrub deserts 
+307,Anabasis brevifolia desert,Semi-shrub and dwarf semi-shrub deserts 
+308,Anabasis salsa desert,Semi-shrub and dwarf semi-shrub deserts 
+309,Anabasis aphylla desert,Semi-shrub and dwarf semi-shrub deserts 
+310,Anabasis elatior desert,Semi-shrub and dwarf semi-shrub deserts 
+311,Seriphidium gracilescens desert,Semi-shrub and dwarf semi-shrub deserts 
+312,Seriphidium terrae-albae desert,Semi-shrub and dwarf semi-shrub deserts 
+313,Seriphidium transiliense desert,Semi-shrub and dwarf semi-shrub deserts 
+314,Seriphidium kaschgaricum desert,Semi-shrub and dwarf semi-shrub deserts 
+315,Seriphidium borotalense desert,Semi-shrub and dwarf semi-shrub deserts 
+316,Seriphidium santolinum desert,Semi-shrub and dwarf semi-shrub deserts 
+317,Artemisia rhodantha desert,Semi-shrub and dwarf semi-shrub deserts 
+318,Artemisia parvula desert,Semi-shrub and dwarf semi-shrub deserts 
+319,Artemisia arenaria desert,Semi-shrub and dwarf semi-shrub deserts 
+320,Artemisia salsoloides desert,Semi-shrub and dwarf semi-shrub deserts 
+321,Artemisia ordosica desert,Semi-shrub and dwarf semi-shrub deserts 
+322,Artemisia desertorum desert,Semi-shrub and dwarf semi-shrub deserts 
+323,Artemisia xerophytica desert,Semi-shrub and dwarf semi-shrub deserts 
+324,Ajania fruticulosa desert,Semi-shrub and dwarf semi-shrub deserts 
+325,Brachanthemum nanschanicum desert,Semi-shrub and dwarf semi-shrub deserts 
+326,Brachanthemum pulvinatum desert,Semi-shrub and dwarf semi-shrub deserts 
+327,"Asterothamnus fruticosus, Ajania fruticulosa, Stipa glareosa desert",Semi-shrub and dwarf semi-shrub deserts 
+328,"Hedysarum mongolicum, Artemisia salsoloides, Psammochloa mongolica desert",Semi-shrub and dwarf semi-shrub deserts 
+329,Kalidium schrenkianum desert,Succulent halophytic dwarf semi-shrub deserts
+330,Kalidium caspicum desert,Succulent halophytic dwarf semi-shrub deserts
+331,Kalidium cuspidatum desert,Succulent halophytic dwarf semi-shrub deserts
+332,Kalidium gracile desert,Succulent halophytic dwarf semi-shrub deserts
+333,Kalidium foliatum desert,Succulent halophytic dwarf semi-shrub deserts
+334,Suaeda dendroides desert,Succulent halophytic dwarf semi-shrub deserts
+335,Halocnemum strobilaceum desert,Succulent halophytic dwarf semi-shrub deserts
+336,Halostachys belangeriana saline desert,Succulent halophytic dwarf semi-shrub deserts
+337,Halogeton glomeratus desert,Annual herb deserts
+338,Artemisia rhodantha desert,Cushion nano-semi-shrub high-cold deserts
+339,Artemisia parvula desert,Cushion nano-semi-shrub high-cold deserts
+340,Ajania tibetica desert,Cushion nano-semi-shrub high-cold deserts
+341,Ceratoides compacta desert,Cushion nano-semi-shrub high-cold deserts
+342,Rhodiola algida var. tangutica desert,Cushion nano-semi-shrub high-cold deserts
+343,"Aneurolepidium chinense, forb steppe","Temperate grass, forb meadow steppes"
+344,"Aneurolepidium angustum, forb steppe","Temperate grass, forb meadow steppes"
+345,"Festuca ovina, Artemisia spp., forb steppe","Temperate grass, forb meadow steppes"
+346,"Festuca sulcata, Carex pediformis, forb steppe","Temperate grass, forb meadow steppes"
+347,"Festuca alatavica, Carex liparocarpos steppe","Temperate grass, forb meadow steppes"
+348,"Stipa baicalensis, forb steppe","Temperate grass, forb meadow steppes"
+349,"Stipa spp., forb steppe","Temperate grass, forb meadow steppes"
+350,Poa angustifolia steppe,"Temperate grass, forb meadow steppes"
+351,"Poa relaxa, Ajania fastigiata steppe","Temperate grass, forb meadow steppes"
+352,"Cleistogenes mucronata, forb steep","Temperate grass, forb meadow steppes"
+353,"Bathriochloa ischaemum, forb steppe","Temperate grass, forb meadow steppes"
+354,"Grass, Artemisia gmelinii, A. giraldii steppe","Temperate grass, forb meadow steppes"
+355,"Carex liparocarpos, forb steppe","Temperate grass, forb meadow steppes"
+356,"Filifolium sibiricum, grass, forb steppe","Temperate grass, forb meadow steppes"
+357,"Aneurolepidium chinense, tufted grass steppe",Temperate tufted grass steppes
+358,Stipa grandis steppe,Temperate tufted grass steppes
+359,Stipa krylovii steppe,Temperate tufted grass steppes
+360,Stipa bungeana steppe,Temperate tufted grass steppes
+361,Stipa capillata steppe,Temperate tufted grass steppes
+362,Stipa roborowskii steppe,Temperate tufted grass steppes
+363,Stipa przewalskii steppe,Temperate tufted grass steppes
+364,Stipa penicillata steppe,Temperate tufted grass steppes
+365,"Stipa breviflora, Stipa bungeana steppe",Temperate tufted grass steppes
+366,Achnatherum splendens steppe,Temperate tufted grass steppes
+367,Festuca sulcata steppe,Temperate tufted grass steppes
+368,Festuca ovina steppe,Temperate tufted grass steppes
+369,"Koeleria cristata, Agropyron cristatum, tufted low grass steppe",Temperate tufted grass steppes
+370,Agropyron cristatum steppe,Temperate tufted grass steppes
+371,"Poa litwinowiana, Festuca olgae steppe",Temperate tufted grass steppes
+372,Cleistogenes squarrosa steppe,Temperate tufted grass steppes
+373,Aristida adscensionis steppe,Temperate tufted grass steppes
+374,Carex pediformis steppe,Temperate tufted grass steppes
+375,"Thymus mongolicus, tufted grass steppe",Temperate tufted grass steppes
+376,"Glycyrrhiza uralensis, Cleistogenes caespitosa steppe",Temperate tufted grass steppes
+377,Artemisia frigida steppes,Temperate tufted grass steppes
+378,"Artemisia gmelinii, grass stppe",Temperate tufted grass steppes
+379,"Artemisia giraldii, grass steppe",Temperate tufted grass steppes
+380,"Artemisia arenaria, grass steppe",Temperate tufted grass steppes
+381,"Pioneer plant community on sandy lands dominated by Agriophyllum squarrosum, Corispermum spp., Salsola spp.",Temperate tufted grass steppes
+382,Stipa gobica steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+383,Stipa klemenzii steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+384,Stipa glareosa steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+385,Stipa breviflora steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+386,"Stipa capillata, nano-semi-shrub steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+387,Stipa orientalis steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+388,Stipa caucasica steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+389,Stipa sareptata steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+390,"Stipa roborowskii, Artemisia rhodantha steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+391,"Achnatherum splendens, Ceratoides latens steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+392,Cleistogenes songorica steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+393,"Ptilagrostis pelliotii, Caragana camilli-scheideri steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+394,"Festuca ovina, Stipa sareptana, Seriphidium gracilescens steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+395,"Agropyron cristatum, Stipa glareose steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+396,Festuca ovina subsp. sphagnicola steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+397,Allium polyrrhizum steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+398,Glycyrrhiza uralensis steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+399,"Caragana stenophylla, low grass steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+400,"Caragana tibetica, low grass steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+401,"Ajania fastigiata, Artemisia argyi, low grass steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+402,"Artemisia dalailamae, low grass steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+403,"Seriphidium borotalense, Festuca ovina steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+404,"Ceratoides latens, Roegneria alashanica steppe","Temperate tufted low grass, nano-semi-shrub desert steppes"
+405,Stipa purpurea steppe,"Grass, Carex spp. high-cold steppes"
+406,Stipa subsessiliflora var. basiplumosa steppe,"Grass, Carex spp. high-cold steppes"
+407,Stipa subsessiliflora steppe,"Grass, Carex spp. high-cold steppes"
+408,Stipa roborowskii steppe,"Grass, Carex spp. high-cold steppes"
+409,Stipa aliena steppe,"Grass, Carex spp. high-cold steppes"
+410,Festuca pseudovinas steppe,"Grass, Carex spp. high-cold steppes"
+411,"Festuca kryloviana, Carex liparocarpos steppe","Grass, Carex spp. high-cold steppes"
+412,Festuca olgae steppe,"Grass, Carex spp. high-cold steppes"
+413,"Poa litwinowiana, Androsace squarrosula steppe","Grass, Carex spp. high-cold steppes"
+414,Orinus thoroldii steppe,"Grass, Carex spp. high-cold steppes"
+415,Orinus kokonorica steppe,"Grass, Carex spp. high-cold steppes"
+416,Carex moorcroftii steppe,"Grass, Carex spp. high-cold steppes"
+417,"Artemisia salsoloides var. wellbyi, Stipa spp. steppe","Grass, Carex spp. high-cold steppes"
+418,"Artemisia younghusbandii, Orinus thoroldii steppe","Grass, Carex spp. high-cold steppes"
+419,Bothriachloa ischaemum grassland,Temperate grasslands
+420,Themeda triandra var. japonica grassland,Temperate grasslands
+421,Miscanthus sinensis grassland ,Subtropical and tropical grasslands
+422,Miscanthus floridulus grassland,Subtropical and tropical grasslands
+423,"Eulalia speciosa, Arundinella hirta, Cymbopogon caesius grassland",Subtropical and tropical grasslands
+424,Arundinella setosa grassland,Subtropical and tropical grasslands
+425,Arundinella chenii grassland,Subtropical and tropical grasslands
+426,"Eremochloa ciliaris, Ischaemum ciliare grassland ",Subtropical and tropical grasslands
+427,Heteropogon contortus grassland,Subtropical and tropical grasslands
+428,Eulaliopsis binata grassland,Subtropical and tropical grasslands
+429,Lmperata cylindrica var. major grassland,Subtropical and tropical grasslands
+430,"Neyraudia reynaudiana, Thysanolaena maxima, Saccharum arundinaceum grassland",Subtropical and tropical grasslands
+431,"Carex spp., Themeda triandara var. japonica, Miscanthus sinensis grassland",Subtropical and tropical grasslands
+432,Dicranopteris dichotoma grassland,Subtropical and tropical grasslands
+433,Pteridium aquilinum var. latiusculum grassland,Subtropical and tropical grasslands
+434,Vitex rotundifolia scrub and herb community,Subtropical and tropical grasslands
+435,Calamagrostis epigejos tall grass meadow,Grass and forb meadows
+436,Calamagrostis pseudophragmites tall grass meadow,Grass and forb meadows
+437,Bromus inermis meadow,Grass and forb meadows
+438,Dactylis glomerata meadow,Grass and forb meadows
+439,Poa spp. meandow,Grass and forb meadows
+440,"Roegneria sinkiangensis, Geranium pratense meadow",Grass and forb meadows
+441,Brachypodium sylvaticum meadow,Grass and forb meadows
+442,Arundinella hirta meadow,Grass and forb meadows
+443,Cynodon dactylon meandow,Grass and forb meadows
+444,Zoysia japonica meadow,Grass and forb meadows
+445,Imperata cylindrica var. major meadow,Grass and forb meadows
+446,"Festuca ovina, Deyeuxia arundinacea, forb meadow",Grass and forb meadows
+447,Phragmites communis meadow,Grass and forb meadows
+448,"Agrostis gigantea, Alopecurus aequalis, Hordeum bogdanii meadow",Grass and forb meadows
+449,"Hordeum bogdanii, Aneurolepidium paboanus meadow with Betula pendula",Grass and forb meadows
+450,"Carex spp., forb meadow",Grass and forb meadows
+451,"Carex lanceolata var. subpediformis, forb meadow",Grass and forb meadows
+452,Carex cinerascens meadow,Grass and forb meadows
+453,"Phlomis pratensis, Geranium pratens, Iris ruthenica, forb meadow",Grass and forb meadows
+454,"Sanguisorba parviflora, Trollius spp., grass meadow",Grass and forb meadows
+455,"Sanguisorba officinalis, Artemisia laciniata, Carex pediformis, grass meadow",Grass and forb meadows
+456,"Ligularia jamesi, Trollius chinensis, grass meadow",Grass and forb meadows
+457,"Phragmites communis, Calamagrostis epigejos meadow","Grass, Carex and forb swamp meadows"
+458,"Agrostis alba, Hordeum bogdanii meadow","Grass, Carex and forb swamp meadows"
+459,"Deyeuxia angustifolia, Carex spp. meadow","Grass, Carex and forb swamp meadows"
+460,Phalaris arundinacea meadow,"Grass, Carex and forb swamp meadows"
+461,Miscanthus sacchariflorus meadow,"Grass, Carex and forb swamp meadows"
+462,Blysmus sinocompressus meadow,"Grass, Carex and forb swamp meadows"
+463,"Carex vesicata, forb meadow","Grass, Carex and forb swamp meadows"
+464,"Carex schmidtii, grass, forb meadow","Grass, Carex and forb swamp meadows"
+465,"Carex stenophylla, forb meadow","Grass, Carex and forb swamp meadows"
+466,"Iris ruthenica, Carex songorica, Phlomis pratensis, Poa angustifolia, forb meadow","Grass, Carex and forb swamp meadows"
+467,Aeluropus littoralis meadow,Grass and forb halophytic meadows
+468,Calamagrostis epigejos meadow with Tamarix ramosissima ,Grass and forb halophytic meadows
+469,Phragmites communis meadow,Grass and forb halophytic meadows
+470,Phragmites communis meadow with semi-shrub,Grass and forb halophytic meadows
+471,Phragmites communis meadow with Populus spp.,Grass and forb halophytic meadows
+472,"Phragmites communis, Poacynum hendersonii meadow with Nitraria spp., Tamarix spp.",Grass and forb halophytic meadows
+473,Achnatherum splendens meadow,Grass and forb halophytic meadows
+474,Aneurolepidium dasystachys meadow,Grass and forb halophytic meadows
+475,"Aneurolepidium chinense, Puccinellia distans meadow",Grass and forb halophytic meadows
+476,Zoysia macrostachys meadow,Grass and forb halophytic meadows
+477,"Iris lactea var. chinensis, grass, forb meadow",Grass and forb halophytic meadows
+478,"Sophora alopecuroides, Poacynum hendersonii, Glycyrrhiza inflata, Alhagi pseudoalhagi, Karelinia caspica meadow",Grass and forb halophytic meadows
+479,Sophora alopecuroides meadow,Grass and forb halophytic meadows
+480,Apocynum venetum meadow,Grass and forb halophytic meadows
+481,Glycyrrhiza inflata meadow,Grass and forb halophytic meadows
+482,Alhagi sparsifolia meadow,Grass and forb halophytic meadows
+483,Karelinia caspica meadow,Grass and forb halophytic meadows
+484,"Kalidium foliatum, Puccinellia distans meadow",Grass and forb halophytic meadows
+485,Suaeda glauca meadow,Grass and forb halophytic meadows
+486,Kobresia pygmaea meadow,"Kobresia spp., forb high-cold meadows"
+487,Kobresia humilis meadow,"Kobresia spp., forb high-cold meadows"
+488,Kobresia capillifolia meadow,"Kobresia spp., forb high-cold meadows"
+489,Kobresia setchwanensis meadow,"Kobresia spp., forb high-cold meadows"
+490,"Kobresia vidua, forb meadow","Kobresia spp., forb high-cold meadows"
+491,Kobresia bellardii meadow,"Kobresia spp., forb high-cold meadows"
+492,Kobresia spp. meadow,"Kobresia spp., forb high-cold meadows"
+493,"Kobresia spp., Carex spp. meadow","Kobresia spp., forb high-cold meadows"
+494,"Korbresia stenocarpa, Calamagrostis macrolepis meadow","Kobresia spp., forb high-cold meadows"
+495,"Elymus nutans, Roegneria nutans meadow","Kobresia spp., forb high-cold meadows"
+496,"Aristida adscensionis, Carex spp. meadow","Kobresia spp., forb high-cold meadows"
+497,Poa spp. meadow,"Kobresia spp., forb high-cold meadows"
+498,"Festuca kurtschumica, Anthoxanthum alpinum meadow","Kobresia spp., forb high-cold meadows"
+499,"Festuca ovina, forb meadow","Kobresia spp., forb high-cold meadows"
+500,Carex spp. meadow,"Kobresia spp., forb high-cold meadows"
+501,Carex spp. meadow and Myricaria prostrate scrub,"Kobresia spp., forb high-cold meadows"
+502,"Polygonum sphaerostachyum, P. viviparum meadow","Kobresia spp., forb high-cold meadows"
+503,"Ligularia virgaurea, Anemone spp. meandow","Kobresia spp., forb high-cold meadows"
+504,"Anaphalis flavescens, Leontopodium longifolium, Spenceria ramalana meadow","Kobresia spp., forb high-cold meadows"
+505,Saussurea spp. Meadow,"Kobresia spp., forb high-cold meadows"
+506,"Rhodiola kaschgarica, Carex atrofusca, Polygonum viviparum meadow","Kobresia spp., forb high-cold meadows"
+507,Phragmites communis marsh,Cold-temperate and temperate marshes
+508,Typha spp. marsh,Cold-temperate and temperate marshes
+509,"Carex tato, Deyeuxia angustifolia marsh",Cold-temperate and temperate marshes
+510,Carex meyeriana marsh,Cold-temperate and temperate marshes
+511,Carex lasiocarpa marsh,Cold-temperate and temperate marshes
+512,Carex pseudocuraica marsh,Cold-temperate and temperate marshes
+513,"Carex vesicaria, Puccinellia hauptiana marsh",Cold-temperate and temperate marshes
+514,Carex stenophylla meadow,Cold-temperate and temperate marshes
+515,"Heleocharis yokoscensis, forb marsh",Cold-temperate and temperate marshes
+516,"Scirpus triqueter, Phragmites communis marsh",Cold-temperate and temperate marshes
+517,Sphagnum bog,Cold-temperate and temperate marshes
+518,"Halerpestes tricuspis, Batrachium tricophullum, Potamogeton pectinatus marsh",Cold-temperate and temperate marshes
+519,"Miscanthus sacchariflorus, Phragmites communis marsh",Subtropical and tropical marshes
+520,Spartina anglica marsh,Subtropical and tropical marshes
+521,"Scirpus yagara, S. triqueter marsh",Subtropical and tropical marshes
+522,"Carex spp., Juncus effusus marsh",Subtropical and tropical marshes
+523,Cyperus malaceensis var . brevifolius marsh,Subtropical and tropical marshes
+524,"Leptocarpus disjunctus, Nepenthes mirabilis marsh ",Subtropical and tropical marshes
+525,"Kandelia candel, Aegiceras corniculatum, Avicennia marina mangroves",Tropical mangroves
+526,"Rhizophora stylosa, Bruguiera sexangula mangroves",Tropical mangroves
+527,"Rhizophora apiculata, Xylocarpus granatum mangroves",Tropical mangroves
+528,Carex muliensis marsh,High-cold marshes
+529,"Carex spp., Deschampsia caespitosa marsh",High-cold marshes
+530,"Carex spp., Blysmus sinocompressus marsh",High-cold marshes
+531,"Dryas octopetala, Phyllodoce caerulea, Rhacomitrium canescens tundra",Alpine tundra
+532,"Papaver pseudo-radicatum, Oxytropis anertii, Polyprachasrum alpinum tundra",Alpine tundra
+533,Cetraria nivalis tundra,Alpine tundra
+534,Arenaria pulvinata cushion vegetation,Alpine cushion vegetation
+535,"Arenaria kansuensis, Rhodiola spp. cushion vegetation",Alpine cushion vegetation
+536,"Arenaria musciformis, Androsace tapete cushion vegetation",Alpine cushion vegetation
+537,Androsace squarrosula cushion vegetation,Alpine cushion vegetation
+538,"Sibbaldia tetrandra, Anthoxanthum alpinum cushion vegetation",Alpine cushion vegetation
+539,Potentilla pamiroalaica cushion vegetation,Alpine cushion vegetation
+540,"Oxytropis chionobia, Poa festucacens cushion vegetation",Alpine cushion vegetation
+541,Ajania tibetica cushion vegetation,Alpine cushion vegetation
+542,"Saussurea involucrata, Callianthemum alatavicum sparse vegetation",Alpine sparse vegetation
+543,"Saussurea medusa, Saussurea spp. sparse vegetation",Alpine sparse vegetation
+544,"Saussurea spp., Rhodiola rosea, Cremanthodium spp. sparse vegetation",Alpine sparse vegetation
+545,"Saussurea tridactyla, Waldheimia glabra sparse vegetation",Alpine sparse vegetation
+546,"Roegneria spp., Polygonum alpinum sparse vegetation",Alpine sparse vegetation
+547,"Potato, cabbage field",One year one ripe fields with cold-tolerant crops of short growth duration
+548,"Spring barley, spring wheat, navew, rape field",One year one ripe fields with cold-tolerant crops of short growth duration
+549,"Spring wheat, early-matuing soybean, flax field ",One year one ripe grain fields and cold-tolerant economic crop fields
+550,"Spring wheat, medium and late maturing soybean, Chinese sorghum; sugar beet, sunflower, flax field",One year one ripe grain fields and cold-tolerant economic crop fields
+551,"Spring wheat, naked oats, buckwheat, potato, flax field",One year one ripe grain fields and cold-tolerant economic crop fields
+552,"Spring wheat, panic, flax, rape field",One year one ripe grain fields and cold-tolerant economic crop fields
+553,"Spring wheat, cron, rape field",One year one ripe grain fields and cold-tolerant economic crop fields
+554,"Spring wheat, pea, rape field; apple orchard",One year one ripe grain fields an cold-tolerant economic crop fields; deciduous orchards
+555,"Spring wheat, rice, sugar beet, sunflower, chinese wolfberry field; pear orchard",One year one ripe grain fields an cold-tolerant economic crop fields; deciduous orchards
+556,"Spring (winter) wheat, millet, panic, lucerne; musk melon field; apple, walnut orchard",One year one ripe grain fields an cold-tolerant economic crop fields; deciduous orchards
+557,"Winter (spring) wheat, corn field, early maturing cotton, Hami-melon field; apple, grape orchard",One year one ripe grain fields an cold-tolerant economic crop fields; deciduous orchards
+558,"Winter wheat, corn, peanut field; apple, persimmon, walnut, grape orchard",Two years three ripes or one year two ripes grain fields and deciduous orchards
+559,"Winter wheat, corn, buckwheat field; apple, pear, walnut orchard",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560,"Winter wheat, millet, Chinese sorghum, cotton, peanut field; apple, pear, walnut, grape orchard",Two years three ripes or one year two ripes grain fields and deciduous orchards
+561,"Winter (spring) wheat, corn, cotton, Hami-melon field; apple, walnut, grape orchard",Two years three ripes or one year two ripes grain fields and deciduous orchards
+562,"Winter wheat, corn field; apple, pear, apricot orchard",Two years three ripes or one year two ripes grain fields and deciduous orchards
+563,"Late maturing Chinese sorghum, long-staple cotton, Hami-melon field; grape orchard",Two years three ripes or one year two ripes grain fields and deciduous orchards
+564,"Summer rice, winter wheat, cotton, rape, mulberry field",One year two ripes grain fields; evergreen and deciduous orchards; economic tree plantations
+565,"Summer rice, winter wheat, corn, soybean, rape field; tea plantation; tung oil tree plantation; apple orchard",One year two ripes grain fields; evergreen and deciduous orchards; economic tree plantations
+566,"Summer rice, winter wheat, corn, rape, tobacco field; apple, walnut orchard",One year two ripes grain fields; evergreen and deciduous orchards; economic tree plantations
+567,"Summer rice, broad bean (or double-cropping rice) field; tea oiltea camellia plantations; citrus orchard",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+568,"Double-cropping rice and chinese clover, winter wheat, sweet potato field; tea, oiltea camellia plantations; citrus orchard",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+569,"Summer rice, winter wheat, sweet potato, winter rape, mulberry field; tung oil tree plantation; citrus orchard",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+570,"Summer rice, winter wheat, Chinese sorghum, sweet potato (double-cropping rice locally), winter rape, sugarcane field; citrus, longan orchard",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571,"Double-cropping rice, broad bean, sugarcane field; citrus, longan orchard",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+572,"Double-cropping rice and winter sweet potato, double-cropping corn, cassava field; Chinese aneise, cassiabarktree plantation; banana, pineapple, papaya, mango orchard",One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573,"Double-cropping rice and winter sweet potato, winter watermelon, cassava, jute field; rubber plantation; litchi, coconut, betel orchard",One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+001a,Larix gmelinii forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+001b,"Larix gmelinii, Pinus sylvestris var. mongolica forest",Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+001c,"Larix gmelinii, Quercus mongolioa forest",Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+001d,"Larix gmelinii, Betula platyphylla forest",Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+002a,Larix sibirica forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+002b,"Larix sibirica, Picea obovata forest",Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+002c,"Larix sibirica, Picea schrenkiana forest",Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+004+087a,Larix principis-rupprechtii forest and Betula platyphylla forest,
+007a,Pinus sylvestris var. mongolica forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+007b,Pinus sylvestris var. mongolica woodland,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+010a,Picea jezoensis forest,Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+010b,"Picea jezoensis, Abies nephrolpeis, Picea koraiensis forest",Needleleaf forests in cold-temperate zone and on mountains in temperate zone
+017+070a,Pinus tabulaeformis forest and Quercus liaotungensis forest,
+017+077,Pinus tabulaeformis forest and Robinia pseudoacacia forest,
+023a,"Shrub layer dominated by Symplocos paniculata, Quercus fabri, Q. serrata var. brevipetiolata",Needleleaf forests in subtropical zone
+023a+030,"Pinus Massoniana forest at shrub layer dominated by Symplocos paniculata, Quercus fabri, Q. serrata var. brevipetiolata and Cunninghamia landceolata forest",
+023a+097,"Pinus Massoniana forest at shrub layer dominated by Symplocos paniculata, Quercus fabri, Q. serrata var. brevipetiolata and Quercus variabilis, Q. acutissima forest",
+023a+202,"Pinus Massoniana forest at shrub layer dominated by Symplocos paniculata, Quercus fabri, Q. serrata var. brevipetiolata and Exochorada racemosa, Rhododendron simsii scrub",
+023b,"Shrub layer dominatd by Loropetalum chinense, Rhododendron simsii",Needleleaf forests in subtropical zone
+023c,Shrub layer dominated by Rhodomyrtus tomentosa,Needleleaf forests in subtropical zone
+023d,Shrub layer dominated by Baeckea frutescens,Needleleaf forests in subtropical zone
+024a,"Shrub layer dominated by Ternstroemia gymnanthera, Illicium yunnanense",Needleleaf forests in subtropical zone
+024b,"Shrub layer dominated by Lyonia ovalifolia, Rhododendron spiciferum",Needleleaf forests in subtropical zone
+024c,"Shrub layer dominated by Phyllanthus emblica, Wendlandia scabra",Needleleaf forests in subtropical zone
+024d,"Shrub layer dominated by Quercus monimotricha, Rhododendron siderophyllum",Needleleaf forests in subtropical zone
+024e,Shrub layer dominated by Rubus ellipticus,Needleleaf forests in subtropical zone
+028a,Pinus armandii forest,Needleleaf forests in subtropical zone
+028b,"Pinus armandii, Tsuga chinensis forest",Needleleaf forests in subtropical zone
+028c,"Pinus armandii, Tsuga chinensis, Betula spp. forest",Needleleaf forests in subtropical zone
+028d,"Pinus armandii, Populus davidiana forest",Needleleaf forests in subtropical zone
+028e,"Pinus armandii, Querus variablilis, Q. aliena var. acuteserrata forest",Needleleaf forests in subtropical zone
+042+041,Picea purpurea forest and Picea asperata forest,
+045+060,Picea likiangensis var. balfouriana forest and Sabina tibetica forest ,
+046+054,Picea likiangensis var. linzhiensis forest and Abies georgei var. smithii forest,
+063a,"Pinus koraiensis, Quercus mongolica forest",Needleleaf and deciduous broadleaf mixed forests in temperate zone 
+063b,"Pinus koraiensis, Tilia amurensis forest",Needleleaf and deciduous broadleaf mixed forests in temperate zone 
+063c,"Pinus koraiensis , Betula costata forest",Needleleaf and deciduous broadleaf mixed forests in temperate zone 
+063d,"Pinus koraiensis, Ulmus propinqua , Fraxinus mandshurica forest",Needleleaf and deciduous broadleaf mixed forests in temperate zone 
+063e,"Pinus koraiensis, Abies holophylla and deciduous broadleaf mixed forest",Needleleaf and deciduous broadleaf mixed forests in temperate zone 
+065a,"Tsuga chinensis, Acer spp., Betula spp. forest","Needeleleaf, evergreen and deciduous broadleaf mixed forests on mountains in subtropical zone"
+066a,"Tsuga dumosa, Schima mornhae forest","Needeleleaf, evergreen and deciduous broadleaf mixed forests on mountains in subtropical zone"
+066b,"Tsuga dumosa, Tetracenton sinense forest","Needeleleaf, evergreen and deciduous broadleaf mixed forests on mountains in subtropical zone"
+066c,"Tsuga dumosa, Quercus semicarpifolia forest","Needeleleaf, evergreen and deciduous broadleaf mixed forests on mountains in subtropical zone"
+067+068,"Tilia, Acer forest and Ulmus propinqua, Fraxinus mandshurica, Juglans mandshurica forest",
+067a,"Tilia amurensis, Acer mono, Tilia mandshurica forest",Broadleaf deciduous forests in temperate zone
+067b,"Tilia mandshurica, T. mongolica, Acer truncatum forest",Broadleaf deciduous forests in temperate zone
+067b+068,"Tilia mandshurica, T. mongolica, Acer truncatum forest and Ulmus propinqua, Fraxinus mandshurica, Juglans mandshurica forest",
+069a,Quercus mongolica forest,Broadleaf deciduous forests in temperate zone
+069b,Quercus mongolica coppice,Broadleaf deciduous forests in temperate zone
+069c,"Quercus mongolica, Betula davurica forest",Broadleaf deciduous forests in temperate zone
+070a,Quercus liaotungensis forest,Broadleaf deciduous forests in temperate zone
+070b,Quercus liaotungensis coppice,Broadleaf deciduous forests in temperate zone
+073+001,Quercus acutissima forest and Larix gmelinii forest,
+073a,Quercus acutissima forest,Broadleaf deciduous forests in temperate zone
+073b,Quercus acutissima coppice,Broadleaf deciduous forests in temperate zone
+075+080,Quercus variabilis forest and Populus simonii forest,
+075+094,"Quercus variabilis forest and Toxicodemdron vernicifluum, Acer mono forest ",
+080a+189,Populus simonii forest and Hippophae rhamnoides scrub,
+083+087a,Populus davidiana forest and Betula platyphylla forest,
+087a,Betula platyphylla forest,Broadleaf deciduous forests in temperate zone
+087a+070a,Betula platyphylla forest and Quercus liaotungensis forest,
+087a+083,Betula platyphylla forest and Populus davidiana forest,
+087b,"Betula platyphylla, Populus davidiana forest",Broadleaf deciduous forests in temperate zone
+091a,Ulmus pumila woodland,Microphyllous deciduous woodlands in temperate zone
+091b,Ulmus macrocarpa woodland,Microphyllous deciduous woodlands in temperate zone
+091b+191a,Ulmus macrocarpa woodland and Caragana microphylla scrub,
+091c,Ulmus glaucescens woodland,Microphyllous deciduous woodlands in temperate zone
+095+097,"Quercus fabri, Q. serrata var. brevipetiolata forest and Quercus variabilis, Q. acutissima forest",
+095+097+100,"Quercus fabri, Q. serrata var. brevipetiolata forest, Quercus variabilis, Q. acutissima forest and Liquidambar formosana forest",
+095+097+101,"Quercus fabri, Q. serrata var. brevipetiolata forest, Quercus variabilis, Q. acutissima forest and Platycarya strobilacea, Dalbergia hupeana forest ",
+095+099,"Quercus fabri, Q. serrata var. brevipetiolata forest and Castanea sequinii, Quercus serrata var. brevipetiolata, Platycarya strobilacea forest",
+097+099,"Quercus variabilis, Q. acutissima forest and Castanea sequinii, Quercus serrata var. brevipetiolata, Platycarya strobilacea forest",
+100+113,Liquidambar formosana forest and Castanopsis sclerophylla forest and Cyclobalanopsis glauca forest ,
+101+113,"Platycarya strobilacea, Dalbergia hupeana forest and Castanopsis sclerophylla forest and Cyclobalanopsis glauca forest",
+104a,Populus davidiana firest,Broadleaf deciduous forests in subtropical zone 
+106a,"Quercus variabilis, Q. serrata var. brevipetiolata, Castanopsis sclerophylla, Cyclobalanopsis glauca forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+106b,"Quercus variabilis, Q. axyphylla forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+106c,"Quercus variabilis, Q. spathulata forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+111a,"Cyclobalanopsis glauca, Pistacia chinensis, Celtis sinensis forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+111b,"Cyclobalanopsis glauca, Sapium rotundifolium, Pteroceltis tatarinowii forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+111c,"Cyclobalanopsis glauca, Carpinus pubescens, Platycarya strobilacea forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+111d,"Cyclobalanopsis glauca, Lysidice rhodostegia forest",Broadleaf evergreen and deciduous mixed forests in subtropical zone
+115+421a,"Castanopsis eyrei, C. carlesii forest and Miscanthus sinensis, Arundinella hirta, Eulalia speciosa grassland",
+150a,"Vatica astrotricha, Heritiera parvifolia forest",Tropical rain forests 
+150b,"Vatica astrotricha, Litchi chinensis forest",Tropical rain forests 
+164a,Phyllostachys bambusoides forest,Bamboo forests and scrubs in subtropical and tropical zones
+164b,"Phyllostachys bambusoides forest, Ph. nigra var. henonis forest ",Bamboo forests and scrubs in subtropical and tropical zones
+164c,Phyllostachys bambusoides f. tanakae forest,Bamboo forests and scrubs in subtropical and tropical zones
+187+185,Ostryopsis davidiana scrub and Spiraea spp. scrub,
+187+189,Ostryopsis davidiana scrub and Hippophae rhamnoides scrub,
+189+187,Hippophae rhamnoides scrub and Ostryopsis davidiana scrub,
+189+192,"Hippophae rhamnoides scrub and Rosa spp., Cotoneaster spp. scrub",
+189+379,"Hippophae rhamnoides scrub and Artemisia giraldii, grass steppe",
+190a,Elaeognus umbellata scrub ,Deciduous scrubs in temperate zone
+190b,"Elaeagnus umebllata, Salix spp. scrub",Deciduous scrubs in temperate zone
+191a,Caragana microphylla scrub,Deciduous scrubs in temperate zone
+191b,Caragana intermedia scrub,Deciduous scrubs in temperate zone
+191c,Caragana korshinskii scrub,Deciduous scrubs in temperate zone
+191d,Caragana tibetica scrub,Deciduous scrubs in temperate zone
+199+198,"Quercus fabri, Q. serrata var. brevipetiolata scrub and Castanea sequinii, Quercus fabri scrub",
+199+205,"Quercus fabri, Q. serrata var. brevipetiolata scrub and Loropetalum chinense, Vaccinium bracteatum, Rhododendron simsii scrub",
+205+113,"Loropetalum chinense, Vaccinium bracteatum, Rhododendron simsii scrub and Castanopsis sclerophylla forest and Cyclobalanopsis glauca forest",
+212a,"Macaranga denticulata, Aporosa chinensis, Engelhardtia roxburghiana scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+212b,"Macaranga denticulata, Aporosa yunnanensus, Mallotus barbatus scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+216a,"Zanthoxylum planispinum, Viburnum spp. scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+216b,"Vibrunum propinquum, Zanthoxylum planispinum scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+216c,"Zanthoxylum planispinum, Viburnum cinnamomifolium scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+222a,"Phyllanthus emblica, Wendlandia chinensis scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+222b,"Phyllanthus emblica, Wendlandia scabra scrub",Broadleaf evergreen and deciduous scrubs in subtropical and tropical zones
+233a,"Salix oritrepha, Dasiphora fruticosa, Caragana jubata scrub",Subalpine broadleaf deciduous scrubs
+257+232,"Rhododendron nivale, Rh. anthopogon scrub and Salix sclerophylla scrub",
+257+243,"Rhododendron nivale, Rh. anthopogon scrub and Caragana jubata scrub",
+257+256,"Rhododendron nivale, Rh. anthopogon scrub and Rhododendron racemosum scrub",
+257+486a,"Rhododendron nivale, Rh. anthopogon scrub and Kobresia pygmaea meadow",
+257+486d,"Rhododendron nivale, Rh. anthopogon scrub and Kobresia polygonum, Polygonum sphaerostachyum meadow",
+257+490,"Rhododendron nivale, Rh. anthopogon scrub and Kobresia vidua, forb meadow ",
+257+502,"Rhododendron nivale, Rh. anthopogon scrub and Polygonum sphaerostachyum, P. viviparum meadow",
+262+486d,"Sabina pingii var. wilsonii, S. squamata, S. wallichiana scrub and Kobresia polygonum, Polygonum sphaerostachyum meadow",
+265a,Haloxylon ammodendron sandy desert,Dwarf semi-arboreous deserts
+265b,Haloxylon ammodendron gravel desert,Dwarf semi-arboreous deserts
+265c,Haloxylon ammodendron loamy desert,Dwarf semi-arboreous deserts
+265c+309,Haloxylon ammodendron loamy desert and Anabasis aphylla desert,
+265d,Haloxylon ammodendron saline desert,Dwarf semi-arboreous deserts
+266+319,Haloxylon persicum desert and Artemisia arenaria desert,
+273+265a,Calligonum leucocladum desert and Haloxylon ammodendron sandy desert,
+274+277+026,Calligonum roborowskii desert and Tamarix ramosissima desert and Pinus khasya forest,
+276+320,Calligonum mongolicum desert and Artemisia salsoloides desert,
+276+328,"Calligonum mongolicum desert and Hedysarum mongolicum, Artemisia salsoloides, Psammochloa mongolica desert",
+277+197,Tamarix ramosissima desert and Tamarix ramosissima scrub,
+277+469,Tamarix ramosissima desert and Phragmites communis meadow,
+281+267,Nitraria sibirica desert and Ephedra przewalskii desert,
+281+293,Nitraria sibirica desert and Reaumuria soongorica desert,
+281a,Nitraria sibirica saline desert,Shrub deserts
+293+281+030,Reaumuria soongorica desert and Nitraria sibirica desert and Cunninghamia lanceolata forest,
+293a,Reaumuria soongorica sandy desert,Semi-shrub and dwarf semi-shrub deserts 
+293b,Reaumuria soongorica desert,Semi-shrub and dwarf semi-shrub deserts 
+293c,Reaumuria soongorica loamy desert,Semi-shrub and dwarf semi-shrub deserts 
+296+293,Ceratoides latens desert and Reaumuria soongorica desert,
+296+333,Ceratoides latens desert and Kalidium foliatum desert,
+296a,Ceratoides latens sandy desert,Semi-shrub and dwarf semi-shrub deserts 
+296b,Ceratoides latens gravel desert,Semi-shrub and dwarf semi-shrub deserts 
+296c,Ceratoides latens loamy desert,Semi-shrub and dwarf semi-shrub deserts 
+299+296,Salsola abrotanoides desert and Ceratoides latens desert,
+299a,Salsola abrotanoides gravel desert,Semi-shrub and dwarf semi-shrub deserts 
+299b,Salsola abrotanoides rocky desert,Semi-shrub and dwarf semi-shrub deserts 
+303a,"Sympegma regelii, Caragana dasyphylla gravel desert",Semi-shrub and dwarf semi-shrub deserts 
+303b,Sympegma regelii sandy desert,Semi-shrub and dwarf semi-shrub deserts 
+303c,Sympegma regelii rocky desert,Semi-shrub and dwarf semi-shrub deserts 
+307a,Anabasis brevifolia sandy desert,Semi-shrub and dwarf semi-shrub deserts 
+307b,Anabasis brevifolia gravel desert,Semi-shrub and dwarf semi-shrub deserts 
+309a,Anabasis aphylla loamy desert,Semi-shrub and dwarf semi-shrub deserts 
+312a,Seriphidium terrae-allbae sandy gravel desert,Semi-shrub and dwarf semi-shrub deserts 
+312b,Seriphidium terrae-albae loamy desert,Semi-shrub and dwarf semi-shrub deserts 
+315a,Seriphidium borotalense gravel desert,Semi-shrub and dwarf semi-shrub deserts 
+315b,Seriphidium borotalense loamy desert,Semi-shrub and dwarf semi-shrub deserts 
+317a,Artemisia rhodantha sandy desert,Semi-shrub and dwarf semi-shrub deserts 
+317b,Artemisia rhodantha gravel desert,Semi-shrub and dwarf semi-shrub deserts 
+317c,Artemisia rhodantha loamy desert,Semi-shrub and dwarf semi-shrub deserts 
+319+450,Artemisia arenaria desert and Carex spp. meadow,
+350a,"Poa angustifolia, Festuca sulcata, Helictotrichon schellianum steppe","Temperate grass, forb meadow steppes"
+350b,"Poa angustifolia, Stipa capillata steppe","Temperate grass, forb meadow steppes"
+360a,Stipa bungeana steppe,Temperate tufted grass steppes
+360a+375,"Stipa bungeana steppe and Thymus mongolicus, tufted grass steppe",
+360a+379,"Stipa bungeana steppe and Artemisia giraldii, grass steppe",
+360a+417+418,"Stipa bungeana steppe and Artemisia salsoloides var. wellbyi, Stipa spp. steppe and Artemisia younghusbandii, Orinus thoroldii steppe",
+360b,"Stipa bungeana, Aneurolepidium dasytachys, Artemisia spp. steppe",Temperate tufted grass steppes
+361a,Stipa capillata steppe,Temperate tufted grass steppes
+361b,"Stipa capillata, Artemisia frigida steppe",Temperate tufted grass steppes
+366a,Achnatherum splendens steppe,Temperate tufted grass steppes
+366b,"Achnatherum splendens, Stipa breviflora steppe",Temperate tufted grass steppes
+374a,"Carex pediformis, Stipa capillata steppe",Temperate tufted grass steppes
+375+379,"Thymus mongolicus, tufted grass steppe and Artemisia giraldii, grass steppe",
+377a,"Artemisia frigida, Festuca sulcata steppe",Temperate tufted grass steppes
+377b,"Artemisia frigida, tufted low grass steppe",Temperate tufted grass steppes
+382+383,Stipa gobica steppe and Stipa klemenzii steppe,
+385+324,Stipa breviflora steppe and Ajania fruticulosa desert,
+385+360,Stipa breviflora steppe and Stipa bungeana steppe,
+392a,Cleistogenes songorica steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+392b,Degraded communities of Cleistogenes songorica steppe,"Temperate tufted low grass, nano-semi-shrub desert steppes"
+405a,Stipa purpurea steppe,"Grass, Carex spp. high-cold steppes"
+405a+416a,Stipa purpurea steppe and Carex moorcroftii steppe,
+405a+497a,"Stipa purpurea steppe and Poa rossbergiana, Littledalea racemosa meadow",
+405b,"Stipa purpurea, Ceratoides compacta steppe","Grass, Carex spp. high-cold steppes"
+405c,"Stipa purpurea, Carex ivanoviae steppe","Grass, Carex spp. high-cold steppes"
+405d,"Stipa purpurea, Carex montis-everestii steppe","Grass, Carex spp. high-cold steppes"
+405e,"Stipa purpurea, Carex moorcroftii steppe","Grass, Carex spp. high-cold steppes"
+405e+416b,"Stipa purpurea, Carex moorcroftii steppe and Carex moorcroftii, Stipa purpurea steppe ",
+406a,Stipa subsessiliflora var. basiplumosa steppe,"Grass, Carex spp. high-cold steppes"
+416a,Carex moorcroftii steppe,"Grass, Carex spp. high-cold steppes"
+416a+405a,Carex moorcroftii steppe and Stipa purpurea steppe,
+416b,"Carex moorcroftii, Stipa purpurea steppe ","Grass, Carex spp. high-cold steppes"
+416c,"Carex moorcroftii, Ceratoides compacta steppe ","Grass, Carex spp. high-cold steppes"
+417+418,"Artemisia salsoloides var. wellbyi, Stipa spp. steppe and Artemisia younghusbandii, Orinus thoroldii steppe",
+417+418+360a,"Artemisia salsoloides var. wellbyi, Stipa spp. Steppe, Artemisia younghusbandii, Orinus thoroldii steppe and Stipa bungeana steppe",
+419a,Bothriachloa ischaemum grassland,Temperate grasslands
+419a+556,"Bothriachloa ischaemum grassland and Spring (winter) wheat, millet, panic, lucerne; musk melon field; apple, walnut orchard",
+419b,"Vitex negundo var. heterophylla, Ziziphus sativa var. spinosus, Bothriochloa ischaemum scrub and grassland",Temperate grasslands
+420a,Themeda triandra var. japonica grassland,Temperate grasslands
+420b,"Vitex negundo var. heterophylla, Ziziphus sativa var. spinosus, Themeda triandra var. japonica scrub and grassalnd",Temperate grasslands
+420c,"Themeda triandra var. japanica, Carex spp., Miscanthus sinensis grassland",Temperate grasslands
+421a,"Miscanthus sinensis, Arundinella hirta, Eulalia speciosa grassland",Subtropical and tropical grasslands
+421b,"Miscanthus sinensis, Eulaliopsis binata grassland",Subtropical and tropical grasslands
+424a,Arundinella steosa grassland,Subtropical and tropical grasslands
+424a+023b,"Arundinella steosa grassland and Pinus massoniana forest at shrub layer dominatd by Loropetalum chinense, Rhododendron simsii",
+424b,"Arundinella setosa, Schizachyrium delavayi grassland",Subtropical and tropical grasslands
+427a,"Heteropogon contortus, Eulaliopsis binata, Imperata cylindrica var. major grassland",Subtropical and tropical grasslands
+427b,"Heteropogon contortus, Bothriochloa pertuosa, Cymbopogon spp. grassland",Subtropical and tropical grasslands
+429a,"Imperara cylindrica var. major, Heteropogon contortus, Eulaliopsis binata grassalnd",Subtropical and tropical grasslands
+429b,"Imperata cylindrica var. major, Arundinella bengalensis grassland",Subtropical and tropical grasslands
+434a,"Vitex rotundifolia, Artemisia capillaris community",Subtropical and tropical grasslands
+434b,"Vitex rotundifolia, Carex kobomugi community",Subtropical and tropical grasslands
+442a,"Arundinella hirta, Carex spp. meadow",Grass and forb meadows
+442b,"Arundinella hirta, Spodiopogon sibiricus, forb meadow",Grass and forb meadows
+455a,"with Salix brachypota, Corylus heterophylla",Grass and forb meadows
+455b,"with Betula fruticosa, Salix brachypoda",Grass and forb meadows
+455c,with Carex spp.,Grass and forb meadows
+458+068,"Agrostis alba, Hordeum bogdanii meadow and Ulmus propinqua, Fraxinus mandshurica, Juglans mandshurica forest",
+459a,with Betula fruticosa,"Grass, Carex and forb swamp meadows"
+459b,with Salix brachypoda,"Grass, Carex and forb swamp meadows"
+462a,"Blysmus sinocompressus, Calamagrostis epigejos meadow","Grass, Carex and forb swamp meadows"
+469+195,Phragmites communis meadow and Myricaria squamosa scrub,
+469+277,Phragmites communis meadow and Tamarix hohenackeri desert,
+469+279,Phragmites communis meadow and Tamarix hispida desert,
+469a,with Aeluropus littoralis,Grass and forb halophytic meadows
+471a,with Populus diversifolia,Grass and forb halophytic meadows
+471b,with Populus pruinosa,Grass and forb halophytic meadows
+473+469,Achnatherum splendens meadow and Phragmites communis meadow ,
+483a,Karelinia caspica meadow,Grass and forb halophytic meadows
+483b,Karelinia caspica meadow with Populus pruinosa,Grass and forb halophytic meadows
+485a,forb meadow,Grass and forb halophytic meadows
+485b,"Suaeda glauca, Polygonum sibiricum meadow",Grass and forb halophytic meadows
+485c,"Suaela salsa, Salicornia herbacea meadow",Grass and forb halophytic meadows
+486a,Kobresia pygmaea meadow,"Kobresia spp., forb high-cold meadows"
+486a+416a,Kobresia pygmaea meadow and Carex moorcroftii steppe,
+486b,"Kobresia pygmaea, Stipa purpurea meadow","Kobresia spp., forb high-cold meadows"
+486c,"Kobresia pygmaea, Stipa aliena meadow","Kobresia spp., forb high-cold meadows"
+486d,"Kobresia pygmaea, Polygonum sphaerostachyum meadow","Kobresia spp., forb high-cold meadows"
+488a,Kobresia capillifolia meadow,"Kobresia spp., forb high-cold meadows"
+488b,"Kobresia capillifolia, Stipa purpurea meadow","Kobresia spp., forb high-cold meadows"
+488c,"Kobresia capilifolia, Polygonum viviparum meadow","Kobresia spp., forb high-cold meadows"
+492a,Kobresia smirnovii meadow,"Kobresia spp., forb high-cold meadows"
+492b,Kobresia filifolia meadow,"Kobresia spp., forb high-cold meadows"
+492c,Kobresia myosuroides meadow,"Kobresia spp., forb high-cold meadows"
+492d,Kobresia stenocarpa meadow,"Kobresia spp., forb high-cold meadows"
+492e,"Kobresia graminifolia, forb meadow","Kobresia spp., forb high-cold meadows"
+492f,"Kobresia schoenoides (K. tibetica), Polygonum viviparum meadow","Kobresia spp., forb high-cold meadows"
+493a,"Kobresia schoenoides, Carex spp. meadow","Kobresia spp., forb high-cold meadows"
+493a+486a,"Kobresia schoenoides, Carex spp. meadow and Kobresia pygmaea meadow",
+493b,Kobresia littledalei meadow,"Kobresia spp., forb high-cold meadows"
+493b+529,"Kobresia littledalei meadow and Carex spp., Deschampsia caespitosa marsh",
+493b+c,Kobresia littledalei meadow and Kobresia deasyi meadow ,
+493c,Kobresia deasyi meadow,"Kobresia spp., forb high-cold meadows"
+493c+195,Kobresia deasyi meadow and Myricaria squamosa scrub,
+493c+b,Kobresia deasyi meadow and Kobresia littledalei meadow,
+493d,"Blysmus sinocompressus, Carex spp. meadow","Kobresia spp., forb high-cold meadows"
+497a,"Poa rossbergiana, Littledalea racemosa meadow","Kobresia spp., forb high-cold meadows"
+497b,"Poa alpina, forb meadow","Kobresia spp., forb high-cold meadows"
+500a,Carex scabrirostris meadow,"Kobresia spp., forb high-cold meadows"
+500b,Carex atrofusca meadow,"Kobresia spp., forb high-cold meadows"
+500c,Carex stenocarpa meadow,"Kobresia spp., forb high-cold meadows"
+500d,Carex alpina meadow,"Kobresia spp., forb high-cold meadows"
+505+342,Saussurea spp. meadow and Rhodiola algida var. tangutica desert,
+505a,"Saussurea arenaria, S. humilis meadow","Kobresia spp., forb high-cold meadows"
+505b,Saussurea alpine meadow,"Kobresia spp., forb high-cold meadows"
+507a,"with Typha angustifolia, Hippuris vulgaris",Cold-temperate and temperate marshes
+509+454,"Carex tato, Deyeuxia angustifolia marsh and Sanguisorba parviflora, Trollius spp., grass meadow",
+517a,"with Larix olgensis var. changpaiensis, Ledum palustre",Cold-temperate and temperate marshes
+517b,"with Larix gmelinii, Ledum palustre",Cold-temperate and temperate marshes
+549a,Rice field ,One year one ripe grain fields and cold-tolerant economic crop fields
+550+083,"Spring wheat, medium and late maturing soybean, Chinese sorghum; sugar beet, sunflower, flax field and Populus davidiana forest",
+550+69a,"Spring wheat, medium and late maturing soybean, Chinese sorghum; sugar beet, sunflower, flax field and Quercus mongolica forest",
+550a,Rice field ,One year one ripe grain fields and cold-tolerant economic crop fields
+551+083,"Spring wheat, naked oats, buckwheat, potato, flax field and Populus davidiana forest",
+556a,"Spring (winter) wheat, food grains other than wheat and rice field; apple, pear orchard",One year one ripe grain fields an cold-tolerant economic crop fields; deciduous orchards
+556b,Food grains other than wheat and rice field,One year one ripe grain fields an cold-tolerant economic crop fields; deciduous orchards
+558a,"Winter wheat, food grains other than wheat and rice field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+558b,Food grains other than wheat and rice field,Two years three ripes or one year two ripes grain fields and deciduous orchards
+558c,Rice field,Two years three ripes or one year two ripes grain fields and deciduous orchards
+558d,Intercropping with jujube and grains field,Two years three ripes or one year two ripes grain fields and deciduous orchards
+558e,"Wheat, corn, cotton field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+558f,"Apple, pear orchard",Two years three ripes or one year two ripes grain fields and deciduous orchards
+558g,Vegetable field,Two years three ripes or one year two ripes grain fields and deciduous orchards
+560a,"Winter wheat, food grains other than wheat and rice field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560b,"Chinese sorghum, cotton field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560c,"Sweet potato, peanut, soybean field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560d,"Wheat, corn, peanut field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560e,"Tobacoo, wheat, food grains other than wheat and rice field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560f,"Wheat, corn, cotton field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560g,"Cotton, wheat, food grains other than wheat and rice field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560h,"Food grains other than wheat and rice, cotton, oil crops field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560i,"Rice, winter wheat field",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560j,Intercropping Paulownia and grains field,Two years three ripes or one year two ripes grain fields and deciduous orchards
+560k,Intercropping mulberry and grains field,Two years three ripes or one year two ripes grain fields and deciduous orchards
+560l,Intercropping chestnut and grains field,Two years three ripes or one year two ripes grain fields and deciduous orchards
+560m,Intercropping jujube and grains field,Two years three ripes or one year two ripes grain fields and deciduous orchards
+560n,"Apple, pear orchard",Two years three ripes or one year two ripes grain fields and deciduous orchards
+560o,Grape orchard,Two years three ripes or one year two ripes grain fields and deciduous orchards
+560p,Vegetable field,Two years three ripes or one year two ripes grain fields and deciduous orchards
+564a,"Rice, wheat, double-cropping rice field",One year two ripes grain fields; evergreen and deciduous orchards; economic tree plantations
+564b,"Intercropping cotton, wheat and soybean field",One year two ripes grain fields; evergreen and deciduous orchards; economic tree plantations
+564c,Single cropping rice field,One year two ripes grain fields; evergreen and deciduous orchards; economic tree plantations
+564d,Mulberry field,One year two ripes grain fields; evergreen and deciduous orchards; economic tree plantations
+568+568c,"Double-cropping rice and chinese clover, winter wheat, sweet potato field; oiltea camellia plantation; citrus orchard, and Citrus orchard",
+568a,Mulberry-grains composite field,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+568b,Sugarcane-grains composite field,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+568c,Citrus orchard,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+568d,Oiltea camellia plantation,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+568e,Tung oil tree plantation,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+568f,Tea plantation,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+568g,"Double-cropping rice, rape (winter wheat) field",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+568h,Rice field,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+568i,Rice-citrus composite field,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+570a,"Rice, wheat, rape, green manure field",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571a,Mulberry-grains composite field,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571b,Sugarcane-grains composite field,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571c,Citrus orchard,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571d,Oiltea camellia plantation,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571e,Tung oil tree plantation,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571f,Tea plantation,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571g,"Rice, mulberry, sugarcane, banana-fish pond composite field",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571h,"Sugarcane, peanut, sweet potato, cassava field",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571i,Rice-citrus composite field,One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571j,"Double-cropping rice, sugarcane field; citrus orchard",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571k,"Vegetable field; apple, pear, honey peach orchard",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+571l,"Tea plantation; citrus, litchi, mango, pear orchard",One year two ripes or three ripes grain fields; evergreen orchards and subtropical economic tree plantations
+572a,"Double-cropping corn or corn, late maturing rice field",One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572b,"Citrus, mango, coconut plantation",One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572c,Rubber plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572d,Red bayberry orchard,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572e,Tobacco field,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572f,Narcissus garden,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572g,Citrus orchard,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572h,Litchi orchard,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572i,Chinese aneise plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572j,Banana plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572k,Oiltea camellia plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+572l,"Double-cropping rice, sugarcane field",One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573a,Citrus orchard,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573b,Litchi orchard,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573c,"Hemp, lemongrass field; pepper garden",One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573d,Rubber plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573e,Banana plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573f,Oiltea camillia plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573g,Coconut plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573h,Sugarcane-grains composite field,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573i,Horsetail beefwood plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573j,Pineapple plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573l,Casuarina equisetifolia plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573m,Eucalyptus plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+573n,Chinese cedar plantation,One year three ripes grain fields; tropical evergreen orchards and economic tree plantations
+574Sa,Sandy desert,No vegetation
+575Gr,Gravel desert,No vegetation
+576R,Rocky desert or alpine rock debris,No vegetation
+577Go,Gobi,No vegetation
+578Ss,Saline soil,No vegetation
+579Sm,Salt marsh,No vegetation
+580Ps,Pellicular salt,No vegetation
+581T,Takir,No vegetation
+582B,Bare ground,No vegetation
+583Bg,Bare gobi,No vegetation
+584Bs,Bare salt lick,No vegetation
+585Rm,Rocky mountain,No vegetation
+586M,Marsh,No vegetation
+587W,Yardan,No vegetation
+588Sc,Snow capped,No vegetation
+589Sf,Salt field,No vegetation

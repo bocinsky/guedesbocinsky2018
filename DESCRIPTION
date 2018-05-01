@@ -22,7 +22,8 @@ Requires: R (>= 3.4.3)
 Remotes: 
     tidyverse/ggplot2,
     hadley/purrrlyr,
-    bocinsky/tdar
+    bocinsky/tdar,
+    DavisVaughan/furrr
 Imports: 
     FedData,
     Hmisc,
@@ -41,7 +42,8 @@ Imports:
     R.oo,
     zoo,
     sp,
-    ggplot2
+    ggplot2,
+    writexl
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 Suggests: knitr,

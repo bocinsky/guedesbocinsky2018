@@ -32,6 +32,7 @@ space_time_video <- function(the_brick,
                              the_brick_upper = NULL,
                              the_brick_lower = NULL,
                              out_file,
+                             line = 75,
                              title = NULL,
                              time,
                              timelim,
@@ -58,11 +59,6 @@ space_time_video <- function(the_brick,
     smoother <- smooth
   } else {
     smoother <- NULL
-  }
-
-  if (!raster::inMemory(the_brick)) {
-    the_brick %<>%
-      raster::readAll()
   }
 
   mean.all <- mean(the_brick[], na.rm = T)
@@ -155,7 +151,7 @@ space_time_video <- function(the_brick,
     if ((min(the_brick[[layer]][], na.rm = TRUE) != max(the_brick[[layer]][], na.rm = TRUE))) {
       raster::contour(the_brick[[layer]],
         maxpixels = raster::ncell(the_brick),
-        levels = 0.75,
+        levels = line,
         drawlabels = FALSE,
         col = "white",
         lwd = 1.25,
@@ -166,7 +162,7 @@ space_time_video <- function(the_brick,
     if (!is.null(the_brick_upper) & (min(the_brick_upper[[layer]][], na.rm = TRUE) != max(the_brick_upper[[layer]][], na.rm = TRUE))) {
       raster::contour(the_brick_upper[[layer]],
         maxpixels = raster::ncell(the_brick_upper),
-        levels = 0.75,
+        levels = line,
         drawlabels = FALSE,
         col = "white",
         lwd = 0.75,
@@ -178,7 +174,7 @@ space_time_video <- function(the_brick,
     if (!is.null(the_brick_lower) & (min(the_brick_lower[[layer]][], na.rm = TRUE) != max(the_brick_lower[[layer]][], na.rm = TRUE))) {
       raster::contour(the_brick_lower[[layer]],
         maxpixels = raster::ncell(the_brick_lower),
-        levels = 0.75,
+        levels = line,
         drawlabels = FALSE,
         col = "white",
         lwd = 0.75,
@@ -229,7 +225,7 @@ space_time_video <- function(the_brick,
     )
 
     graphics::abline(
-      h = 0.75,
+      h = line,
       col = "white"
     )
 

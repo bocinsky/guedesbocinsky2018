@@ -32,6 +32,7 @@ space_time_plot <- function(the_brick,
                             the_brick_upper = NULL,
                             the_brick_lower = NULL,
                             out_file,
+                            line = 75,
                             title = NULL,
                             time,
                             timelim,
@@ -158,7 +159,7 @@ space_time_plot <- function(the_brick,
 
   raster::contour(mean.spatial,
     maxpixels = raster::ncell(mean.spatial),
-    levels = 0.75,
+    levels = line,
     drawlabels = FALSE,
     col = "white",
     lwd = 1.25,
@@ -168,7 +169,7 @@ space_time_plot <- function(the_brick,
   if (!is.null(the_brick_upper)) {
     raster::contour(mean.spatial.upper,
       maxpixels = raster::ncell(mean.spatial.upper),
-      levels = 0.75,
+      levels = line,
       drawlabels = FALSE,
       col = "white",
       lwd = 0.75,
@@ -180,7 +181,7 @@ space_time_plot <- function(the_brick,
   if (!is.null(the_brick_lower)) {
     raster::contour(mean.spatial.lower,
       maxpixels = raster::ncell(mean.spatial.lower),
-      levels = 0.75,
+      levels = line,
       drawlabels = FALSE,
       col = "white",
       lwd = 0.75,
@@ -225,7 +226,7 @@ space_time_plot <- function(the_brick,
     xpd = T
   )
   graphics::abline(
-    h = 0.75,
+    h = line,
     col = "white"
   )
   graphics::text(
