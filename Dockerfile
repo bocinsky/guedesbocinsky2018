@@ -17,3 +17,4 @@ RUN r -e 'devtools::install("/guedesbocinsky2018", dep = TRUE, upgrade_dependenc
 
 # render the analysis
 # && r -e "rmarkdown::render('/guedesbocinsky2018/vignettes/guedesbocinsky2018.Rmd')"
+
