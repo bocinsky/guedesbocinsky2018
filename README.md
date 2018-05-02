@@ -292,7 +292,3 @@ Montana<br> Division of Earth and Ecosystem Sciences, Desert Research
 Institute<br> The Research Institute at Crow Canyon Archaeological
 Center<br> 770.362.6659 – Mobile<br> <bocinsky@gmail.com> – Email<br>
 [bocinsky.io](http://www.bocinsky.io/) – Web
-
-### R package citations
-
-The following R packages were used for this analysis:
