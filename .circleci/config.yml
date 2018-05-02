@@ -7,14 +7,17 @@ defaults: &steps
             R \
               -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
               -e 'devtools::install_github("r-lib/devtools")'
+
       - run:
-          name: Install package dependencies
+          name: Install
           command: |
-            R -e 'devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
+            R -e 'devtools::install(dependencies = TRUE, upgrade_dependencies = FALSE)'
+
       - run:
           name: Check and test
           command: |
             R -e 'results <- devtools::check(vignettes = FALSE, args = "--no-vignettes"); stopifnot(length(results$errors) == 0)'
+
 
 version: 2
 jobs:
