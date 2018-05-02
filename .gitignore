@@ -33,4 +33,3 @@ DALPOIMGUEDES_BOCINSKY_2017.xlsx
 # SLURM output
 *.err
 *.out
-inst/doc
