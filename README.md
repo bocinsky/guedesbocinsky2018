@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--05--01-brightgreen.svg)](https://github.com/bocinsky/guedesbocinsky2018/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--05--03-brightgreen.svg)](https://github.com/bocinsky/guedesbocinsky2018/commits/master)
 [![CircleCI](https://circleci.com/gh/bocinsky/guedesbocinsky2018.svg?style=svg)](https://circleci.com/gh/bocinsky/guedesbocinsky2018)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.4.4-brightgreen.svg)](https://cran.r-project.org/)
@@ -23,7 +23,7 @@ Asia*, 2018. Version 1.0.0. Zenodo.
 d’Alpoim Guedes, Jade and R. Kyle Bocinsky. Data output for: *Climate
 change stimulated agricultural innovation and exchange across Asia*,
 2018. Version 1.0.0. Zenodo.
-<http://doi.org/10.5281/zenodo.583154>
+<http://doi.org/10.5281/zenodo.788601>
 
 ### Compendium DOI:
 
