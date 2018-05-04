@@ -1720,7 +1720,7 @@ file.copy(from = "./data/derived_data/Data_file_S1_sites_dates.xlsx",
           to = "./submission/Data_file_S1_sites_dates.xlsx",
           overwrite = TRUE)
 file.copy(from = "./figures/Data_file_S2_all_crossplot.html",
-          to = "./submission/Data_file_S2_all_crossplot.htmls",
+          to = "./submission/Data_file_S2_all_crossplot.html",
           overwrite = TRUE)
 
 # Copy Movies
@@ -1745,29 +1745,16 @@ file.copy(from = "./figures/crop_niches/all_rice.mp4",
 
 # Write the compendium
 system(paste0("cp -r ../ ",tempdir(),"/Data_file_S3_research_compendium/"))
-unlink(paste0(tempdir(),"/Data_file_S3_research_compendium/vignettes/data"),
-       recursive = TRUE, 
-       force = TRUE)
-unlink(paste0(tempdir(),"/Data_file_S3_research_compendium/vignettes/figures"),
-       recursive = TRUE, 
-       force = TRUE)
-unlink(paste0(tempdir(),"/Data_file_S3_research_compendium/vignettes/submission"),
-       recursive = TRUE, 
-       force = TRUE)
-unlink(paste0(tempdir(),"/Data_file_S3_research_compendium/vignettes/guedesbocinsky2018_cache"),
-       recursive = TRUE, 
-       force = TRUE)
-unlink(paste0(tempdir(),"/Data_file_S3_research_compendium/.git"),
-       recursive = TRUE, 
-       force = TRUE)
-suppressWarnings(utils::tar("./submission/Data_file_S3_research_compendium.tar.gz",
-           files = paste0(tempdir(),"/Data_file_S3_research_compendium"),
-           compression = "gzip",
-           tar = "internal",
-           extra_flags = paste("--exclude 'vignettes/data'",
-                               "'vignettes/figures'",
-                               "'vignettes/submission'",
-                               "'vignettes/guedesbocinsky2018_cache'")))
+
+system(paste("tar -zcf submission/Data_file_S3_research_compendium.tar.gz",
+              "-C ",tempdir(),
+             "--exclude='vignettes/data'",
+             "--exclude='vignettes/figures'",
+             "--exclude='vignettes/submission'",
+             "--exclude='vignettes/guedesbocinsky2018_cache'",
+             "--exclude='vignettes/zenodo'",
+             "--exclude='.git'",
+             "Data_file_S3_research_compendium"))
 
 ```
 
