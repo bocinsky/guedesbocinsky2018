@@ -18,12 +18,13 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-Requires: R (>= 3.4.3)
+Depends: R (>= 3.4.3)
 Remotes: 
     tidyverse/ggplot2,
     hadley/purrrlyr,
     bocinsky/tdar,
-    DavisVaughan/furrr
+    DavisVaughan/furrr,
+    ropensci/writexl
 Imports: 
     FedData,
     Hmisc,
@@ -43,7 +44,6 @@ Imports:
     zoo,
     sp,
     ggplot2,
-    writexl,
     future,
     httr
 Roxygen: list(markdown = TRUE)
