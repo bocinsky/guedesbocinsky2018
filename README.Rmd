@@ -29,7 +29,7 @@ d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Climate change stimulated agricultur
 
 d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Research compendium for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. https://doi.org/10.5281/zenodo.1239106
 
-d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Data output for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. http://doi.org/10.5281/zenodo.583154
+d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Data output for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. http://doi.org/10.5281/zenodo.788601
 
 ### Compendium DOI: 
  
