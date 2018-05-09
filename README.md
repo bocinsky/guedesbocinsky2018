@@ -118,9 +118,9 @@ This analysis has been designed to take advantage of modern multi-core or multi-
 # install.packages("devtools")
 ## Install the development version of devtools
 library(devtools)
-install_github("r-lib/devtools")
+install_github("r-lib/devtools", upgrade_dependencies = FALSE)
 library(devtools)
-install(dependencies = TRUE)
+install(dependencies = TRUE, upgrade_dependencies = FALSE)
 ```
 
 5.  Go to the `vignettes/` directory.
@@ -177,7 +177,7 @@ export tdar_pw=YOUR_TDAR_PASSWORD
 To run the analyses directly, render the `guedesbocinsky2018.Rmd` RMarkdown vignette at the end of the run command like so (in the terminal):
 
 ``` bash
-docker run bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesbocinsky2018/vignettes/guedesbocinsky2018.Rmd', \
+docker exec bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesbocinsky2018/vignettes/guedesbocinsky2018.Rmd', \
                                                                               params = list(cores = 1, \
                                                                               clean = FALSE, \
                                                                               google_maps_elevation_api_key = '$google_maps_elevation_api_key', \
@@ -190,7 +190,7 @@ docker run bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesboc
 Alternatively, you can run the container in interactive mode and load the script yourself like so (in the terminal):
 
 ``` bash
-docker run -it bocinsky/guedesbocinsky2018:1.0.0 bash
+docker exec -it bocinsky/guedesbocinsky2018:1.0.0 bash
 ```
 
 You can use the `exit` command to stop the container.
@@ -200,7 +200,7 @@ You can use the `exit` command to stop the container.
 Finally, you can host RStudio Server locally to use the RStudio browser-based IDE. Run like so (in the terminal):
 
 ``` bash
-docker run -p 8787:8787 bocinsky/guedesbocinsky2018:1.0.0
+docker exec -p 8787:8787 bocinsky/guedesbocinsky2018:1.0.0
 ```
 
 Then, open a browser (we find [Chrome](https://www.google.com/chrome/) works best) and navigate to “localhost:8787” or or run `docker-machine ip default` in the shell to find the correct IP address, and log in with **rstudio**/**rstudio** as the user name and password. In the explorer (lower right pane in RStudio), navigate to the `guedesbocinsky2018` directory, and click the `guedesbocinsky2018.Rproj` to open the project.
