@@ -27,7 +27,7 @@ The files at the URL above will generate the results as found in the publication
 
 This repository is a research compendium package for d’Alpoim Guedes and Bocinsky (2018). The compendium contains all code associated with the analyses described and presented in the publication, as well as a Docker environment (described in the `Dockerfile`) for running the code.
 
-This compendium is an R package, meaning that by installing it you are also installing most required dependencies. See below for hints on installing some of the command-line tools necessary in this analysis on macOS and Linux.
+This compendium is an R package, meaning that by installing it you are also installing most required dependencies. See below for hints on installing some of the command-line tools necessary in this analysis on macOS and Linux. This compendium takes a lot of its cues from [Ben Marwick’s `rrtools` package](https://github.com/benmarwick/rrtools) for performing reproducible research.
 
 The analyses presented in Guedes and Bocinsky (2018) are performed in an RMarkdown vignette (`guedesbocinsky2018.Rmd`) located in the `vignettes` directory.
 
@@ -98,7 +98,7 @@ Install the publication version of this compendium with
 # library(devtools)
 # install_github("r-lib/devtools")
 library(devtools)
-install_github("bocinsky/guedesbocinsky2018@1.0.0")
+install_github("bocinsky/guedesbocinsky2018@1.0.0", dependencies = TRUE)
 ```
 
 Install the current development version from github with
@@ -109,7 +109,7 @@ Install the current development version from github with
 # library(devtools)
 # install_github("r-lib/devtools")
 library(devtools)
-install_github("bocinsky/guedesbocinsky2018")
+install_github("bocinsky/guedesbocinsky2018", dependencies = TRUE)
 ```
 
 Or, install the local version if you’ve downloaded it. We suggest using the [RStudio development environment](https://www.rstudio.com/products/rstudio/download/).
@@ -126,7 +126,7 @@ Or, install the local version if you’ve downloaded it. We suggest using the [R
 # library(devtools)
 # install_github("r-lib/devtools")
 library(devtools)
-install()
+install(dependencies = TRUE)
 ```
 
 ### Authentication for the Google Elevation API and tDAR
@@ -160,6 +160,16 @@ This analysis uses the tDAR application programming interface (API) to authentic
 
 ### Running the analysis
 
+There are three ways to run the analysis:
+
+  - **Running from within *R*** — Do this if your goal is to explore how we developed the model, or to change parameters.
+  - **Running from the terminal** — Do this if your goal is just to reproduce the output on your local machine/environment.
+  - **Running from the Docker** — Do this if your goal is to reproduce our results precisely, using a custom-build and pre-tested environment.
+
+#### A note on run time
+
+This analysis has been designed to take advantage of modern multi-core or multi-CPU computer architectures. By default, it will run on two cores—i.e., sections of the code will run in parallel approximately twice as fast as on a single core. The analysis also consumes quite a bit of memory. On two (relatively high-speed) cores, run-time of the entire analysis is **approximately 12 hours**. This can be sortened dramatically by running with a higher number of cores/processors and amount of memory, if available.
+
 #### Running the analysis from within *R*
 
 **This is what most users will want want to run if your goal is to explore how we developed the model, or to change parameters.** Be sure that you have a working version of *R* installed (\>= 3.4.4) and the [RStudio development environment](https://www.rstudio.com/products/rstudio/download/).
@@ -178,7 +188,7 @@ This analysis uses the tDAR application programming interface (API) to authentic
 library(devtools)
 install_github("r-lib/devtools")
 library(devtools)
-install()
+install(dependencies = TRUE)
 ```
 
 5.  Go to the `vignettes/` directory.
@@ -188,21 +198,21 @@ install()
 
 #### Running the analysis from the terminal
 
-**This is what you want to run to reproduce our results from the terminal. We strongly encourage you to run the analysis from *R* if your goal is to explore how we developed the model, or to change parameters.**
+**This is what you want to run to reproduce our results from the terminal. We strongly encourage you to run the analysis from *R* and RStudio if your goal is to explore how we developed the model, or to change parameters.**
 
 To run this analysis from the terminal, first you must ensure you have downloaded the compendium package and installed all system requirements. We’ve included a convenient script for running the entire analysis, including installing the compendium package.
 
 From within the `guedesbocinsky2018` directory:
 
 ``` bash
-bash inst/guedesbocinsky2018.sh
+bash inst/guedesbocinsky2018_BASH.sh
 ```
 
 Output will appear in the `vignettes/` directory.
 
 #### Running the analysis from the Docker container
 
-**This is what you want to run to reproduce our results precisely. We strongly encourage you to run the analysis from *R* if your goal is to explore how we developed the model, or to change parameters.**
+**This is what you want to run to reproduce our results precisely. We strongly encourage you to run the analysis from *R* and RStudio if your goal is to explore how we developed the model, or to change parameters.**
 
 [Docker](https://www.docker.com/) is a virtual computing environment that facilitates reproducible research—it allows for research results to be produced independent of the machine on which they are computed. Docker users describe computing environments in a text format called a “Dockerfile”, which when read by the Docker software builds a virtual machine, or “container”. Other users can then load the container on their own computers. Users can upload container images to [Docker Hub](https://hub.docker.com/), and the image for this research (without the analyses run) is available at <https://hub.docker.com/r/bocinsky/guedesbocinsky2018/>.
 
@@ -253,11 +263,17 @@ If you wish to build the Docker container locally for this project from scratch,
 docker build -t bocinsky/guedesbocinsky2018 .
 ```
 
-The `-t` argument gives the resulting container image a name. You can then run the container as described above.
+The `-t` argument gives the resulting container image a name. You can then run the container as described above, except without the tag.
 
-### A note on run time
+##### Run in Docker using the conveniencec script
 
-This analysis has been designed to take advantage of modern multi-core or multi-CPU computer architectures. By default, it will run on two cores—i.e., sections of the code will run in parallel approximately twice as fast as on a single core. The analysis also consumes quite a bit of memory. On two (relatively high-speed) cores, run-time of the entire analysis is **approximately 12 hours**. This can be sortened dramatically by running with a higher number of cores/processors and amount of memory, if available.
+We have also included a bash script that builds the Docker container, executes the analysis, and moves the results onto your local machine. To use it, open the terminal, make sure you are in the `guedesbocinsky2018/` directory, then run the following:
+
+``` bash
+bash inst/guedesbocinsky2018_DOCKER.sh
+```
+
+The entire analysis will appear in a `docker_out/` directory when the analysis finishes.
 
 ### Output
 
