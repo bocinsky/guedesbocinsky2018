@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Last-changedate](https://img.shields.io/badge/last%20change-2018--05--09-brightgreen.svg)](https://github.com/bocinsky/guedesbocinsky2018/commits/master) [![CircleCI](https://circleci.com/gh/bocinsky/guedesbocinsky2018.svg?style=svg)](https://circleci.com/gh/bocinsky/guedesbocinsky2018) [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.5.0-brightgreen.svg)](https://cran.r-project.org/) [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1239106.svg)](https://doi.org/10.5281/zenodo.1239106)
@@ -116,11 +117,9 @@ This analysis has been designed to take advantage of modern multi-core or multi-
 ``` r
 ## Install the devtools package, if not previously installed
 # install.packages("devtools")
-## Install the development version of devtools
-library(devtools)
-install_github("r-lib/devtools", upgrade_dependencies = FALSE)
-library(devtools)
-install(dependencies = TRUE, upgrade_dependencies = FALSE)
+devtools::install_cran("remotes", upgrade_dependencies = FALSE)
+devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)
+remotes::install(".")
 ```
 
 5.  Go to the `vignettes/` directory.

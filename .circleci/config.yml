@@ -6,15 +6,19 @@ jobs:
         - checkout
     steps:
       - run:
-          name: Install dev version of devtools
+          name: Install remotes
           command: |
             R \
               -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
-              -e 'devtools::install_github("r-lib/devtools")'
+              -e 'devtools::install_cran("remotes")'
       - run:
           name: Install
           command: |
-            R -e 'devtools::install(dependencies = TRUE, upgrade_dependencies = FALSE)'
+            R -e 'devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)'
+      - run:
+          name: Install remote dependencies
+          command: |
+            R -e 'remotes::install(".")'
       - run:
           name: Check and test
           command: |
@@ -33,15 +37,19 @@ jobs:
           name: Install ghostscript
           command: brew install ghostscript
       - run:
-          name: Install dev version of devtools
+          name: Install remotes
           command: |
             R \
               -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
-              -e 'devtools::install_github("r-lib/devtools")'
+              -e 'devtools::install_cran("remotes")'
       - run:
           name: Install
           command: |
-            R -e 'devtools::install(dependencies = TRUE, upgrade_dependencies = FALSE)'
+            R -e 'devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)'
+      - run:
+          name: Install remote dependencies
+          command: |
+            R -e 'remotes::install(".")'
       - run:
           name: Check and test
           command: |
