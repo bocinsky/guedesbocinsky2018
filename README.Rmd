@@ -107,14 +107,14 @@ This analysis uses the tDAR application programming interface (API) to authentic
 ### Running the analysis
 There are three ways to run the analysis:
 
-- **Running from within *R*** --- Do this if your goal is to explore how we developed the model, or to change parameters.
-- **Running from the terminal** --- Do this if your goal is just to reproduce the output on your local machine/environment.
-- **Running from the Docker** --- Do this if your goal is to reproduce our results precisely, using a custom-build and pre-tested environment.
+- **[Running from within *R*]** --- Do this if your goal is to explore how we developed the model, or to change parameters.
+- **[Running from the terminal]** --- Do this if your goal is just to reproduce the output on your local machine/environment.
+- **[Running from a Docker container]** --- Do this if your goal is to reproduce our results precisely, using a custom-build and pre-tested environment.
 
 #### A note on run time
 This analysis has been designed to take advantage of modern multi-core or multi-CPU computer architectures. By default, it will run on two cores—i.e., sections of the code will run in parallel approximately twice as fast as on a single core. The analysis also consumes quite a bit of memory. On two (relatively high-speed) cores, run-time of the entire analysis is **approximately 12 hours**. This can be sortened dramatically by running with a higher number of cores/processors and amount of memory, if available.
 
-#### Running the analysis from within *R*
+#### Running from within *R*
 **This is what most users will want want to run if your goal is to explore how we developed the model, or to change parameters.** Be sure that you have a working version of *R* installed (>= 3.4.4) and the [RStudio development environment](https://www.rstudio.com/products/rstudio/download/).
 
 1. Download the compendium package
@@ -138,7 +138,7 @@ This analysis has been designed to take advantage of modern multi-core or multi-
   ![](./inst/header_new.png)
 8. Press "**Knit**" at the top of the screen to run the analysis.
 
-#### Running the analysis from the terminal
+#### Running from the terminal
 **This is what you want to run to reproduce our results from the terminal. We strongly encourage you to run the analysis from _R_ and RStudio if your goal is to explore how we developed the model, or to change parameters.**
 
 To run this analysis from the terminal, first you must ensure you have downloaded the compendium package and installed all system requirements. We've included a convenient script for running the entire analysis, including installing the compendium package.
@@ -159,7 +159,7 @@ bash inst/guedesbocinsky2018_BASH.sh
 
 Output will appear in the `vignettes/` directory.
 
-#### Running the analysis from the Docker container
+#### Running from a Docker container
 **This is what you want to run to reproduce our results precisely. We strongly encourage you to run the analysis from _R_ and RStudio if your goal is to explore how we developed the model, or to change parameters.**
 
 [Docker](https://www.docker.com/) is a virtual computing environment that facilitates reproducible research---it allows for research results to be produced independent of the machine on which they are computed. Docker users describe computing environments in a text format called a "Dockerfile", which when read by the Docker software builds a virtual machine, or "container". Other users can then load the container on their own computers. Users can upload container images to [Docker Hub](https://hub.docker.com/), and the image for this research (without the analyses run) is available at [https://hub.docker.com/r/bocinsky/guedesbocinsky2018/](https://hub.docker.com/r/bocinsky/guedesbocinsky2018/).

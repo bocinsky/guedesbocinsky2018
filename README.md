@@ -94,15 +94,15 @@ This analysis uses the tDAR application programming interface (API) to authentic
 
 There are three ways to run the analysis:
 
-  - **Running from within *R*** — Do this if your goal is to explore how we developed the model, or to change parameters.
-  - **Running from the terminal** — Do this if your goal is just to reproduce the output on your local machine/environment.
-  - **Running from the Docker** — Do this if your goal is to reproduce our results precisely, using a custom-build and pre-tested environment.
+  - **[Running from within *R*](#running-from-within-r)** — Do this if your goal is to explore how we developed the model, or to change parameters.
+  - **[Running from the terminal](#running-from-the-terminal)** — Do this if your goal is just to reproduce the output on your local machine/environment.
+  - **[Running from a Docker container](#running-from-a-docker-container)** — Do this if your goal is to reproduce our results precisely, using a custom-build and pre-tested environment.
 
 #### A note on run time
 
 This analysis has been designed to take advantage of modern multi-core or multi-CPU computer architectures. By default, it will run on two cores—i.e., sections of the code will run in parallel approximately twice as fast as on a single core. The analysis also consumes quite a bit of memory. On two (relatively high-speed) cores, run-time of the entire analysis is **approximately 12 hours**. This can be sortened dramatically by running with a higher number of cores/processors and amount of memory, if available.
 
-#### Running the analysis from within *R*
+#### Running from within *R*
 
 **This is what most users will want want to run if your goal is to explore how we developed the model, or to change parameters.** Be sure that you have a working version of *R* installed (\>= 3.4.4) and the [RStudio development environment](https://www.rstudio.com/products/rstudio/download/).
 
@@ -128,7 +128,7 @@ install(dependencies = TRUE)
 7.  Set environment variables (in header at the top of the document). You should replace the sections that start with `!r` (through the end of the line) with your Google Maps Elevation API key, tDAR user name, and tDAR password (each in single quotes). It should look something like this before replacement: ![](./inst/header.png) After replacement: ![](./inst/header_new.png)
 8.  Press “**Knit**” at the top of the screen to run the analysis.
 
-#### Running the analysis from the terminal
+#### Running from the terminal
 
 **This is what you want to run to reproduce our results from the terminal. We strongly encourage you to run the analysis from *R* and RStudio if your goal is to explore how we developed the model, or to change parameters.**
 
@@ -150,7 +150,7 @@ bash inst/guedesbocinsky2018_BASH.sh
 
 Output will appear in the `vignettes/` directory.
 
-#### Running the analysis from the Docker container
+#### Running from a Docker container
 
 **This is what you want to run to reproduce our results precisely. We strongly encourage you to run the analysis from *R* and RStudio if your goal is to explore how we developed the model, or to change parameters.**
 
