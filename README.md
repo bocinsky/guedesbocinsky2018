@@ -134,7 +134,7 @@ install(dependencies = TRUE)
 
 To run this analysis from the terminal, first you must ensure you have downloaded the compendium package and installed all system requirements. We’ve included a convenient script for running the entire analysis, including installing the compendium package.
 
-First, set your environment variables in the terminal. On Unix-alike systems (including Linux and macOS), you can set environmental variables like so:
+First, set your environment variables in the terminal. On Unix-alike systems (including Linux and macOS), you can set environmental variables in the terminal like so:
 
 ``` bash
 export google_maps_elevation_api_key=YOUR_API_KEY
@@ -164,7 +164,7 @@ The commands below demonstrate three ways to run the docker container. See this 
 
 ##### Setting your environment variables
 
-Set your environment variables in the terminal. On Unix-alike systems (including Linux and macOS), you can set environmental variables like so:
+Set your environment variables in the terminal. On Unix-alike systems (including Linux and macOS), you can set environmental variables in the terminal like so:
 
 ``` bash
 export google_maps_elevation_api_key=YOUR_API_KEY
@@ -174,7 +174,7 @@ export tdar_pw=YOUR_TDAR_PASSWORD
 
 ##### Run the analysis directly
 
-To run the analyses directly, render the `guedesbocinsky2018.Rmd` RMarkdown vignette at the end of the run command:
+To run the analyses directly, render the `guedesbocinsky2018.Rmd` RMarkdown vignette at the end of the run command like so (in the terminal):
 
 ``` bash
 docker run bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesbocinsky2018/vignettes/guedesbocinsky2018.Rmd', \
@@ -187,7 +187,7 @@ docker run bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesboc
 
 ##### Run the analysis interactively from the terminal
 
-Alternatively, you can run the container in interactive mode and load the script yourself:
+Alternatively, you can run the container in interactive mode and load the script yourself like so (in the terminal):
 
 ``` bash
 docker run -it bocinsky/guedesbocinsky2018:1.0.0 bash
@@ -197,7 +197,7 @@ You can use the `exit` command to stop the container.
 
 ##### Run the analysis from within a Dockerized RStudio IDE
 
-Finally, you can host RStudio Server locally to use the RStudio browser-based IDE. Run:
+Finally, you can host RStudio Server locally to use the RStudio browser-based IDE. Run like so (in the terminal):
 
 ``` bash
 docker run -p 8787:8787 bocinsky/guedesbocinsky2018:1.0.0
@@ -207,7 +207,7 @@ Then, open a browser (we find [Chrome](https://www.google.com/chrome/) works bes
 
 ##### Building the Docker container from scratch
 
-If you wish to build the Docker container locally for this project from scratch, simply `cd` into this `guedesbocinsky2018/` directory and run:
+If you wish to build the Docker container locally for this project from scratch, simply `cd` into this `guedesbocinsky2018/` directory and run like so (in the terminal):
 
 ``` bash
 docker build -t bocinsky/guedesbocinsky2018 .
@@ -219,7 +219,7 @@ The `-t` argument gives the resulting container image a name. You can then run t
 
 We have also included a bash script that builds the Docker container, executes the analysis, and moves the results onto your local machine. To use it, open the terminal, make sure you are in the `guedesbocinsky2018/` directory, then run the following:
 
-First, set your environment variables in the terminal. On Unix-alike systems (including Linux and macOS), you can set environmental variables like so:
+First, set your environment variables in the terminal. On Unix-alike systems (including Linux and macOS), you can set environmental variables in the terminal like so:
 
 ``` bash
 export google_maps_elevation_api_key=YOUR_API_KEY
