@@ -18,7 +18,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-Depends: R (>= 3.4.3)
+Depends: R (>= 3.4.3.0)
 Remotes: 
     tidyverse/ggplot2,
     hadley/purrrlyr,
@@ -46,20 +46,15 @@ Imports:
     ggplot2,
     future,
     httr,
-    geomapdata
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
-Suggests: 
+    geomapdata,
+    fields,
     knitr,
     rmarkdown,
     Bchron,
     R.utils,
     RColorBrewer,
     bibtex,
-    doParallel,
     dplyr,
-    fields,
-    foreach,
     htmlwidgets,
     knitcitations,
     mapproj,
@@ -72,4 +67,9 @@ Suggests:
     sf,
     tdar,
     bookdown
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+Suggests:
+    devtools,
+    furrr

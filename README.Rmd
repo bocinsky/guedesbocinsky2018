@@ -111,7 +111,7 @@ Install the publication version of this compendium with
 # library(devtools)
 # install_github("r-lib/devtools")
 library(devtools)
-install_github("bocinsky/guedesbocinsky2018@1.0.0")
+install_github("bocinsky/guedesbocinsky2018@1.0.0", dependencies = TRUE)
 ```
 
 Install the current development version from github with
@@ -121,7 +121,7 @@ Install the current development version from github with
 # library(devtools)
 # install_github("r-lib/devtools")
 library(devtools)
-install_github("bocinsky/guedesbocinsky2018")
+install_github("bocinsky/guedesbocinsky2018", dependencies = TRUE)
 ```
 
 Or, install the local version if you've downloaded it. We suggest using the [RStudio development environment](https://www.rstudio.com/products/rstudio/download/).
@@ -135,7 +135,7 @@ Or, install the local version if you've downloaded it. We suggest using the [RSt
   # library(devtools)
   # install_github("r-lib/devtools")
   library(devtools)
-  install()
+  install(dependencies = TRUE)
   ```
 
 ### Authentication for the Google Elevation API and tDAR
@@ -182,7 +182,7 @@ This analysis uses the tDAR application programming interface (API) to authentic
   library(devtools)
   install_github("r-lib/devtools")
   library(devtools)
-  install()
+  install(dependencies = TRUE)
   ```
 5. Go to the `vignettes/` directory.
 6. Open `guedesbocinsky2018.Rmd`.

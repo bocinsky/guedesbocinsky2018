@@ -11,7 +11,7 @@ VERSION="1.0.0"
 ## Change 'clean' to TRUE to remove all previous output
 Rscript -e "install.packages('devtools')"
 Rscript -e "devtools::install_github('r-lib/devtools')"
-Rscript -e "devtools::install()"
+Rscript -e "devtools::install(dependencies = TRUE)"
 Rscript -e "rmarkdown::render('./vignettes/guedesbocinsky2018.Rmd', \
                                   params = list(cores = 2, \
                                   clean = FALSE, \

@@ -283,7 +283,7 @@ GDDs <- sort(unique(crop_GDD$t_base))
 GHCN.GDD.incremented.sd <-
   furrr::future_map(GDDs,
                     # purrr::map(GDDs,
-                    future.packages = c("foreach",
+                    future.packages = c(#"foreach",
                                         "magrittr",
                                         "guedesbocinsky2018"),
                     future.globals = c("sample.points",
