@@ -23,7 +23,6 @@ jobs:
     macos:
       xcode: "9.0"
     steps:
-      - checkout
       - run:
           name: Install gdal
           command: brew install gdal
