@@ -24,7 +24,8 @@ Remotes:
     hadley/purrrlyr,
     bocinsky/tdar,
     DavisVaughan/furrr,
-    ropensci/writexl
+    ropensci/writexl,
+    r-lib/devtools
 Imports: 
     FedData,
     Hmisc,
@@ -50,7 +51,6 @@ Imports:
     fields,
     knitr,
     rmarkdown,
-    Bchron,
     R.utils,
     RColorBrewer,
     bibtex,
@@ -65,11 +65,12 @@ Imports:
     purrr,
     rgdal,
     sf,
+    bookdown,
+    Bchron,
     tdar,
-    bookdown
+    devtools,
+    furrr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
-Suggests:
-    devtools,
-    furrr
+    
