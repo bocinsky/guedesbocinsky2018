@@ -82,16 +82,25 @@ git checkout tags/1.0.0
 # install.packages("devtools")
 library(devtools)
 install_github("r-lib/devtools")
+library(devtools)
 ```
 
 Install the publication version of this compendium with
 ```r
+# Install the devtools package, if not previously installed
+# install.packages("devtools")
+# library(devtools)
+# install_github("r-lib/devtools")
 library(devtools)
 install_github("bocinsky/guedesbocinsky2018@1.0.0")
 ```
 
 Install the current development version from github with
 ```r
+# Install the devtools package, if not previously installed
+# install.packages("devtools")
+# library(devtools)
+# install_github("r-lib/devtools")
 library(devtools)
 install_github("bocinsky/guedesbocinsky2018")
 ```
@@ -104,6 +113,8 @@ Or, install the local version if you've downloaded it. We suggest using the [RSt
   ```r
   # Install the devtools package, if not previously installed
   # install.packages("devtools")
+  # library(devtools)
+  # install_github("r-lib/devtools")
   library(devtools)
   install()
   ```
