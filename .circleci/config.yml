@@ -1,20 +1,21 @@
 version: 2
 jobs:
   linux:
-     docker:
-       - image: bocinsky/bocin_base:latest
-           - checkout
-       - run:
+    docker:
+      - image: bocinsky/bocin_base:latest
+        - checkout
+    steps:
+      - run:
           name: Install dev version of devtools
           command: |
             R \
               -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
               -e 'devtools::install_github("r-lib/devtools")'
-       - run:
+      - run:
           name: Install
           command: |
             R -e 'devtools::install(dependencies = TRUE, upgrade_dependencies = FALSE)'
-       - run:
+      - run:
           name: Check and test
           command: |
             R -e 'results <- devtools::check(vignettes = FALSE, args = "--no-vignettes"); stopifnot(length(results$errors) == 0)'
