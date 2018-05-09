@@ -93,50 +93,6 @@ Please refer to the dockerfiles for [rocker/geospatial](https://github.com/rocke
 This software has not been tested on Windows, but should install and work fine if all system requirements are installed.
 
 
-### Installing the compendium package
-**In order to install the research compendium, you currently must use the development version of the `devtools` package for _R_.**
-
-``` r
-# Install the devtools package, if not previously installed
-# install.packages("devtools")
-library(devtools)
-install_github("r-lib/devtools")
-library(devtools)
-```
-
-Install the publication version of this compendium with
-```r
-# Install the devtools package, if not previously installed
-# install.packages("devtools")
-# library(devtools)
-# install_github("r-lib/devtools")
-library(devtools)
-install_github("bocinsky/guedesbocinsky2018@1.0.0", dependencies = TRUE)
-```
-
-Install the current development version from github with
-```r
-# Install the devtools package, if not previously installed
-# install.packages("devtools")
-# library(devtools)
-# install_github("r-lib/devtools")
-library(devtools)
-install_github("bocinsky/guedesbocinsky2018", dependencies = TRUE)
-```
-
-Or, install the local version if you've downloaded it. We suggest using the [RStudio development environment](https://www.rstudio.com/products/rstudio/download/).
-
-1. Open the research compendium directory ("guedesbocinsky2018")
-2. Launch RStudio by double-clicking `guedesbocinsky2018.Rproj`.
-3. Install the package with:
-  ```r
-  # Install the devtools package, if not previously installed
-  # install.packages("devtools")
-  # library(devtools)
-  # install_github("r-lib/devtools")
-  library(devtools)
-  install(dependencies = TRUE)
-  ```
 
 ### Authentication for the Google Elevation API and tDAR
 This analyses requires the user to have the Google Elevation API key and a tDAR user name and password either as environment variables or passed to the `guedesbocinsky2018.Rmd` RMarkdown vignette as parameters.
@@ -164,7 +120,6 @@ Archaeological site location data are sensitive information due to the possibili
 The data are available through tDAR at the following DOI: [10.6067/XCV8MK6G05](https://doi.org/10.6067/XCV8MK6G05). Please go to the site and select "Request Access, Submit Correction, Comment" under the downloads section in the right panel. You will have to [create a tDAR user account](https://core.tdar.org/account/new) and agree to the [tDAR user agreement](https://www.tdar.org/about/policies/terms-of-use/).
 
 This analysis uses the tDAR application programming interface (API) to authenticate a user into tDAR and access and download the archaeological site data.
-
 
 ### Running the analysis
 There are three ways to run the analysis:
@@ -194,8 +149,11 @@ This analysis has been designed to take advantage of modern multi-core or multi-
   ```
 5. Go to the `vignettes/` directory.
 6. Open `guedesbocinsky2018.Rmd`.
-7. Set environment variables (in header).
-8. Press "**Knit**" at the top of the screen to run the analysis.
+7. Set environment variables (in header at the top of the document). You should replace the sections that start with `!r` (through the end of the line) with your Google Maps Elevation API key, tDAR user name, and tDAR password (each in single quotes). It should look something like this before replacement:
+  ![](./inst/header.png)
+  After replacement:
+  ![](./inst/header_new.png)
+8. Press "**Knit**" at the top of the panel to run the analysis.
 
 #### Running the analysis from the terminal
 **This is what you want to run to reproduce our results from the terminal. We strongly encourage you to run the analysis from _R_ and RStudio if your goal is to explore how we developed the model, or to change parameters.**
