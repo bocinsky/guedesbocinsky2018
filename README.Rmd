@@ -128,7 +128,7 @@ This analysis has been designed to take advantage of modern multi-core or multi-
   library(devtools)
   install_github("r-lib/devtools")
   library(devtools)
-  install(dependencies = TRUE)
+  install(dependencies = TRUE, upgrade_dependencies = FALSE)
   ```
 5. Go to the `vignettes/` directory.
 6. Open `guedesbocinsky2018.Rmd`.
