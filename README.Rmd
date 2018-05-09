@@ -126,7 +126,7 @@ This analysis has been designed to take advantage of modern multi-core or multi-
   # install.packages("devtools")
   ## Install the development version of devtools
   library(devtools)
-  install_github("r-lib/devtools")
+  install_github("r-lib/devtools", upgrade_dependencies = FALSE)
   library(devtools)
   install(dependencies = TRUE, upgrade_dependencies = FALSE)
   ```
