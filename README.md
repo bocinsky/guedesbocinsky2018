@@ -121,7 +121,7 @@ This analysis has been designed to take advantage of modern multi-core or multi-
 # install.packages("devtools")
 devtools::install_cran("remotes", upgrade_dependencies = FALSE)
 devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)
-remotes::install(".")
+remotes::install_local(".")
 ```
 
 5.  Go to the `vignettes/` directory.

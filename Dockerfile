@@ -13,7 +13,7 @@ RUN r -e 'devtools::install_cran("remotes")'
 RUN r -e 'devtools::install("/guedesbocinsky2018", dependencies = TRUE, upgrade_dependencies = FALSE)'
 
 # install the remotes
-RUN r -e 'remotes::install("/guedesbocinsky2018")'
+RUN r -e 'remotes::install_local("/guedesbocinsky2018")'
 
 # Check the package
 RUN r -e 'devtools::check("/guedesbocinsky2018", vignettes = FALSE, args = "--no-vignettes")'

@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Install remote dependencies
           command: |
-            R -e 'remotes::install(".")'
+            R -e 'remotes::install_local(".")'
       - run:
           name: Check and test
           command: |
@@ -27,6 +27,9 @@ jobs:
     macos:
       xcode: "9.0"
     steps:
+      - run:
+          name: Install r
+          command: brew cask install r-app
       - run:
           name: Install gdal
           command: brew install gdal
@@ -49,7 +52,7 @@ jobs:
       - run:
           name: Install remote dependencies
           command: |
-            R -e 'remotes::install(".")'
+            R -e 'remotes::install_local(".")'
       - run:
           name: Check and test
           command: |
