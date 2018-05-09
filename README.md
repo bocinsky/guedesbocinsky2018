@@ -58,7 +58,7 @@ git checkout tags/1.0.0
 
 ### Installing the compendium package
 
-\*\* In order to install the research compendium, you currently must use the developmnet version of the `devtools` package for *R*.\*\*
+**In order to install the research compendium, you currently must use the development version of the `devtools` package for *R*.**
 
 ``` r
 # Install the devtools package, if not previously installed
