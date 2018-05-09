@@ -58,11 +58,18 @@ git checkout tags/1.0.0
 
 ### Installing the compendium package
 
-Install the publication version of this compendium with
+\*\* In order to install the research compendium, you currently must use the developmnet version of the `devtools` package for *R*.\*\*
 
 ``` r
 # Install the devtools package, if not previously installed
 # install.packages("devtools")
+library(devtools)
+install_github("r-lib/devtools")
+```
+
+Install the publication version of this compendium with
+
+``` r
 library(devtools)
 install_github("bocinsky/guedesbocinsky2018@1.0.0")
 ```
@@ -70,8 +77,6 @@ install_github("bocinsky/guedesbocinsky2018@1.0.0")
 Install the current development version from github with
 
 ``` r
-# Install the devtools package, if not previously installed
-# install.packages("devtools")
 library(devtools)
 install_github("bocinsky/guedesbocinsky2018")
 ```
