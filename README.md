@@ -56,6 +56,28 @@ cd guedesbocinsky2018
 git checkout tags/1.0.0
 ```
 
+### System requirements
+
+Among the system dependencies for this package are [GDAL](http://www.gdal.org/), [FFMPEG](https://www.ffmpeg.org/), and [Ghostscript](https://www.ghostscript.com/). These packages (and their respective dependencies) must be installed in order to run the analyses. Additionally, Cairo must be among the capabilities of your particular R installation (as it probably is if you installed from a pre-compiled binary download available on CRAN).
+
+#### macOS
+
+We strongly suggest using [Homebrew](https://brew.sh/) to install the system dependencies. Homebrew commands might be:
+
+``` bash
+brew install gdal --with-complete --with-unsupported
+brew install ffmpeg
+brew install ghostscript
+```
+
+#### Linux
+
+Please refer to the dockerfiles for [rocker/geospatial](https://github.com/rocker-org/geospatial/blob/master/Dockerfile) and [bocinsky/bocin\_base](https://github.com/bocinsky/bocin_base/blob/master/Dockerfile).
+
+#### Windows
+
+This software has not been tested on Windows, but should install and work fine if all system requirements are installed.
+
 ### Installing the compendium package
 
 **In order to install the research compendium, you currently must use the development version of the `devtools` package for *R*.**
@@ -65,11 +87,16 @@ git checkout tags/1.0.0
 # install.packages("devtools")
 library(devtools)
 install_github("r-lib/devtools")
+library(devtools)
 ```
 
 Install the publication version of this compendium with
 
 ``` r
+# Install the devtools package, if not previously installed
+# install.packages("devtools")
+# library(devtools)
+# install_github("r-lib/devtools")
 library(devtools)
 install_github("bocinsky/guedesbocinsky2018@1.0.0")
 ```
@@ -77,6 +104,10 @@ install_github("bocinsky/guedesbocinsky2018@1.0.0")
 Install the current development version from github with
 
 ``` r
+# Install the devtools package, if not previously installed
+# install.packages("devtools")
+# library(devtools)
+# install_github("r-lib/devtools")
 library(devtools)
 install_github("bocinsky/guedesbocinsky2018")
 ```
@@ -92,31 +123,11 @@ Or, install the local version if you’ve downloaded it. We suggest using the [R
 ``` r
 # Install the devtools package, if not previously installed
 # install.packages("devtools")
+# library(devtools)
+# install_github("r-lib/devtools")
 library(devtools)
 install()
 ```
-
-#### System requirements
-
-Among the system dependencies for this package are [GDAL](http://www.gdal.org/), [FFMPEG](https://www.ffmpeg.org/), and [Ghostscript](https://www.ghostscript.com/). These packages (and their respective dependencies) must be installed in order to run the analyses. Additionally, Cairo must be among the capabilities of your particular R installation (as it probably is if you installed from a pre-compiled binary download available on CRAN).
-
-##### macOS
-
-We strongly suggest using [Homebrew](https://brew.sh/) to install the system dependencies. Homebrew commands might be:
-
-``` bash
-brew install gdal --with-complete --with-unsupported
-brew install ffmpeg
-brew install ghostscript
-```
-
-##### Linux
-
-Please refer to the dockerfiles for [rocker/geospatial](https://github.com/rocker-org/geospatial/blob/master/Dockerfile) and [bocinsky/bocin\_base](https://github.com/bocinsky/bocin_base/blob/master/Dockerfile).
-
-##### Windows
-
-This software has not been tested on Windows, but should install and work fine if all system requirements are installed.
 
 ### Authentication for the Google Elevation API and tDAR
 
@@ -130,7 +141,7 @@ export tdar_un=YOUR_TDAR_USER_NAME
 export tdar_pw=YOUR_TDAR_PASSWORD
 ```
 
-Or, pass them as parameters when compiling the `guedesbocinsky2018.Rmd` RMarkdown vignette:
+Or, pass them as parameters when compiling the `guedesbocinsky2018.Rmd` RMarkdown vignette (see [Running the analysis](#running-the-analysis), below):
 
 ``` bash
 Rscript -e "rmarkdown::render('./vignettes/guedesbocinsky2018.Rmd', \
@@ -147,23 +158,61 @@ The data are available through tDAR at the following DOI: [10.6067/XCV8MK6G05](h
 
 This analysis uses the tDAR application programming interface (API) to authenticate a user into tDAR and access and download the archaeological site data.
 
-### Running the analysis from the terminal
+### Running the analysis
 
-To run this analysis from the terminal, first you must ensure you have downloaded the compendium package.
+#### Running the analysis from within *R*
 
-### Running the analysis from within *R*
+**This is what most users will want want to run if your goal is to explore how we developed the model, or to change parameters.** Be sure that you have a working version of *R* installed (\>= 3.4.4) and the [RStudio development environment](https://www.rstudio.com/products/rstudio/download/).
 
-### Running the analysis from the Docker container
+1.  Download the compendium package
+2.  Un-zip the archive and navigate into the `guedesbocinsky2018-1.0.0` directory.
+3.  Launch the guedesbocinsky2018.Rproj file (should open up RStudio).
+4.  Install the package with:
+
+<!-- end list -->
+
+``` r
+## Install the devtools package, if not previously installed
+# install.packages("devtools")
+## Install the development version of devtools
+library(devtools)
+install_github("r-lib/devtools")
+library(devtools)
+install()
+```
+
+5.  Go to the `vignettes/` directory.
+6.  Open `guedesbocinsky2018.Rmd`.
+7.  Set environment variables (in header).
+8.  Press “**Knit**” at the top of the screen to run the analysis.
+
+#### Running the analysis from the terminal
+
+**This is what you want to run to reproduce our results from the terminal. We strongly encourage you to run the analysis from *R* if your goal is to explore how we developed the model, or to change parameters.**
+
+To run this analysis from the terminal, first you must ensure you have downloaded the compendium package and installed all system requirements. We’ve included a convenient script for running the entire analysis, including installing the compendium package.
+
+From within the `guedesbocinsky2018` directory:
+
+``` bash
+bash inst/guedesbocinsky2018.sh
+```
+
+Output will appear in the `vignettes/` directory.
+
+#### Running the analysis from the Docker container
+
+**This is what you want to run to reproduce our results precisely. We strongly encourage you to run the analysis from *R* if your goal is to explore how we developed the model, or to change parameters.**
 
 [Docker](https://www.docker.com/) is a virtual computing environment that facilitates reproducible research—it allows for research results to be produced independent of the machine on which they are computed. Docker users describe computing environments in a text format called a “Dockerfile”, which when read by the Docker software builds a virtual machine, or “container”. Other users can then load the container on their own computers. Users can upload container images to [Docker Hub](https://hub.docker.com/), and the image for this research (without the analyses run) is available at <https://hub.docker.com/r/bocinsky/guedesbocinsky2018/>.
 
 We have included a Dockerfile which builds a Docker container for running the analyses described in the paper. It uses [`rocker/geospatial:3.4.4`](https://hub.docker.com/r/rocker/geospatial/), which provides R, [RStudio Server](https://www.rstudio.com/products/rstudio/download-server/), the [tidyverse](http://tidyverse.org/) of R packages as its base image and adds several geospatial software packages ([GDAL](http://www.gdal.org/), [GEOS](https://trac.osgeo.org/geos/), and [proj.4](http://proj4.org/). The Dockerimage (1) adds ffmpeg, (2) updates the R packages, and (3) installs the R software packages required by this package.
 
-#### Downloading and running the Docker container image
+##### Downloading and running the Docker container image
 
 The commands below demonstrate three ways to run the docker container. See this [Docker cheat sheet](https://github.com/wsargent/docker-cheat-sheet) for other arguments. Using the “:1.0.0” tag will ensure you are running the version of the code that generates the d’Alpoim Guedes and Bocinsky (2018) results—the first time you run the Docker image, it will download it from the Docker Hub.
 
-##### Run the analysis directly
+###### Run the analysis directly
 
 To run the analyses directly, render the `guedesbocinsky2018.Rmd` RMarkdown vignette at the end of the run command:
 
@@ -176,7 +225,7 @@ docker run bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesboc
                                                                               tdar_pw = '$tdar_pw'))"
 ```
 
-##### Run the analysis interactively from the terminal
+###### Run the analysis interactively from the terminal
 
 Alternatively, you can run the container in interactive mode and load the script yourself:
 
@@ -186,7 +235,7 @@ docker run -it bocinsky/guedesbocinsky2018:1.0.0 bash
 
 You can use the `exit` command to stop the container.
 
-##### Run the analysis from within a Dockerized RStudio IDE
+###### Run the analysis from within a Dockerized RStudio IDE
 
 Finally, you can host RStudio Server locally to use the RStudio browser-based IDE. Run:
 
@@ -196,7 +245,7 @@ docker run -p 8787:8787 bocinsky/guedesbocinsky2018:1.0.0
 
 Then, open a browser (we find [Chrome](https://www.google.com/chrome/) works best) and navigate to “localhost:8787” or or run `docker-machine ip default` in the shell to find the correct IP address, and log in with **rstudio**/**rstudio** as the user name and password. In the explorer (lower right pane in RStudio), navigate to the `guedesbocinsky2018` directory, and click the `guedesbocinsky2018.Rproj` to open the project.
 
-#### Building the Docker container from scratch
+##### Building the Docker container from scratch
 
 If you wish to build the Docker container locally for this project from scratch, simply `cd` into this `guedesbocinsky2018/` directory and run:
 

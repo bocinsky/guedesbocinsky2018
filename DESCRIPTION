@@ -45,7 +45,8 @@ Imports:
     sp,
     ggplot2,
     future,
-    httr
+    httr,
+    geomapdata
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 Suggests: 
@@ -55,13 +56,10 @@ Suggests:
     R.utils,
     RColorBrewer,
     bibtex,
-    bookdown,
-    devtools,
     doParallel,
     dplyr,
     fields,
     foreach,
-    geomapdata,
     htmlwidgets,
     knitcitations,
     mapproj,
@@ -72,5 +70,6 @@ Suggests:
     purrr,
     rgdal,
     sf,
-    tdar
+    tdar,
+    bookdown
 VignetteBuilder: knitr
