@@ -82,23 +82,6 @@ This software has not been tested on Windows, but should install and work fine i
 
 This analyses requires the user to have the Google Elevation API key and a tDAR user name and password either as environment variables or passed to the `guedesbocinsky2018.Rmd` RMarkdown vignette as parameters.
 
-On Unix-alike systems (including Linux and macOS), you can set environmental variables like so:
-
-``` bash
-export google_maps_elevation_api_key=YOUR_API_KEY
-export tdar_un=YOUR_TDAR_USER_NAME
-export tdar_pw=YOUR_TDAR_PASSWORD
-```
-
-Or, pass them as parameters when compiling the `guedesbocinsky2018.Rmd` RMarkdown vignette (see [Running the analysis](#running-the-analysis), below):
-
-``` bash
-Rscript -e "rmarkdown::render('./vignettes/guedesbocinsky2018.Rmd', \
-                              params = list(google_maps_elevation_api_key = 'YOUR_API_KEY', \
-                              tdar_un = 'YOUR_TDAR_USER_NAME',\
-                              tdar_pw = 'YOUR_TDAR_PASSWORD'))"
-```
-
 #### Archaeological site data from tDAR
 
 Archaeological site location data are sensitive information due to the possibility of looting, and archaeological ethics require that we restrict access to those data. Accordingly, an essential component of this analysis is **not** shipped in this open GitHub repository or archived with Zenodo. We have instead archived the site location data necessary to run this analysis with the [Digital Archaeological Record (tDAR)](https://www.tdar.org/) under restricted access. Users who want to run this analysis need to request access through tDAR, which we will provide to any researcher with a reasonable affiliation (academic or otherwise). The main purpose is to track to whom we provide access.
@@ -143,7 +126,7 @@ install(dependencies = TRUE)
 5.  Go to the `vignettes/` directory.
 6.  Open `guedesbocinsky2018.Rmd`.
 7.  Set environment variables (in header at the top of the document). You should replace the sections that start with `!r` (through the end of the line) with your Google Maps Elevation API key, tDAR user name, and tDAR password (each in single quotes). It should look something like this before replacement: ![](./inst/header.png) After replacement: ![](./inst/header_new.png)
-8.  Press “**Knit**” at the top of the panel to run the analysis.
+8.  Press “**Knit**” at the top of the screen to run the analysis.
 
 #### Running the analysis from the terminal
 
@@ -151,7 +134,15 @@ install(dependencies = TRUE)
 
 To run this analysis from the terminal, first you must ensure you have downloaded the compendium package and installed all system requirements. We’ve included a convenient script for running the entire analysis, including installing the compendium package.
 
-From within the `guedesbocinsky2018` directory:
+First, set your environment variables in the terminal. On Unix-alike systems (including Linux and macOS), you can set environmental variables like so:
+
+``` bash
+export google_maps_elevation_api_key=YOUR_API_KEY
+export tdar_un=YOUR_TDAR_USER_NAME
+export tdar_pw=YOUR_TDAR_PASSWORD
+```
+
+Then, from within the `guedesbocinsky2018` directory in the terminal:
 
 ``` bash
 bash inst/guedesbocinsky2018_BASH.sh
@@ -171,7 +162,17 @@ We have included a Dockerfile which builds a Docker container for running the an
 
 The commands below demonstrate three ways to run the docker container. See this [Docker cheat sheet](https://github.com/wsargent/docker-cheat-sheet) for other arguments. Using the “:1.0.0” tag will ensure you are running the version of the code that generates the d’Alpoim Guedes and Bocinsky (2018) results—the first time you run the Docker image, it will download it from the Docker Hub.
 
-###### Run the analysis directly
+##### Setting your environment variables
+
+Set your environment variables in the terminal. On Unix-alike systems (including Linux and macOS), you can set environmental variables like so:
+
+``` bash
+export google_maps_elevation_api_key=YOUR_API_KEY
+export tdar_un=YOUR_TDAR_USER_NAME
+export tdar_pw=YOUR_TDAR_PASSWORD
+```
+
+##### Run the analysis directly
 
 To run the analyses directly, render the `guedesbocinsky2018.Rmd` RMarkdown vignette at the end of the run command:
 
@@ -184,7 +185,7 @@ docker run bocinsky/guedesbocinsky2018:1.0.0 r -e "rmarkdown::render('/guedesboc
                                                                               tdar_pw = '$tdar_pw'))"
 ```
 
-###### Run the analysis interactively from the terminal
+##### Run the analysis interactively from the terminal
 
 Alternatively, you can run the container in interactive mode and load the script yourself:
 
@@ -194,7 +195,7 @@ docker run -it bocinsky/guedesbocinsky2018:1.0.0 bash
 
 You can use the `exit` command to stop the container.
 
-###### Run the analysis from within a Dockerized RStudio IDE
+##### Run the analysis from within a Dockerized RStudio IDE
 
 Finally, you can host RStudio Server locally to use the RStudio browser-based IDE. Run:
 
@@ -214,9 +215,19 @@ docker build -t bocinsky/guedesbocinsky2018 .
 
 The `-t` argument gives the resulting container image a name. You can then run the container as described above, except without the tag.
 
-##### Run in Docker using the conveniencec script
+##### Run in Docker using the convenience script
 
 We have also included a bash script that builds the Docker container, executes the analysis, and moves the results onto your local machine. To use it, open the terminal, make sure you are in the `guedesbocinsky2018/` directory, then run the following:
+
+First, set your environment variables in the terminal. On Unix-alike systems (including Linux and macOS), you can set environmental variables like so:
+
+``` bash
+export google_maps_elevation_api_key=YOUR_API_KEY
+export tdar_un=YOUR_TDAR_USER_NAME
+export tdar_pw=YOUR_TDAR_PASSWORD
+```
+
+Then, change into the `guedesbocinsky2018/` directory, and run the convenience script:
 
 ``` bash
 bash inst/guedesbocinsky2018_DOCKER.sh
