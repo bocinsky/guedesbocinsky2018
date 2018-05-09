@@ -80,7 +80,7 @@ This software has not been tested on Windows, but should install and work fine i
 
 ### Authentication for the Google Elevation API and tDAR
 
-This analyses requires the user to have the Google Elevation API key and a tDAR user name and password either as environment variables or passed to the `guedesbocinsky2018.Rmd` RMarkdown vignette as parameters.
+This analyses requires the user to have the Google Elevation API key and a tDAR user name and password either as environment variables or passed to the `guedesbocinsky2018.Rmd` RMarkdown vignette as parameters. Please see the [Running the analysis](#running-the-analysis) sections below for guidance on setting these parameters.
 
 #### Archaeological site data from tDAR
 

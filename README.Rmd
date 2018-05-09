@@ -95,7 +95,7 @@ This software has not been tested on Windows, but should install and work fine i
 
 
 ### Authentication for the Google Elevation API and tDAR
-This analyses requires the user to have the Google Elevation API key and a tDAR user name and password either as environment variables or passed to the `guedesbocinsky2018.Rmd` RMarkdown vignette as parameters.
+This analyses requires the user to have the Google Elevation API key and a tDAR user name and password either as environment variables or passed to the `guedesbocinsky2018.Rmd` RMarkdown vignette as parameters. Please see the [Running the analysis] sections below for guidance on setting these parameters.
 
 #### Archaeological site data from tDAR
 Archaeological site location data are sensitive information due to the possibility of looting, and archaeological ethics require that we restrict access to those data. Accordingly, an essential component of this analysis is **not** shipped in this open GitHub repository or archived with Zenodo. We have instead archived the site location data necessary to run this analysis with the [Digital Archaeological Record (tDAR)](https://www.tdar.org/) under restricted access. Users who want to run this analysis need to request access through tDAR, which we will provide to any researcher with a reasonable affiliation (academic or otherwise). The main purpose is to track to whom we provide access.
