@@ -86,6 +86,8 @@ install_github("bocinsky/guedesbocinsky2018@1.0.0")
 
 Install the current development version from github with
 ```r
+# Install the devtools package, if not previously installed
+# install.packages("devtools")
 library(devtools)
 install_github("bocinsky/guedesbocinsky2018")
 ```
@@ -96,6 +98,8 @@ Or, install the local version if you've downloaded it. We suggest using the [RSt
 2. Launch RStudio by double-clicking `guedesbocinsky2018.Rproj`.
 3. Install the package with:
   ```r
+  # Install the devtools package, if not previously installed
+  # install.packages("devtools")
   library(devtools)
   install()
   ```

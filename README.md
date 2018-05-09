@@ -70,6 +70,8 @@ install_github("bocinsky/guedesbocinsky2018@1.0.0")
 Install the current development version from github with
 
 ``` r
+# Install the devtools package, if not previously installed
+# install.packages("devtools")
 library(devtools)
 install_github("bocinsky/guedesbocinsky2018")
 ```
@@ -83,6 +85,8 @@ Or, install the local version if you’ve downloaded it. We suggest using the [R
 <!-- end list -->
 
 ``` r
+# Install the devtools package, if not previously installed
+# install.packages("devtools")
 library(devtools)
 install()
 ```
