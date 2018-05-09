@@ -59,7 +59,7 @@ git checkout tags/1.0.0
 
 ### System requirements
 
-Among the system dependencies for this package are [GDAL](http://www.gdal.org/), [FFMPEG](https://www.ffmpeg.org/), and [Ghostscript](https://www.ghostscript.com/). These packages (and their respective dependencies) must be installed in order to run the analyses. Additionally, Cairo must be among the capabilities of your particular R installation (as it probably is if you installed from a pre-compiled binary download available on CRAN).
+Among the system dependencies for this package are [GDAL](http://www.gdal.org/), [FFMPEG](https://www.ffmpeg.org/), and [Ghostscript](https://www.ghostscript.com/). These packages (and their respective dependencies) must be installed in order to run the analyses. Additionally, Cairo must be among the capabilities of your particular R installation (as it probably is if you installed from a pre-compiled binary download available on CRAN), and a recent versions of Pandoc is required for building the README.md file.
 
 #### macOS
 
@@ -69,6 +69,8 @@ We strongly suggest using [Homebrew](https://brew.sh/) to install the system dep
 brew install gdal --with-complete --with-unsupported
 brew install ffmpeg
 brew install ghostscript
+brew install pandoc
+brew install pandoc-citeproc
 ```
 
 #### Linux
