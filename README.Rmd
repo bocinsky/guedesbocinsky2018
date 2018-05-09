@@ -2,6 +2,9 @@
 output:
   md_document:
     variant: gfm
+    pandoc_args: [ 
+      "--wrap", "none" 
+    ]
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -25,11 +28,11 @@ library(magrittr)
 
 **When using the code included in this research compendium, please cite *all* of the following:**
 
-d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Climate change stimulated agricultural innovation and exchange across Asia. In review.
+> d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Climate change stimulated agricultural innovation and exchange across Asia. In review.
 
-d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Research compendium for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. https://doi.org/10.5281/zenodo.1239106
+> d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Research compendium for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. https://doi.org/10.5281/zenodo.1239106
 
-d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Data output for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. http://doi.org/10.5281/zenodo.788601
+> d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Data output for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. http://doi.org/10.5281/zenodo.788601
 
 ### Compendium DOI: 
  
@@ -49,10 +52,34 @@ This compendium is an R package, meaning that by installing it you are also inst
 
 The analyses presented in Guedes and Bocinsky (2018) are performed in an RMarkdown vignette (`guedesbocinsky2018.Rmd`) located in the `vignettes` directory.
 
+### Downloading the compendium package
+This compendium package may be downloaded as Data file S3 from d'Alpoim Guedes and Bocinsky (2018), directly from Github as an archive, or cloned with `git`.
+
+#### Downloading directly from Github
+You can download the compendium package using the following link:
+
+[https://github.com/bocinsky/guedesbocinsky2018/archive/1.0.0.zip](https://github.com/bocinsky/guedesbocinsky2018/archive/1.0.0.zip)
+
+#### Cloning via `git`
+To download this research compendium as you see it on GitHub, for offline browsing, [install git on your computer](https://git-scm.com/) and use this line at a Bash prompt ("Terminal" on macOS and Unix-alikes, "Command Prompt" on Windows):
+
+```bash
+# Clone into the repository
+git clone https://github.com/bocinsky/guedesbocinsky2018.git
+
+# Change directories into the local repository
+cd guedesbocinsky2018
+
+# Checkout the publication tag
+git checkout tags/1.0.0
+```
+
 ### Installing the compendium package
 
 Install the publication version of this compendium with
 ```r
+# Install the devtools package, if not previously installed
+# install.packages("devtools")
 library(devtools)
 install_github("bocinsky/guedesbocinsky2018@1.0.0")
 ```
@@ -63,13 +90,23 @@ library(devtools)
 install_github("bocinsky/guedesbocinsky2018")
 ```
 
+Or, install the local version if you've downloaded it. We suggest using the [RStudio development environment](https://www.rstudio.com/products/rstudio/download/).
+
+1. Open the research compendium directory ("guedesbocinsky2018")
+2. Launch RStudio by double-clicking `guedesbocinsky2018.Rproj`.
+3. Install the package with:
+  ```r
+  library(devtools)
+  install()
+  ```
+
 #### System requirements
 Among the system dependencies for this package are [GDAL](http://www.gdal.org/), [FFMPEG](https://www.ffmpeg.org/), and [Ghostscript](https://www.ghostscript.com/). These packages (and their respective dependencies) must be installed in order to run the analyses. Additionally, Cairo must be among the capabilities of your particular R installation (as it probably is if you installed from a pre-compiled binary download available on CRAN).
 
 ##### macOS
 We strongly suggest using [Homebrew](https://brew.sh/) to install the system dependencies. Homebrew commands might be:
 
-```
+```bash
 brew install gdal --with-complete --with-unsupported
 brew install ffmpeg
 brew install ghostscript
@@ -108,10 +145,17 @@ The data are available through tDAR at the following DOI: [10.6067/XCV8MK6G05](h
 
 This analysis uses the tDAR application programming interface (API) to authenticate a user into tDAR and access and download the archaeological site data.
 
-### The Docker container
+
+### Running the analysis from the terminal
+To run this analysis from the terminal, first you must ensure you have downloaded the compendium package. 
+
+### Running the analysis from within *R*
+
+
+### Running the analysis from the Docker container
 [Docker](https://www.docker.com/) is a virtual computing environment that facilitates reproducible research---it allows for research results to be produced independent of the machine on which they are computed. Docker users describe computing environments in a text format called a "Dockerfile", which when read by the Docker software builds a virtual machine, or "container". Other users can then load the container on their own computers. Users can upload container images to [Docker Hub](https://hub.docker.com/), and the image for this research (without the analyses run) is available at [https://hub.docker.com/r/bocinsky/guedesbocinsky2018/](https://hub.docker.com/r/bocinsky/guedesbocinsky2018/).
 
-We have included a Dockerfile which builds a Docker container for running the analyses described in the paper. It uses [`rocker/geospatial:3.4.3`](https://hub.docker.com/r/rocker/geospatial/), which provides R, [RStudio Server](https://www.rstudio.com/products/rstudio/download-server/), the [tidyverse](http://tidyverse.org/) of R packages as its base image and adds several geospatial software packages ([GDAL](http://www.gdal.org/), [GEOS](https://trac.osgeo.org/geos/), and [proj.4](http://proj4.org/). The Dockerimage (1) adds ffmpeg, (2) updates the R packages, and (3) installs the R software packages required by the script.
+We have included a Dockerfile which builds a Docker container for running the analyses described in the paper. It uses [`rocker/geospatial:3.4.4`](https://hub.docker.com/r/rocker/geospatial/), which provides R, [RStudio Server](https://www.rstudio.com/products/rstudio/download-server/), the [tidyverse](http://tidyverse.org/) of R packages as its base image and adds several geospatial software packages ([GDAL](http://www.gdal.org/), [GEOS](https://trac.osgeo.org/geos/), and [proj.4](http://proj4.org/). The Dockerimage (1) adds ffmpeg, (2) updates the R packages, and (3) installs the R software packages required by this package.
 
 #### Downloading and running the Docker container image
 The commands below demonstrate three ways to run the docker container. See this [Docker cheat sheet](https://github.com/wsargent/docker-cheat-sheet) for other arguments. Using the ":1.0.0" tag will ensure you are running the version of the code that generates the d'Alpoim Guedes and Bocinsky (2018) results---the first time you run the Docker image, it will download it from the Docker Hub.
