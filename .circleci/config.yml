@@ -3,8 +3,8 @@ jobs:
   linux:
     docker:
       - image: bocinsky/bocin_base:latest
-      - checkout
     steps:
+      - checkout
       - run:
         name: Install remotes
         command: |
