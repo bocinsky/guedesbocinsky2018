@@ -99,13 +99,6 @@ gdd.recons <-
                              rev() %>%
                              colorRampPalette(.))(length(breaks) - 1)
                    
-                   # pal <- c(rev(colorRampPalette(RColorBrewer::brewer.pal(9, "Blues")[2:9],
-                   #                               bias = 2,
-                   #                               space = "Lab")(76)),
-                   #          colorRampPalette(RColorBrewer::brewer.pal(9, "Reds")[2:9],
-                   #                           bias = 1.5,
-                   #                           space = "Lab")(26))
-                   
                    if(!file.exists(paste0("./figures/cultivar_niches/",cultivar,".pdf")))
                      guedesbocinsky2018:::space_time_plot(
                        the_brick = rasts$Z,
