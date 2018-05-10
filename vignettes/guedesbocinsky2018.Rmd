@@ -468,9 +468,13 @@ if(params$clean){
 dir.create("./data/derived_data/recons/", recursive = TRUE, showWarnings = F)
 
 # Create the plan for (possibly parallel) execution
-future::plan(multisession, 
-             workers = floor(min(future::availableCores(), 
-                                 params$cores)/2),
+future::plan(future::multisession, 
+             workers = max(
+               floor(
+                 min(
+                   future::availableCores(), 
+                   params$cores)/2), 
+               1),
              gc = TRUE)
 
 junk <- furrr::future_map(crop_GDD$cultivar,    
@@ -589,9 +593,13 @@ message("Combining like crop niches complete: ", capture.output(Sys.time() - tim
 ```{r modern-niches}
 
 # Create the plan for (possibly parallel) execution
-future::plan(multisession, 
-             workers = floor(min(future::availableCores(), 
-                                 params$cores)/2),
+future::plan(future::multisession, 
+             workers = max(
+               floor(
+                 min(
+                   future::availableCores(), 
+                   params$cores)/2), 
+               1),
              gc = TRUE)
 
 if(!file.exists("./data/derived_data/recons/modern_niches.Rds")){
