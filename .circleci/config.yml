@@ -3,26 +3,26 @@ jobs:
   linux:
     docker:
       - image: bocinsky/bocin_base:latest
-        - checkout
+      - checkout
     steps:
       - run:
-          name: Install remotes
-          command: |
-            R \
-              -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
-              -e 'devtools::install_cran("remotes")'
+        name: Install remotes
+        command: |
+          R \
+            -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
+            -e 'devtools::install_cran("remotes")'
       - run:
-          name: Install
-          command: |
-            R -e 'devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)'
+        name: Install
+        command: |
+          R -e 'devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)'
       - run:
-          name: Install remote dependencies
-          command: |
-            R -e 'remotes::install_local(".")'
+        name: Install remote dependencies
+        command: |
+          R -e 'remotes::install_local(".")'
       - run:
-          name: Check and test
-          command: |
-            R -e 'results <- devtools::check(vignettes = FALSE, args = "--no-vignettes"); stopifnot(length(results$errors) == 0)'
+        name: Check and test
+        command: |
+          R -e 'results <- devtools::check(vignettes = FALSE, args = "--no-vignettes"); stopifnot(length(results$errors) == 0)'
 workflows:
   version: 2
   build_and_test:
