@@ -32,13 +32,25 @@ jobs:
           command: brew cask install r-app
       - run:
           name: Install gdal
-          command: brew install gdal
+          command: brew install gdal --with-complete --with-unsupported
       - run:
           name: Install ffmpeg
           command: brew install ffmpeg
       - run:
           name: Install ghostscript
           command: brew install ghostscript
+      - run:
+          name: Install protobuf
+          command: brew install protobuf
+      - run:
+          name: Install v8@3.15
+          command: brew install v8@3.15
+      - run:
+          name: Install pandoc
+          command: brew install pandoc
+      - run:
+          name: Install pandoc-citeproc
+          command: brew install pandoc-citeproc
       - run:
           name: Install remotes
           command: |
