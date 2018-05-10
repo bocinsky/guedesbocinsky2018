@@ -23,7 +23,6 @@ jobs:
           name: Check and test
           command: |
             R -e 'results <- devtools::check(vignettes = FALSE, args = "--no-vignettes"); stopifnot(length(results$errors) == 0)'
-
 workflows:
   version: 2
   build_and_test:
