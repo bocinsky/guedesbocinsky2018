@@ -52,6 +52,7 @@ knitr::opts_chunk$set(echo = TRUE,
 library(guedesbocinsky2018)
 library(sf)
 library(magrittr)
+library(fields)
 
 # Set the behavior for printing scientific notation
 # options(digits = 3, scipen = -2)
