@@ -410,10 +410,6 @@ smooth.preds <- function(y){
 }
 
 if(nrow(crop_GDD_run) > 0){
-  # create the cluster for parallel computation
-  # cl <- makeCluster(min(params$cores,nrow(crop_GDD_run)), type = "PSOCK")
-  # registerDoParallel(cl)
-  
   options(dplyr.show_progress = FALSE)
   chunk_size <- 10000
   
@@ -423,8 +419,6 @@ if(nrow(crop_GDD_run) > 0){
                         packages = c("fields",
                                      "dplyr",
                                      "magrittr",
-                                     # "foreach",
-                                     # "doParallel",
                                      "readr",
                                      "guedesbocinsky2018")),
                       .f = function(crop){
@@ -485,8 +479,6 @@ junk <- furrr::future_map(crop_GDD$cultivar,
                                          "dplyr",
                                          "magrittr",
                                          "sp",
-                                         # "foreach",
-                                         # "doParallel",
                                          "readr",
                                          "guedesbocinsky2018")),
                           function(crop){
@@ -678,7 +670,6 @@ modern_vegetation_type_niche_percent <-
     out <- niche_vx$extract(vegetation_atlas_data %>%
                               dplyr::filter(crop == crop_name) %>%
                               sf::st_cast(),
-                            # fun = function(x){quantile(x, probs = p, na.rm = T)},
                             small = TRUE) %>%
       purrr::map(as.integer)
     
