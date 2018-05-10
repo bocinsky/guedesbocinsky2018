@@ -23,43 +23,43 @@ jobs:
           name: Check and test
           command: |
               R -e 'results <- devtools::check(vignettes = FALSE, args = "--no-vignettes"); stopifnot(length(results$errors) == 0)'
-  # mac:
-  #   macos:
-  #     xcode: "9.0"
-  #   steps:
-  #     - run:
-  #         name: Install r
-  #         command: brew cask install r-app
-  #     - run:
-  #         name: Install gdal
-  #         command: brew install gdal
-  #     - run:
-  #         name: Install ffmpeg
-  #         command: brew install ffmpeg
-  #     - run:
-  #         name: Install ghostscript
-  #         command: brew install ghostscript
-  #     - run:
-  #         name: Install remotes
-  #         command: |
-  #           R \
-  #             -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
-  #             -e 'devtools::install_cran("remotes")'
-  #     - run:
-  #         name: Install
-  #         command: |
-  #           R -e 'devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)'
-  #     - run:
-  #         name: Install remote dependencies
-  #         command: |
-  #           R -e 'remotes::install_local(".")'
-  #     - run:
-  #         name: Check and test
-  #         command: |
-  #           R -e 'results <- devtools::check(vignettes = FALSE, args = "--no-vignettes"); stopifnot(length(results$errors) == 0)'
+  mac:
+    macos:
+      xcode: "9.0"
+    steps:
+      - run:
+          name: Install r
+          command: brew cask install r-app
+      - run:
+          name: Install gdal
+          command: brew install gdal
+      - run:
+          name: Install ffmpeg
+          command: brew install ffmpeg
+      - run:
+          name: Install ghostscript
+          command: brew install ghostscript
+      - run:
+          name: Install remotes
+          command: |
+            R \
+              -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
+              -e 'devtools::install_cran("remotes")'
+      - run:
+          name: Install
+          command: |
+            R -e 'devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)'
+      - run:
+          name: Install remote dependencies
+          command: |
+            R -e 'remotes::install_local(".")'
+      - run:
+          name: Check and test
+          command: |
+            R -e 'results <- devtools::check(vignettes = FALSE, args = "--no-vignettes"); stopifnot(length(results$errors) == 0)'
 workflows:
   version: 2
   build_and_test:
     jobs:
       - linux
-#      - mac
+      - mac
