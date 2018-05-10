@@ -690,10 +690,6 @@ modern_vegetation_type_niche_percent <-
   dplyr::select(crop,
                 dplyr::everything())
 
-# modern_vegetation_type_niche_percent %>%
-#   sf::st_set_geometry(NULL) %>%
-#   readr::write_csv("./data/derived_data/modern_vegetation_type_niche_percent.csv")
-
 vegetation_atlas_data_crops <- 
   vegetation_atlas_data %>%
   dplyr::select(crop) %>%
@@ -715,7 +711,6 @@ modern_crop_niche_percent <-
     out <- niche_vx$extract(vegetation_atlas_data_crops %>%
                               dplyr::filter(crop == crop_name) %>%
                               sf::st_cast(),
-                            # fun = function(x){quantile(x, probs = p, na.rm = T)},
                             small = TRUE) %>%
       purrr::map(as.integer)
     
@@ -730,15 +725,10 @@ modern_crop_niche_percent <-
                          dplyr::bind_rows())
   }) %>%
   do.call(rbind, .) %>%
-  # sf::st_cast() %>%
   dplyr::arrange(crop,
                  -count) %>%
   dplyr::select(crop,
                 dplyr::everything())
-
-# modern_crop_niche_percent %>%
-#   sf::st_set_geometry(NULL) %>%
-#   readr::write_csv("./data/derived_data/modern_crop_niche_percent.csv")
 
 vegetation_atlas_data_crops_simple <- 
   vegetation_atlas_data_crops %>%
@@ -773,7 +763,6 @@ print(vegetation_atlas_data_crops_simple %>%
         ggplot2::facet_wrap( ~ Crop, ncol = 2))
 dev.off()
 
-
 # Distributions
 modern_crop_niche_data <- 
   vegetation_atlas_data_crops$crop %>%
@@ -789,7 +778,6 @@ modern_crop_niche_data <-
     niche_vx$extract(vegetation_atlas_data_crops %>%
                        dplyr::filter(crop == crop_name) %>%
                        sf::st_cast(),
-                     # fun = function(x){quantile(x, probs = p, na.rm = T)},
                      small = TRUE) %>%
       purrr::map(as.integer) %>%
       unlist() %>%
@@ -812,11 +800,9 @@ print(modern_crop_niche_data %>%
                                      ..density..,
                                      color = Crop,
                                      fill = Crop)) +
-        # ggplot2::geom_histogram(breaks = seq(0,100,2)) +
         ggplot2::geom_density(n = 1000,
                               bw = 2,
                               alpha = 0.1) +
-        # ggplot2::xlim(0, 100) +
         ggplot2::scale_x_continuous(limits = c(0, 100),
                                     expand = c(0, 0)) +
         ggplot2::scale_y_continuous(expand = c(0, 0, 0, 0.001)) +
@@ -874,13 +860,6 @@ gdd.recons <-
                    pal <- (RColorBrewer::brewer.pal(10, "Spectral") %>%
                              rev() %>%
                              colorRampPalette(.))(length(breaks) - 1)
-                   
-                   # pal <- c(rev(colorRampPalette(RColorBrewer::brewer.pal(9, "Blues")[2:9],
-                   #                               bias = 2,
-                   #                               space = "Lab")(76)),
-                   #          colorRampPalette(RColorBrewer::brewer.pal(9, "Reds")[2:9],
-                   #                           bias = 1.5,
-                   #                           space = "Lab")(26))
                    
                    if(!file.exists(paste0("./figures/cultivar_niches/",cultivar,".pdf")))
                      guedesbocinsky2018:::space_time_plot(
@@ -1133,8 +1112,6 @@ sites <- chronometric_data %>%
 # Map the sites
 cairo_pdf("./figures/Figure_1_crop_map.pdf", width = 7.2, height = 10.5)
 print(sites %>%
-        # dplyr::filter(Crop != "buckwheat",
-        #               Crop != "rice") %>%
         dplyr::mutate(Crop = dplyr::recode_factor(Crop,
                                                   foxtail_millet = "Foxtail millet",
                                                   broomcorn_millet = "Broomcorn millet",
@@ -1214,8 +1191,6 @@ local_niche <- function(niche, dens){
 # by the crop niche probabilities (summing will get the average)
 # Join the niche and density tables
 niche_densities <- niches %>%
-  # set_class(c("tbl_df", "tbl", "data.frame")) %>%
-  # tibble::as_tibble() %>%
   dplyr::left_join(densities, by = c("Site", "Period")) %>%
   dplyr::select(Site:Niche, Density) %>%
   # Get local densities
@@ -1519,7 +1494,6 @@ tidyCrop <- function(x, years){
     readr::read_rds() %$%
     Z %>%
     magrittr::extract2(stringr::str_c("X",years)) %>%
-    # magrittr::divide_by(100) %>%
     as("SpatialPixelsDataFrame") %>%
     tibble::as_tibble() %>%
     tidyr::gather(Year, Niche, -x:-y) %>%
@@ -1609,7 +1583,6 @@ print({
                                           "80–90%",
                                           "90–100%"),
                                drop = FALSE,
-                               # breaks = seq(10,100,10),
                                name = "Probability of being in the thermal niche",
                                guide = ggplot2::guide_legend(
                                  direction = "horizontal",
@@ -1620,18 +1593,14 @@ print({
                                  label.hjust = 0,
                                  nrow = 1,
                                  byrow = T,
-                                 # reverse = T,
                                  label.position = "bottom"
                                )) +
     ggplot2::scale_y_continuous(position = "right") +
-    # xlab("") +
-    # ylab("") +
     ggplot2::theme_minimal(base_size = 7) +
     ggplot2::theme(plot.margin = ggplot2::margin(0,0,0,0, "in"),
                    strip.text.x = ggplot2::element_text(size = 8),
                    strip.text.y = ggplot2::element_text(size = 8),
                    legend.position = "bottom",
-                   # legend.position = c(0.5, -0.1),
                    legend.margin = ggplot2::margin(0,0,0.1,0, "in"),
                    legend.title = ggplot2::element_text(face = "bold"))
   
