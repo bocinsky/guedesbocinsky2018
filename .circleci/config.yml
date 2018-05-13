@@ -71,7 +71,7 @@ jobs:
           name: Install remotes
           command: |
             R \
-              -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
+              -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools", repos = "https://cloud.r-project.org/")' \
               -e 'devtools::install_cran("remotes")'
       - run:
           name: Install
