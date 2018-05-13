@@ -74,7 +74,9 @@ jobs:
             R \
               -e 'options(repos = "https://cloud.r-project.org/")' \
               -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
-              -e 'devtools::install_cran("remotes")'
+              -e 'devtools::install_cran("remotes")' \
+              -e 'devtools::install_cran("rmarkdown")' \
+              -e 'devtools::install_cran("roxygen2")'
       - run:
           name: Install
           command: |
