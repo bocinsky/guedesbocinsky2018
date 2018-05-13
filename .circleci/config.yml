@@ -29,7 +29,7 @@ jobs:
     steps:
       - run:
           name: Change directory
-          command: cd /guedesbocinsky2018
+          command: cd ~/guedesbocinsky2018
       - run:
           name: Update homebrew
           command: brew update
