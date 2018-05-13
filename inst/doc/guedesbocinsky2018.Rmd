@@ -468,9 +468,13 @@ if(params$clean){
 dir.create("./data/derived_data/recons/", recursive = TRUE, showWarnings = F)
 
 # Create the plan for (possibly parallel) execution
-future::plan(multisession, 
-             workers = floor(min(future::availableCores(), 
-                                 params$cores)/2),
+future::plan(future::multisession, 
+             workers = max(
+               floor(
+                 min(
+                   future::availableCores(), 
+                   params$cores)/2), 
+               1),
              gc = TRUE)
 
 junk <- furrr::future_map(crop_GDD$cultivar,    
@@ -550,20 +554,20 @@ time_check <-  Sys.time()
 purrr::walk(crop_GDD %>%
               split(as.factor(crop_GDD$crop)),
             function(x){
-              if(file.exists(paste0("./data/derived_data/recons/all_",x$crop[[1]],".Rds"))) return()
+              if(file.exists(paste0("./data/derived_data/recons/all_",x$crop[[1]],".rds"))) return()
               n_crops <- length(x$crop)
               if(n_crops == 1){
                 file.copy(paste0("./data/derived_data/recons/",
                                  x$cultivar[[1]],
-                                 "_recons.Rds"),
+                                 "_recons.rds"),
                           paste0("./data/derived_data/recons/all_",
                                  x$crop[[1]],
-                                 ".Rds"))
+                                 ".rds"))
                 return()
               }
               
               test <- purrr::map(x$cultivar, function(cultivar){
-                paste0("./data/derived_data/recons/",cultivar,"_recons.Rds") %>%
+                paste0("./data/derived_data/recons/",cultivar,"_recons.rds") %>%
                   readr::read_rds()
               }) %>%
                 purrr::transpose() %>%
@@ -576,7 +580,7 @@ purrr::walk(crop_GDD %>%
                 }) %>%
                 readr::write_rds(paste0("./data/derived_data/recons/all_",
                                         x$crop[[1]],
-                                        ".Rds"),
+                                        ".rds"),
                                  compress = "xz",
                                  compression = 9)
             })
@@ -589,12 +593,16 @@ message("Combining like crop niches complete: ", capture.output(Sys.time() - tim
 ```{r modern-niches}
 
 # Create the plan for (possibly parallel) execution
-future::plan(multisession, 
-             workers = floor(min(future::availableCores(), 
-                                 params$cores)/2),
+future::plan(future::multisession, 
+             workers = max(
+               floor(
+                 min(
+                   future::availableCores(), 
+                   params$cores)/2), 
+               1),
              gc = TRUE)
 
-if(!file.exists("./data/derived_data/recons/modern_niches.Rds")){
+if(!file.exists("./data/derived_data/recons/modern_niches.rds")){
   modern_niches <- 
     purrr::map(crop_GDD$cultivar,
                function(crop){
@@ -628,7 +636,7 @@ if(!file.exists("./data/derived_data/recons/modern_niches.Rds")){
         proj4string = crop.models@proj4string) %>%
     as("SpatialPixelsDataFrame") %>%
     raster::brick() %>%
-    readr::write_rds("./data/derived_data/recons/modern_niches.Rds",
+    readr::write_rds("./data/derived_data/recons/modern_niches.rds",
                      compress = "xz",
                      compression = 9)
   
@@ -637,7 +645,7 @@ if(!file.exists("./data/derived_data/recons/modern_niches.Rds")){
   gc()
   
 }
-modern_niches <- readr::read_rds("./data/derived_data/recons/modern_niches.Rds")
+modern_niches <- readr::read_rds("./data/derived_data/recons/modern_niches.rds")
 
 modern_niches %<>%
   magrittr::extract2(which(!(names(modern_niches) %in% c("buckwheat","barley_alaska","barley_juskiw"))))
@@ -839,7 +847,7 @@ gdd.recons <-
                    if(file.exists(paste0("./figures/cultivar_niches/",cultivar,".pdf")) & file.exists(paste0("./figures/cultivar_niches/",cultivar,".mp4")))
                      return(paste0("./figures/cultivar_niches/",cultivar,".pdf"))
                    
-                   rasts <- readr::read_rds(paste0("./data/derived_data/recons/",cultivar,"_recons.Rds")) %>%
+                   rasts <- readr::read_rds(paste0("./data/derived_data/recons/",cultivar,"_recons.rds")) %>%
                      purrr::map(function(x){
                        x %>%
                          magrittr::extract2(which(.@z$`Years BP` > 1000)) %>%
@@ -935,13 +943,14 @@ chronometric_data %<>%
   sf::st_intersection(countries %>%
                         sf::st_union() %>%
                         sf::st_transform("+proj=longlat")) %>%
-  dplyr::as_data_frame() %>%
-  dplyr::select(-geometry) %>%
+  sf::st_set_geometry(NULL) %>%
   magrittr::set_names(names(chronometric_data))
 
 # Write table of dates
-list(`Chronometric Data` = chronometric_data %>%
-       dplyr::mutate(`Estimated age range (BP)` = stringr::str_c(`Age range lower (BP)`,"–",`Age range upper (BP)`)) %>%
+list(`Chronometric Data` = 
+       chronometric_data %>%
+       dplyr::mutate(`Estimated age range (BP)` = stringr::str_c(`Age range lower (BP)`,"–",
+                                                                 `Age range upper (BP)`)) %>%
        dplyr::select(Site,
                      Period,
                      `Lab sample identifier`,
@@ -952,7 +961,9 @@ list(`Chronometric Data` = chronometric_data %>%
                      Reference) %>%
        # dplyr::filter(!is.na(`14C age BP`)) %>%
        dplyr::arrange(Site, Period),
+     
      `Radiocarbon Labs` = labs,
+     
      `References` = refs) %>%
   writexl::write_xlsx("./data/derived_data/Data_file_S1_sites_dates.xlsx")
 
@@ -1133,13 +1144,14 @@ print(sites %>%
         ggplot2::theme_minimal(base_size = 7) +
         ggplot2::guides(colour=FALSE) +
         ggplot2::theme(legend.position="none",
-                       strip.text.x = ggplot2::element_text(size = 9, face = "bold")) +
+                       strip.text.x = ggplot2::element_text(size = 9, 
+                                                            face = "bold")) +
         ggplot2::facet_wrap( ~ Crop, ncol = 2))
 dev.off()
 
 # A function to extract niches for each crop
 extract_niches <- function(x){
-  out_niche <- paste0("./data/derived_data/recons/all_",x$Crop[[1]],".Rds") %>%
+  out_niche <- paste0("./data/derived_data/recons/all_",x$Crop[[1]],".rds") %>%
     readr::read_rds() %$%
     Z %>%
     raster::extract(x %>%
@@ -1359,7 +1371,7 @@ for(n in 1:nrow(crops)){
   if(file.exists(paste0("./figures/crop_niches/all_",crop,".pdf")) & file.exists(paste0("./figures/crop_niches/all_",crop,".mp4")))
     next
   
-  rasts <- readr::read_rds(paste0("./data/derived_data/recons/all_",crop,".Rds")) %>%
+  rasts <- readr::read_rds(paste0("./data/derived_data/recons/all_",crop,".rds")) %>%
     purrr::map(function(x){
       x %>%
         magrittr::extract2(which((x %>%
@@ -1490,7 +1502,7 @@ for(n in 1:nrow(crops)){
 # A function to extract data from a crop raster brick
 tidyCrop <- function(x, years){
   x %>%
-    paste0("./data/derived_data/recons/all_",.,".Rds") %>%
+    paste0("./data/derived_data/recons/all_",.,".rds") %>%
     readr::read_rds() %$%
     Z %>%
     magrittr::extract2(stringr::str_c("X",years)) %>%

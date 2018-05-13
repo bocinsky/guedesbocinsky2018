@@ -30,27 +30,35 @@ jobs:
       - run:
           name: Install r
           command: brew cask install r-app
-  #     - run:
-  #         name: Install gdal
-  #         command: brew install gdal --with-complete --with-unsupported
+          no_output_timeout: 1h
+      - run:
+          name: Install gdal
+          command: brew install gdal --with-complete --with-unsupported
+          no_output_timeout: 1h
       - run:
           name: Install ffmpeg
           command: brew install ffmpeg
+          no_output_timeout: 1h
       - run:
           name: Install ghostscript
           command: brew install ghostscript
+          no_output_timeout: 1h
       - run:
           name: Install protobuf
           command: brew install protobuf
+          no_output_timeout: 1h
       - run:
           name: Install v8@3.15
           command: brew install v8@3.15
+          no_output_timeout: 1h
       - run:
           name: Install pandoc
           command: brew install pandoc
+          no_output_timeout: 1h
       - run:
           name: Install pandoc-citeproc
           command: brew install pandoc-citeproc
+          no_output_timeout: 1h
       - run:
           name: Install remotes
           command: |

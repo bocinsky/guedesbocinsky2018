@@ -77,7 +77,7 @@ gdd.recons <-
                    if(file.exists(paste0("./figures/cultivar_niches/",cultivar,".pdf")) & file.exists(paste0("./figures/cultivar_niches/",cultivar,".mp4")))
                      return(paste0("./figures/cultivar_niches/",cultivar,".pdf"))
                    
-                   rasts <- readr::read_rds(paste0("./data/derived_data/recons/",cultivar,"_recons.Rds")) %>%
+                   rasts <- readr::read_rds(paste0("./data/derived_data/recons/",cultivar,"_recons.rds")) %>%
                      purrr::map(function(x){
                        x %>%
                          magrittr::extract2(which(.@z$`Years BP` > 1000)) %>%

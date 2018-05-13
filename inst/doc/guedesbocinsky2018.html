@@ -2820,7 +2820,7 @@ div.tocify {
 <h1 class="title toc-ignore">Analyses reported in d’Alpoim Guedes and Bocinsky (2018)</h1>
 <h4 class="author"><em>R. Kyle Bocinsky</em></h4>
 <h4 class="author"><em>Jade d’Alpoim Guedes</em></h4>
-<h4 class="date"><em>09 May, 2018</em></h4>
+<h4 class="date"><em>13 May, 2018</em></h4>
 
 </div>
 
@@ -2829,23 +2829,6 @@ div.tocify {
 <blockquote>
 <p>d’Alpoim Guedes, Jade and R. Kyle Bocinsky. Climate change stimulated agricultural innovation and exchange across Asia. <em>In review.</em></p>
 </blockquote>
-<pre><code>## Linking to GEOS 3.6.1, GDAL 2.1.3, proj.4 4.9.3</code></pre>
-<pre><code>## Loading required package: spam</code></pre>
-<pre><code>## Loading required package: dotCall64</code></pre>
-<pre><code>## Loading required package: grid</code></pre>
-<pre><code>## Spam version 2.1-4 (2018-04-12) is loaded.
-## Type 'help( Spam)' or 'demo( spam)' for a short introduction 
-## and overview of this package.
-## Help for individual functions is also obtained by adding the
-## suffix '.spam' to the function name, e.g. 'help( chol.spam)'.</code></pre>
-<pre><code>## 
-## Attaching package: 'spam'</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     backsolve, forwardsolve</code></pre>
-<pre><code>## Loading required package: maps</code></pre>
-<pre><code>## See www.image.ucar.edu/~nychka/Fields for
-##  a vignette and other supplements.</code></pre>
 <div id="set-parameters" class="section level2 unnumbered">
 <h2>Set parameters</h2>
 <p>In this section we define the study area by a bounding box, the calendar years used to define climatology (here, 1961–1990), and a plotting theme for <strong>ggplot</strong>.</p>
@@ -3227,9 +3210,13 @@ if(params$clean){
 dir.create(&quot;./data/derived_data/recons/&quot;, recursive = TRUE, showWarnings = F)
 
 # Create the plan for (possibly parallel) execution
-future::plan(multisession, 
-             workers = floor(min(future::availableCores(), 
-                                 params$cores)/2),
+future::plan(future::multisession, 
+             workers = max(
+               floor(
+                 min(
+                   future::availableCores(), 
+                   params$cores)/2), 
+               1),
              gc = TRUE)
 
 junk &lt;- furrr::future_map(crop_GDD$cultivar,    
@@ -3307,20 +3294,20 @@ time_check &lt;-  Sys.time()
 purrr::walk(crop_GDD %&gt;%
               split(as.factor(crop_GDD$crop)),
             function(x){
-              if(file.exists(paste0(&quot;./data/derived_data/recons/all_&quot;,x$crop[[1]],&quot;.Rds&quot;))) return()
+              if(file.exists(paste0(&quot;./data/derived_data/recons/all_&quot;,x$crop[[1]],&quot;.rds&quot;))) return()
               n_crops &lt;- length(x$crop)
               if(n_crops == 1){
                 file.copy(paste0(&quot;./data/derived_data/recons/&quot;,
                                  x$cultivar[[1]],
-                                 &quot;_recons.Rds&quot;),
+                                 &quot;_recons.rds&quot;),
                           paste0(&quot;./data/derived_data/recons/all_&quot;,
                                  x$crop[[1]],
-                                 &quot;.Rds&quot;))
+                                 &quot;.rds&quot;))
                 return()
               }
               
               test &lt;- purrr::map(x$cultivar, function(cultivar){
-                paste0(&quot;./data/derived_data/recons/&quot;,cultivar,&quot;_recons.Rds&quot;) %&gt;%
+                paste0(&quot;./data/derived_data/recons/&quot;,cultivar,&quot;_recons.rds&quot;) %&gt;%
                   readr::read_rds()
               }) %&gt;%
                 purrr::transpose() %&gt;%
@@ -3333,7 +3320,7 @@ purrr::walk(crop_GDD %&gt;%
                 }) %&gt;%
                 readr::write_rds(paste0(&quot;./data/derived_data/recons/all_&quot;,
                                         x$crop[[1]],
-                                        &quot;.Rds&quot;),
+                                        &quot;.rds&quot;),
                                  compress = &quot;xz&quot;,
                                  compression = 9)
             })
@@ -3344,12 +3331,16 @@ message(&quot;Combining like crop niches complete: &quot;, capture.output(Sys.ti
 <h2>1961–1990 Niche Analysis</h2>
 <pre class="r"><code>
 # Create the plan for (possibly parallel) execution
-future::plan(multisession, 
-             workers = floor(min(future::availableCores(), 
-                                 params$cores)/2),
+future::plan(future::multisession, 
+             workers = max(
+               floor(
+                 min(
+                   future::availableCores(), 
+                   params$cores)/2), 
+               1),
              gc = TRUE)
 
-if(!file.exists(&quot;./data/derived_data/recons/modern_niches.Rds&quot;)){
+if(!file.exists(&quot;./data/derived_data/recons/modern_niches.rds&quot;)){
   modern_niches &lt;- 
     purrr::map(crop_GDD$cultivar,
                function(crop){
@@ -3383,7 +3374,7 @@ if(!file.exists(&quot;./data/derived_data/recons/modern_niches.Rds&quot;)){
         proj4string = crop.models@proj4string) %&gt;%
     as(&quot;SpatialPixelsDataFrame&quot;) %&gt;%
     raster::brick() %&gt;%
-    readr::write_rds(&quot;./data/derived_data/recons/modern_niches.Rds&quot;,
+    readr::write_rds(&quot;./data/derived_data/recons/modern_niches.rds&quot;,
                      compress = &quot;xz&quot;,
                      compression = 9)
   
@@ -3392,7 +3383,7 @@ if(!file.exists(&quot;./data/derived_data/recons/modern_niches.Rds&quot;)){
   gc()
   
 }
-modern_niches &lt;- readr::read_rds(&quot;./data/derived_data/recons/modern_niches.Rds&quot;)
+modern_niches &lt;- readr::read_rds(&quot;./data/derived_data/recons/modern_niches.rds&quot;)
 
 modern_niches %&lt;&gt;%
   magrittr::extract2(which(!(names(modern_niches) %in% c(&quot;buckwheat&quot;,&quot;barley_alaska&quot;,&quot;barley_juskiw&quot;))))
@@ -3566,12 +3557,12 @@ print(modern_crop_niche_data %&gt;%
         ggplot2::ylab(&quot;Probability density&quot;))
 dev.off()
 #&gt; Response [https://core.tdar.org/api/login]
-#&gt;   Date: 2018-05-10 02:32
+#&gt;   Date: 2018-05-12 17:31
 #&gt;   Status: 200
 #&gt;   Content-Type: application/xml;charset=UTF-8
 #&gt;   Size: 518 B
 #&gt; &lt;BINARY BODY&gt;
-#&gt; Reading layer `vegetation' from data source `/private/var/folders/jt/hhw0gdbj08bdxsbw15rcx_j40000gn/T/RtmpNq10CE/vegetation/vegetation.shp' using driver `ESRI Shapefile'
+#&gt; Reading layer `vegetation' from data source `/private/var/folders/jt/hhw0gdbj08bdxsbw15rcx_j40000gn/T/RtmphKiSvk/vegetation/vegetation.shp' using driver `ESRI Shapefile'
 #&gt; Simple feature collection with 75418 features and 5 fields
 #&gt; geometry type:  POLYGON
 #&gt; dimension:      XY
@@ -3606,7 +3597,7 @@ gdd.recons &lt;-
                    if(file.exists(paste0(&quot;./figures/cultivar_niches/&quot;,cultivar,&quot;.pdf&quot;)) &amp; file.exists(paste0(&quot;./figures/cultivar_niches/&quot;,cultivar,&quot;.mp4&quot;)))
                      return(paste0(&quot;./figures/cultivar_niches/&quot;,cultivar,&quot;.pdf&quot;))
                    
-                   rasts &lt;- readr::read_rds(paste0(&quot;./data/derived_data/recons/&quot;,cultivar,&quot;_recons.Rds&quot;)) %&gt;%
+                   rasts &lt;- readr::read_rds(paste0(&quot;./data/derived_data/recons/&quot;,cultivar,&quot;_recons.rds&quot;)) %&gt;%
                      purrr::map(function(x){
                        x %&gt;%
                          magrittr::extract2(which(.@z$`Years BP` &gt; 1000)) %&gt;%
@@ -3700,13 +3691,14 @@ chronometric_data %&lt;&gt;%
   sf::st_intersection(countries %&gt;%
                         sf::st_union() %&gt;%
                         sf::st_transform(&quot;+proj=longlat&quot;)) %&gt;%
-  dplyr::as_data_frame() %&gt;%
-  dplyr::select(-geometry) %&gt;%
+  sf::st_set_geometry(NULL) %&gt;%
   magrittr::set_names(names(chronometric_data))
 
 # Write table of dates
-list(`Chronometric Data` = chronometric_data %&gt;%
-       dplyr::mutate(`Estimated age range (BP)` = stringr::str_c(`Age range lower (BP)`,&quot;–&quot;,`Age range upper (BP)`)) %&gt;%
+list(`Chronometric Data` = 
+       chronometric_data %&gt;%
+       dplyr::mutate(`Estimated age range (BP)` = stringr::str_c(`Age range lower (BP)`,&quot;–&quot;,
+                                                                 `Age range upper (BP)`)) %&gt;%
        dplyr::select(Site,
                      Period,
                      `Lab sample identifier`,
@@ -3717,7 +3709,9 @@ list(`Chronometric Data` = chronometric_data %&gt;%
                      Reference) %&gt;%
        # dplyr::filter(!is.na(`14C age BP`)) %&gt;%
        dplyr::arrange(Site, Period),
+     
      `Radiocarbon Labs` = labs,
+     
      `References` = refs) %&gt;%
   writexl::write_xlsx(&quot;./data/derived_data/Data_file_S1_sites_dates.xlsx&quot;)
 
@@ -3898,13 +3892,14 @@ print(sites %&gt;%
         ggplot2::theme_minimal(base_size = 7) +
         ggplot2::guides(colour=FALSE) +
         ggplot2::theme(legend.position=&quot;none&quot;,
-                       strip.text.x = ggplot2::element_text(size = 9, face = &quot;bold&quot;)) +
+                       strip.text.x = ggplot2::element_text(size = 9, 
+                                                            face = &quot;bold&quot;)) +
         ggplot2::facet_wrap( ~ Crop, ncol = 2))
 dev.off()
 
 # A function to extract niches for each crop
 extract_niches &lt;- function(x){
-  out_niche &lt;- paste0(&quot;./data/derived_data/recons/all_&quot;,x$Crop[[1]],&quot;.Rds&quot;) %&gt;%
+  out_niche &lt;- paste0(&quot;./data/derived_data/recons/all_&quot;,x$Crop[[1]],&quot;.rds&quot;) %&gt;%
     readr::read_rds() %$%
     Z %&gt;%
     raster::extract(x %&gt;%
@@ -4076,7 +4071,7 @@ niche_densities_extract %&gt;%
 # })
 # dev.off()
 #&gt; Response [https://core.tdar.org/api/login]
-#&gt;   Date: 2018-05-10 02:36
+#&gt;   Date: 2018-05-13 14:26
 #&gt;   Status: 200
 #&gt;   Content-Type: application/xml;charset=UTF-8
 #&gt;   Size: 518 B
@@ -4133,7 +4128,7 @@ for(n in 1:nrow(crops)){
   if(file.exists(paste0(&quot;./figures/crop_niches/all_&quot;,crop,&quot;.pdf&quot;)) &amp; file.exists(paste0(&quot;./figures/crop_niches/all_&quot;,crop,&quot;.mp4&quot;)))
     next
   
-  rasts &lt;- readr::read_rds(paste0(&quot;./data/derived_data/recons/all_&quot;,crop,&quot;.Rds&quot;)) %&gt;%
+  rasts &lt;- readr::read_rds(paste0(&quot;./data/derived_data/recons/all_&quot;,crop,&quot;.rds&quot;)) %&gt;%
     purrr::map(function(x){
       x %&gt;%
         magrittr::extract2(which((x %&gt;%
@@ -4264,7 +4259,7 @@ for(n in 1:nrow(crops)){
 # A function to extract data from a crop raster brick
 tidyCrop &lt;- function(x, years){
   x %&gt;%
-    paste0(&quot;./data/derived_data/recons/all_&quot;,.,&quot;.Rds&quot;) %&gt;%
+    paste0(&quot;./data/derived_data/recons/all_&quot;,.,&quot;.rds&quot;) %&gt;%
     readr::read_rds() %$%
     Z %&gt;%
     magrittr::extract2(stringr::str_c(&quot;X&quot;,years)) %&gt;%
@@ -4537,173 +4532,179 @@ system(&quot;tar -zcf ./zenodo/guedesbocinsky2018-1.0.0-output.tar.gz submission
 </div>
 <div id="colophon" class="section level2 unnumbered">
 <h2>Colophon</h2>
-<p>This report was generated on 2018-05-09 20:57:36 using the following computational environment and dependencies:</p>
+<p>This report was generated on 2018-05-13 08:35:49 using the following computational environment and dependencies:</p>
 <pre class="r"><code># which R packages and versions?
 devtools::session_info()
 #&gt; ─ Session info ──────────────────────────────────────────────────────────
 #&gt;  setting  value                       
 #&gt;  version  R version 3.5.0 (2018-04-23)
 #&gt;  os       macOS High Sierra 10.13.4   
-#&gt;  system   x86_64, darwin15.6.0        
+#&gt;  system   x86_64, darwin17.5.0        
 #&gt;  ui       RStudio                     
 #&gt;  language (EN)                        
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  tz       America/Denver              
-#&gt;  date     2018-05-09                  
+#&gt;  date     2018-05-13                  
 #&gt; 
 #&gt; ─ Packages ──────────────────────────────────────────────────────────────
-#&gt;  package            * version        date      
-#&gt;  assertthat           0.2.0          2017-04-11
-#&gt;  backports            1.1.2          2017-12-13
-#&gt;  Bchron               4.2.7          2018-02-27
-#&gt;  bindr                0.1.1          2018-03-13
-#&gt;  bindrcpp             0.2.2          2018-03-29
-#&gt;  bookdown             0.7            2018-02-18
-#&gt;  callr                2.0.3          2018-04-11
-#&gt;  class                7.3-14         2015-08-30
-#&gt;  classInt             0.2-3          2018-04-16
-#&gt;  cli                  1.0.0          2017-11-05
-#&gt;  clisymbols           1.2.0          2017-05-21
-#&gt;  codetools            0.2-15         2016-10-05
-#&gt;  colorspace           1.3-2          2016-12-14
-#&gt;  crayon               1.3.4          2017-09-16
-#&gt;  curl                 3.2            2018-03-28
-#&gt;  data.table           1.11.2         2018-05-08
-#&gt;  DBI                  1.0.0          2018-05-02
-#&gt;  debugme              1.1.0          2017-10-22
-#&gt;  desc                 1.2.0          2018-05-01
-#&gt;  devtools             1.13.5.9000    2018-05-09
-#&gt;  digest               0.6.15         2018-01-28
-#&gt;  dotCall64          * 0.9-5.2        2018-01-11
-#&gt;  dplyr                0.7.4          2017-09-28
-#&gt;  e1071                1.6-8          2017-02-02
-#&gt;  evaluate             0.10.1         2017-06-24
-#&gt;  FedData              2.5.2          2018-03-12
-#&gt;  fields             * 9.6            2018-01-29
-#&gt;  forcats              0.3.0          2018-02-19
-#&gt;  foreach              1.4.4          2017-12-12
-#&gt;  foreign              0.8-70         2017-11-28
-#&gt;  furrr                0.1.0          2018-05-09
-#&gt;  future               1.8.1          2018-05-03
-#&gt;  geojsonlint          0.2.0          2016-11-03
-#&gt;  ggplot2              2.2.1.9000     2018-05-10
-#&gt;  git2r                0.21.0.9002    2018-05-09
-#&gt;  globals              0.11.0         2018-01-10
-#&gt;  glue                 1.2.0          2017-10-29
-#&gt;  gtable               0.2.0          2016-02-26
-#&gt;  guedesbocinsky2018 * 1.0.0          2018-05-09
-#&gt;  hms                  0.4.2          2018-03-10
-#&gt;  htmltools            0.3.6          2017-04-28
-#&gt;  htmlwidgets          1.2            2018-04-19
-#&gt;  httr                 1.3.1          2017-08-20
-#&gt;  iterators            1.0.9          2017-12-12
-#&gt;  jsonlite             1.5            2017-06-01
-#&gt;  jsonvalidate         1.0.0          2016-06-13
-#&gt;  knitr                1.20           2018-02-20
-#&gt;  lattice              0.20-35        2017-03-25
-#&gt;  lazyeval             0.2.1          2017-10-29
-#&gt;  listenv              0.7.0          2018-01-21
-#&gt;  lubridate            1.7.4          2018-04-11
-#&gt;  magrittr           * 1.5            2014-11-22
-#&gt;  maps               * 3.3.0          2018-04-03
-#&gt;  maptools             0.9-2          2017-03-25
-#&gt;  memoise              1.1.0          2017-04-21
-#&gt;  munsell              0.4.3          2016-02-13
-#&gt;  ncdf4                1.16           2017-04-01
-#&gt;  pillar               1.2.2          2018-04-26
-#&gt;  pkgbuild             1.0.0          2018-05-09
-#&gt;  pkgconfig            2.0.1          2017-03-21
-#&gt;  pkgload              1.0.0          2018-05-09
-#&gt;  plotly               4.7.1          2017-07-29
-#&gt;  plyr                 1.8.4          2016-06-08
-#&gt;  purrr                0.2.4          2017-10-18
-#&gt;  purrrlyr             0.0.1.9000 (!) 2017-05-13
-#&gt;  R6                   2.2.2          2017-06-17
-#&gt;  raster               2.6-7          2017-11-13
-#&gt;  RColorBrewer         1.1-2          2014-12-07
-#&gt;  Rcpp                 0.12.16        2018-03-13
-#&gt;  readr                1.1.1          2017-05-16
-#&gt;  rgdal                1.2-20         2018-05-07
-#&gt;  rgeos                0.3-26         2017-10-31
-#&gt;  rlang                0.2.0.9001     2018-05-10
-#&gt;  rmapshaper           0.4.0          2018-04-03
-#&gt;  rmarkdown            1.9            2018-03-01
-#&gt;  rprojroot            1.3-2          2018-01-03
-#&gt;  rstudioapi           0.7            2017-09-07
-#&gt;  scales               0.5.0.9000     2018-05-10
-#&gt;  sessioninfo          1.0.0          2017-06-21
-#&gt;  sf                 * 0.6-1          2018-03-22
-#&gt;  sp                   1.2-7          2018-01-19
-#&gt;  spam               * 2.1-4          2018-04-12
-#&gt;  spData               0.2.8.3        2018-03-25
-#&gt;  stringi              1.2.2          2018-05-02
-#&gt;  stringr              1.3.0          2018-02-19
-#&gt;  tdar                 0.0.0.9000     2018-05-09
-#&gt;  tibble               1.4.2          2018-01-22
-#&gt;  tidyr                0.8.0          2018-01-29
-#&gt;  udunits2             0.13           2016-11-17
-#&gt;  units                0.5-1          2018-01-08
-#&gt;  usethis              1.3.0          2018-02-24
-#&gt;  V8                   1.5            2017-04-25
-#&gt;  velox                0.2.0          2017-12-01
-#&gt;  viridisLite          0.3.0          2018-02-01
-#&gt;  withr                2.1.2          2018-03-15
-#&gt;  writexl              0.2.9000       2018-05-09
-#&gt;  xfun                 0.1            2018-01-22
-#&gt;  yaml                 2.1.19         2018-05-01
+#&gt;  package            * version     date      
+#&gt;  assertthat           0.2.0       2017-04-11
+#&gt;  backports            1.1.2       2017-12-13
+#&gt;  Bchron               4.2.7       2018-02-27
+#&gt;  bindr                0.1.1       2018-03-13
+#&gt;  bindrcpp           * 0.2.2       2018-03-29
+#&gt;  bookdown             0.7         2018-02-18
+#&gt;  callr                2.0.3       2018-04-11
+#&gt;  cellranger           1.1.0       2016-07-27
+#&gt;  class                7.3-14      2015-08-30
+#&gt;  classInt             0.2-3       2018-04-16
+#&gt;  cli                  1.0.0       2017-11-05
+#&gt;  clisymbols           1.2.0       2017-05-21
+#&gt;  codetools            0.2-15      2016-10-05
+#&gt;  colorspace           1.3-2       2016-12-14
+#&gt;  crayon               1.3.4       2017-09-16
+#&gt;  curl                 3.2         2018-03-28
+#&gt;  data.table           1.11.2      2018-05-08
+#&gt;  DBI                  1.0.0       2018-05-02
+#&gt;  debugme              1.1.0       2017-10-22
+#&gt;  desc                 1.2.0       2018-05-01
+#&gt;  devtools             1.13.5.9000 2018-05-12
+#&gt;  digest               0.6.15      2018-01-28
+#&gt;  dotCall64          * 0.9-5.2     2018-01-11
+#&gt;  dplyr                0.7.4       2017-09-28
+#&gt;  e1071                1.6-8       2017-02-02
+#&gt;  evaluate             0.10.1      2017-06-24
+#&gt;  FedData              2.5.2       2018-03-12
+#&gt;  fields             * 9.6         2018-01-29
+#&gt;  forcats              0.3.0       2018-02-19
+#&gt;  foreach              1.4.4       2017-12-12
+#&gt;  foreign              0.8-70      2017-11-28
+#&gt;  furrr                0.1.0       2018-05-12
+#&gt;  future               1.8.1       2018-05-03
+#&gt;  geojsonlint          0.2.0       2016-11-03
+#&gt;  ggplot2              2.2.1.9000  2018-05-12
+#&gt;  git2r                0.21.0.9002 2018-05-12
+#&gt;  globals              0.11.0      2018-01-10
+#&gt;  glue                 1.2.0       2017-10-29
+#&gt;  gtable               0.2.0       2016-02-26
+#&gt;  guedesbocinsky2018 * 1.0.0       2018-05-12
+#&gt;  hms                  0.4.2       2018-03-10
+#&gt;  htmltools            0.3.6       2017-04-28
+#&gt;  htmlwidgets          1.2         2018-04-19
+#&gt;  httr                 1.3.1       2017-08-20
+#&gt;  iterators            1.0.9       2017-12-12
+#&gt;  jsonlite             1.5         2017-06-01
+#&gt;  jsonvalidate         1.0.0       2016-06-13
+#&gt;  knitr                1.20        2018-02-20
+#&gt;  lattice              0.20-35     2017-03-25
+#&gt;  lazyeval             0.2.1       2017-10-29
+#&gt;  listenv              0.7.0       2018-01-21
+#&gt;  lubridate            1.7.4       2018-04-11
+#&gt;  magrittr           * 1.5         2014-11-22
+#&gt;  maps               * 3.3.0       2018-04-03
+#&gt;  maptools             0.9-2       2017-03-25
+#&gt;  memoise              1.1.0       2017-04-21
+#&gt;  munsell              0.4.3       2016-02-13
+#&gt;  ncdf4                1.16        2017-04-01
+#&gt;  pillar               1.2.2       2018-04-26
+#&gt;  pkgbuild             1.0.0       2018-05-12
+#&gt;  pkgconfig            2.0.1       2017-03-21
+#&gt;  pkgload              1.0.0       2018-05-12
+#&gt;  plotly               4.7.1       2017-07-29
+#&gt;  plyr                 1.8.4       2016-06-08
+#&gt;  purrr                0.2.4       2017-10-18
+#&gt;  purrrlyr             0.0.1.9000  2018-05-12
+#&gt;  R6                   2.2.2       2017-06-17
+#&gt;  raster               2.6-7       2017-11-13
+#&gt;  RColorBrewer         1.1-2       2014-12-07
+#&gt;  Rcpp                 0.12.16     2018-03-13
+#&gt;  readr                1.1.1       2017-05-16
+#&gt;  readxl               1.1.0       2018-04-20
+#&gt;  rematch              1.0.1       2016-04-21
+#&gt;  rgdal                1.2-20      2018-05-07
+#&gt;  rgeos                0.3-26      2017-10-31
+#&gt;  rlang                0.2.0.9001  2018-05-10
+#&gt;  rmapshaper           0.4.0       2018-04-03
+#&gt;  rmarkdown            1.9         2018-03-01
+#&gt;  RPostgreSQL          0.6-2       2017-06-24
+#&gt;  rprojroot            1.3-2       2018-01-03
+#&gt;  rstudioapi           0.7         2017-09-07
+#&gt;  scales               0.5.0.9000  2018-05-10
+#&gt;  sessioninfo          1.0.0       2017-06-21
+#&gt;  sf                 * 0.6-2       2018-04-25
+#&gt;  sp                   1.2-7       2018-01-19
+#&gt;  spam               * 2.1-4       2018-04-12
+#&gt;  spData               0.2.8.3     2018-03-25
+#&gt;  stringi              1.2.2       2018-05-02
+#&gt;  stringr              1.3.1       2018-05-10
+#&gt;  tdar                 0.0.0.9000  2018-05-12
+#&gt;  testthat             2.0.0       2017-12-13
+#&gt;  tibble               1.4.2       2018-01-22
+#&gt;  tidyr                0.8.0       2018-01-29
+#&gt;  udunits2             0.13        2016-11-17
+#&gt;  units                0.5-1       2018-01-08
+#&gt;  usethis              1.3.0       2018-02-24
+#&gt;  V8                   1.5         2017-04-25
+#&gt;  velox                0.2.0       2017-12-01
+#&gt;  viridisLite          0.3.0       2018-02-01
+#&gt;  withr                2.1.2       2018-03-15
+#&gt;  writexl              1.0         2018-05-12
+#&gt;  xfun                 0.1         2018-01-22
+#&gt;  yaml                 2.1.19      2018-05-01
 #&gt;  source                             
 #&gt;  cran (@0.2.0)                      
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.1.2)                      
 #&gt;  cran (@4.2.7)                      
 #&gt;  cran (@0.1.1)                      
 #&gt;  cran (@0.2.2)                      
 #&gt;  cran (@0.7)                        
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@2.0.3)                      
+#&gt;  cran (@1.1.0)                      
 #&gt;  CRAN (R 3.5.0)                     
 #&gt;  cran (@0.2-3)                      
 #&gt;  cran (@1.0.0)                      
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.2.0)                      
 #&gt;  CRAN (R 3.5.0)                     
 #&gt;  cran (@1.3-2)                      
 #&gt;  cran (@1.3.4)                      
 #&gt;  CRAN (R 3.5.0)                     
 #&gt;  cran (@1.11.2)                     
 #&gt;  cran (@1.0.0)                      
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.1.0)                      
+#&gt;  cran (@1.2.0)                      
 #&gt;  Github (r-lib/devtools@13ee56b)    
 #&gt;  CRAN (R 3.5.0)                     
 #&gt;  cran (@0.9-5.2)                    
 #&gt;  cran (@0.7.4)                      
 #&gt;  cran (@1.6-8)                      
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@0.10.1)                     
 #&gt;  CRAN (R 3.5.0)                     
 #&gt;  cran (@9.6)                        
 #&gt;  cran (@0.3.0)                      
 #&gt;  cran (@1.4.4)                      
 #&gt;  CRAN (R 3.5.0)                     
-#&gt;  Github (DavisVaughan/furrr@7fb8291)
+#&gt;  Github (DavisVaughan/furrr@8516dd0)
 #&gt;  cran (@1.8.1)                      
 #&gt;  cran (@0.2.0)                      
-#&gt;  Github (tidyverse/ggplot2@9cefab7) 
+#&gt;  Github (tidyverse/ggplot2@4463da6) 
 #&gt;  Github (ropensci/git2r@0eaa7fb)    
 #&gt;  cran (@0.11.0)                     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.2.0)                      
 #&gt;  cran (@0.2.0)                      
 #&gt;  local                              
 #&gt;  cran (@0.4.2)                      
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@0.3.6)                      
+#&gt;  cran (@1.2)                        
 #&gt;  CRAN (R 3.5.0)                     
 #&gt;  cran (@1.0.9)                      
 #&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.0.0)                      
+#&gt;  cran (@1.20)                       
 #&gt;  CRAN (R 3.5.0)                     
 #&gt;  cran (@0.2.1)                      
 #&gt;  cran (@0.7.0)                      
 #&gt;  cran (@1.7.4)                      
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.5)                        
 #&gt;  cran (@3.3.0)                      
 #&gt;  cran (@0.9-2)                      
 #&gt;  CRAN (R 3.5.0)                     
@@ -4713,43 +4714,47 @@ devtools::session_info()
 #&gt;  Github (r-lib/pkgbuild@0457039)    
 #&gt;  cran (@2.0.1)                      
 #&gt;  Github (r-lib/pkgload@35efedd)     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@4.7.1)                      
 #&gt;  cran (@1.8.4)                      
 #&gt;  cran (@0.2.4)                      
+#&gt;  Github (hadley/purrrlyr@469fc93)   
 #&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@2.6-7)                      
+#&gt;  cran (@1.1-2)                      
+#&gt;  cran (@0.12.16)                    
 #&gt;  cran (@1.1.1)                      
+#&gt;  cran (@1.1.0)                      
+#&gt;  cran (@1.0.1)                      
 #&gt;  cran (@1.2-20)                     
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  Github (r-lib/rlang@c30d290)       
+#&gt;  cran (@0.3-26)                     
+#&gt;  Github (r-lib/rlang@ccdbd8b)       
 #&gt;  cran (@0.4.0)                      
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.9)                        
+#&gt;  cran (@0.6-2)                      
+#&gt;  cran (@1.3-2)                      
 #&gt;  CRAN (R 3.5.0)                     
 #&gt;  Github (hadley/scales@d767915)     
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.0.0)                      
+#&gt;  cran (@0.6-2)                      
 #&gt;  cran (@1.2-7)                      
 #&gt;  cran (@2.1-4)                      
 #&gt;  cran (@0.2.8.3)                    
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.2.2)                      
+#&gt;  cran (@1.3.1)                      
 #&gt;  Github (bocinsky/tdar@626b05b)     
+#&gt;  cran (@2.0.0)                      
 #&gt;  cran (@1.4.2)                      
 #&gt;  cran (@0.8.0)                      
 #&gt;  cran (@0.13)                       
 #&gt;  cran (@0.5-1)                      
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
-#&gt;  CRAN (R 3.5.0)                     
+#&gt;  cran (@1.3.0)                      
+#&gt;  cran (@1.5)                        
+#&gt;  cran (@0.2.0)                      
 #&gt;  cran (@0.3.0)                      
 #&gt;  CRAN (R 3.5.0)                     
-#&gt;  Github (ropensci/writexl@49985cb)  
+#&gt;  Github (ropensci/writexl@5ef8247)  
 #&gt;  cran (@0.1)                        
-#&gt;  CRAN (R 3.5.0)</code></pre>
+#&gt;  cran (@2.1.19)</code></pre>
 <p>The current Git commit details are:</p>
 <pre class="r"><code># what commit is this file at? You may need to change the path value
 # if your Rmd is not in analysis/paper/
