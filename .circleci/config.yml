@@ -41,17 +41,6 @@ jobs:
           command: brew cask install r-app
           no_output_timeout: 1h
       - run:
-          name: Install remotes
-          command: |
-            R \
-              -e 'options(repos = "https://cloud.r-project.org/")' \
-              -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
-              -e 'devtools::install_cran("remotes")'
-      - run:
-          name: Install
-          command: |
-            R -e 'devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)'
-      - run:
           name: Install gdal
           command: brew install gdal --with-complete --with-unsupported
           no_output_timeout: 1h
@@ -79,6 +68,17 @@ jobs:
           name: Install pandoc-citeproc
           command: brew install pandoc-citeproc
           no_output_timeout: 1h
+      - run:
+          name: Install remotes
+          command: |
+            R \
+              -e 'options(repos = "https://cloud.r-project.org/")' \
+              -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")' \
+              -e 'devtools::install_cran("remotes")'
+      - run:
+          name: Install
+          command: |
+            R -e 'devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)'
       - run:
           name: Install remote dependencies
           command: |
