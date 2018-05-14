@@ -3484,7 +3484,7 @@ vegetation_atlas_data_crops_simple &lt;-
                         sf::st_transform(4326))
 
 # Map the sites
-cairo_pdf(&quot;./figures/Figure_S2_modern_crops.pdf&quot;, width = 7.2, height = 7)
+cairo_pdf(&quot;./figures/Figure_5_modern_crops.pdf&quot;, width = 7.2, height = 7)
 print(vegetation_atlas_data_crops_simple %&gt;%
         dplyr::mutate(Crop = as.factor(crop),
                       Crop = dplyr::recode_factor(Crop,
@@ -3534,7 +3534,7 @@ modern_crop_niche_data &lt;-
   dplyr::bind_rows()
 
 
-cairo_pdf(&quot;./figures/Figure_S3_modern_crops_density.pdf&quot;, width = 4.6, height = 3)
+cairo_pdf(&quot;./figures/Figure_6_modern_crops_density.pdf&quot;, width = 4.6, height = 3)
 print(modern_crop_niche_data %&gt;%
         dplyr::mutate(Crop = as.factor(Crop),
                       Crop = dplyr::recode_factor(Crop,
@@ -3557,12 +3557,12 @@ print(modern_crop_niche_data %&gt;%
         ggplot2::ylab(&quot;Probability density&quot;))
 dev.off()
 #&gt; Response [https://core.tdar.org/api/login]
-#&gt;   Date: 2018-05-13 16:41
+#&gt;   Date: 2018-05-14 02:33
 #&gt;   Status: 200
 #&gt;   Content-Type: application/xml;charset=UTF-8
 #&gt;   Size: 518 B
 #&gt; &lt;BINARY BODY&gt;
-#&gt; Reading layer `vegetation' from data source `/private/var/folders/jt/hhw0gdbj08bdxsbw15rcx_j40000gn/T/RtmpcNaCcW/vegetation/vegetation.shp' using driver `ESRI Shapefile'
+#&gt; Reading layer `vegetation' from data source `/private/var/folders/jt/hhw0gdbj08bdxsbw15rcx_j40000gn/T/RtmpmgFG2m/vegetation/vegetation.shp' using driver `ESRI Shapefile'
 #&gt; Simple feature collection with 75418 features and 5 fields
 #&gt; geometry type:  POLYGON
 #&gt; dimension:      XY
@@ -4387,7 +4387,7 @@ message(&quot;Plotting of crop niche reconstructions complete: &quot;, capture.o
 storage %&gt;%
   readr::write_csv(&quot;./data/derived_data/Table_S3_storage.csv&quot;)
 
-cairo_pdf(&quot;./figures/Figure_S1_storage.pdf&quot;, width = 4.6, height = 3)
+cairo_pdf(&quot;./figures/Figure_4_storage.pdf&quot;, width = 4.6, height = 3)
 print({
   storage %&gt;%
     ggplot2::ggplot(ggplot2::aes(y = YRS_Storage,
@@ -4425,14 +4425,14 @@ file.copy(from = &quot;./figures/Figure_2_facet_niche.pdf&quot;,
 file.copy(from = &quot;./figures/Figure_3_all_crossplot.pdf&quot;,
           to = &quot;./submission/Figure_3_all_crossplot.pdf&quot;,
           overwrite = TRUE)
-file.copy(from = &quot;./figures/Figure_S1_storage.pdf&quot;,
-          to = &quot;./submission/Figure_S1_storage.pdf&quot;,
+file.copy(from = &quot;./figures/Figure_4_storage.pdf&quot;,
+          to = &quot;./submission/Figure_4_storage.pdf&quot;,
           overwrite = TRUE)
-file.copy(from = &quot;./figures/Figure_S2_modern_crops.pdf&quot;,
-          to = &quot;./submission/Figure_S2_modern_crops.pdf&quot;,
+file.copy(from = &quot;./figures/Figure_5_modern_crops.pdf&quot;,
+          to = &quot;./submission/Figure_5_modern_crops.pdf&quot;,
           overwrite = TRUE)
-file.copy(from = &quot;./figures/Figure_S3_modern_crops_density.pdf&quot;,
-          to = &quot;./submission/Figure_S3_modern_crops_density.pdf&quot;,
+file.copy(from = &quot;./figures/Figure_6_modern_crops_density.pdf&quot;,
+          to = &quot;./submission/Figure_6_modern_crops_density.pdf&quot;,
           overwrite = TRUE)
 
 # Copy Tables
@@ -4532,7 +4532,7 @@ system(&quot;tar -zcf ./zenodo/guedesbocinsky2018-1.0.0-output.tar.gz submission
 </div>
 <div id="colophon" class="section level2 unnumbered">
 <h2>Colophon</h2>
-<p>This report was generated on 2018-05-13 10:59:19 using the following computational environment and dependencies:</p>
+<p>This report was generated on 2018-05-13 21:01:34 using the following computational environment and dependencies:</p>
 <pre class="r"><code># which R packages and versions?
 devtools::session_info()
 #&gt; ─ Session info ──────────────────────────────────────────────────────────
@@ -4552,10 +4552,9 @@ devtools::session_info()
 #&gt;  backports            1.1.2       2017-12-13
 #&gt;  Bchron               4.2.7       2018-02-27
 #&gt;  bindr                0.1.1       2018-03-13
-#&gt;  bindrcpp           * 0.2.2       2018-03-29
+#&gt;  bindrcpp             0.2.2       2018-03-29
 #&gt;  bookdown             0.7         2018-02-18
 #&gt;  callr                2.0.3       2018-04-11
-#&gt;  cellranger           1.1.0       2016-07-27
 #&gt;  class                7.3-14      2015-08-30
 #&gt;  classInt             0.2-3       2018-04-16
 #&gt;  cli                  1.0.0       2017-11-05
@@ -4619,8 +4618,6 @@ devtools::session_info()
 #&gt;  RColorBrewer         1.1-2       2014-12-07
 #&gt;  Rcpp                 0.12.16     2018-03-13
 #&gt;  readr                1.1.1       2017-05-16
-#&gt;  readxl               1.1.0       2018-04-20
-#&gt;  rematch              1.0.1       2016-04-21
 #&gt;  rgdal                1.2-20      2018-05-07
 #&gt;  rgeos                0.3-26      2017-10-31
 #&gt;  rlang                0.2.0.9001  2018-05-10
@@ -4659,7 +4656,6 @@ devtools::session_info()
 #&gt;  cran (@0.2.2)                      
 #&gt;  cran (@0.7)                        
 #&gt;  cran (@2.0.3)                      
-#&gt;  cran (@1.1.0)                      
 #&gt;  CRAN (R 3.5.0)                     
 #&gt;  cran (@0.2-3)                      
 #&gt;  cran (@1.0.0)                      
@@ -4723,8 +4719,6 @@ devtools::session_info()
 #&gt;  cran (@1.1-2)                      
 #&gt;  cran (@0.12.16)                    
 #&gt;  cran (@1.1.1)                      
-#&gt;  cran (@1.1.0)                      
-#&gt;  cran (@1.0.1)                      
 #&gt;  cran (@1.2-20)                     
 #&gt;  cran (@0.3-26)                     
 #&gt;  Github (r-lib/rlang@ccdbd8b)       
@@ -4761,7 +4755,7 @@ devtools::session_info()
 git2r::repository(&quot;..&quot;)
 #&gt; Local:    master /Users/bocinsky/git/guedesbocinsky2018
 #&gt; Remote:   master @ origin (https://github.com/bocinsky/guedesbocinsky2018)
-#&gt; Head:     [638d886] 2018-05-13: circleci</code></pre>
+#&gt; Head:     [6076e5e] 2018-05-13: updated vignette</code></pre>
 </div>
 
 

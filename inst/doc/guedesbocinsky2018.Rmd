@@ -747,7 +747,7 @@ vegetation_atlas_data_crops_simple <-
                         sf::st_transform(4326))
 
 # Map the sites
-cairo_pdf("./figures/Figure_S2_modern_crops.pdf", width = 7.2, height = 7)
+cairo_pdf("./figures/Figure_5_modern_crops.pdf", width = 7.2, height = 7)
 print(vegetation_atlas_data_crops_simple %>%
         dplyr::mutate(Crop = as.factor(crop),
                       Crop = dplyr::recode_factor(Crop,
@@ -797,7 +797,7 @@ modern_crop_niche_data <-
   dplyr::bind_rows()
 
 
-cairo_pdf("./figures/Figure_S3_modern_crops_density.pdf", width = 4.6, height = 3)
+cairo_pdf("./figures/Figure_6_modern_crops_density.pdf", width = 4.6, height = 3)
 print(modern_crop_niche_data %>%
         dplyr::mutate(Crop = as.factor(Crop),
                       Crop = dplyr::recode_factor(Crop,
@@ -1631,7 +1631,7 @@ storage <- readr::read_csv("../inst/storage.csv")
 storage %>%
   readr::write_csv("./data/derived_data/Table_S3_storage.csv")
 
-cairo_pdf("./figures/Figure_S1_storage.pdf", width = 4.6, height = 3)
+cairo_pdf("./figures/Figure_4_storage.pdf", width = 4.6, height = 3)
 print({
   storage %>%
     ggplot2::ggplot(ggplot2::aes(y = YRS_Storage,
@@ -1670,14 +1670,14 @@ file.copy(from = "./figures/Figure_2_facet_niche.pdf",
 file.copy(from = "./figures/Figure_3_all_crossplot.pdf",
           to = "./submission/Figure_3_all_crossplot.pdf",
           overwrite = TRUE)
-file.copy(from = "./figures/Figure_S1_storage.pdf",
-          to = "./submission/Figure_S1_storage.pdf",
+file.copy(from = "./figures/Figure_4_storage.pdf",
+          to = "./submission/Figure_4_storage.pdf",
           overwrite = TRUE)
-file.copy(from = "./figures/Figure_S2_modern_crops.pdf",
-          to = "./submission/Figure_S2_modern_crops.pdf",
+file.copy(from = "./figures/Figure_5_modern_crops.pdf",
+          to = "./submission/Figure_5_modern_crops.pdf",
           overwrite = TRUE)
-file.copy(from = "./figures/Figure_S3_modern_crops_density.pdf",
-          to = "./submission/Figure_S3_modern_crops_density.pdf",
+file.copy(from = "./figures/Figure_6_modern_crops_density.pdf",
+          to = "./submission/Figure_6_modern_crops_density.pdf",
           overwrite = TRUE)
 
 # Copy Tables
@@ -1769,7 +1769,7 @@ devtools::session_info()
 
 The current Git commit details are:
 
-```{r}
+```{r git details}
 # what commit is this file at? You may need to change the path value
 # if your Rmd is not in analysis/paper/
 git2r::repository("..")
