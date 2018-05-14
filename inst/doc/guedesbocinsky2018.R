@@ -144,7 +144,105 @@ gdd.recons <-
 message("Plotting of cultivar niche reconstructions complete: ", capture.output(Sys.time() - time_check))
 
 
+## ----submission, cache = FALSE-------------------------------------------
+unlink("./submission",
+       recursive = TRUE, 
+       force = TRUE)
+
+dir.create("./submission",
+           recursive = TRUE,
+           showWarnings = FALSE)
+
+# Copy figures
+file.copy(from = "./figures/Figure_1_crop_map.pdf",
+          to = "./submission/Figure_1_crop_map.pdf",
+          overwrite = TRUE)
+file.copy(from = "./figures/Figure_2_facet_niche.pdf",
+          to = "./submission/Figure_2_facet_niche.pdf",
+          overwrite = TRUE)
+file.copy(from = "./figures/Figure_3_all_crossplot.pdf",
+          to = "./submission/Figure_3_all_crossplot.pdf",
+          overwrite = TRUE)
+file.copy(from = "./figures/Figure_4_storage.pdf",
+          to = "./submission/Figure_4_storage.pdf",
+          overwrite = TRUE)
+file.copy(from = "./figures/Figure_5_modern_crops.pdf",
+          to = "./submission/Figure_5_modern_crops.pdf",
+          overwrite = TRUE)
+file.copy(from = "./figures/Figure_6_modern_crops_density.pdf",
+          to = "./submission/Figure_6_modern_crops_density.pdf",
+          overwrite = TRUE)
+
+# Copy Tables
+file.copy(from = "./data/derived_data/Table_S1_crops.csv",
+          to = "./submission/Table_S1_crops.csv",
+          overwrite = TRUE)
+file.copy(from = "./data/derived_data/Table_S2_age_niche_estimates.csv",
+          to = "./submission/Table_S2_age_niche_estimates.csv",
+          overwrite = TRUE)
+file.copy(from = "./data/derived_data/Table_S3_storage.csv",
+          to = "./submission/Table_S3_storage.csv",
+          overwrite = TRUE)
+
+# Copy Data Files
+file.copy(from = "./data/derived_data/Data_file_S1_sites_dates.xlsx",
+          to = "./submission/Data_file_S1_sites_dates.xlsx",
+          overwrite = TRUE)
+file.copy(from = "./figures/Data_file_S2_all_crossplot.html",
+          to = "./submission/Data_file_S2_all_crossplot.html",
+          overwrite = TRUE)
+
+# Copy Movies
+file.copy(from = "./figures/crop_niches/all_wheat.mp4",
+          to = "./submission/Movie_S1_wheat.mp4",
+          overwrite = TRUE)
+file.copy(from = "./figures/crop_niches/all_barley.mp4",
+          to = "./submission/Movie_S2_barley.mp4",
+          overwrite = TRUE)
+file.copy(from = "./figures/crop_niches/all_broomcorn_millet.mp4",
+          to = "./submission/Movie_S3_broomcorn_millet.mp4",
+          overwrite = TRUE)
+file.copy(from = "./figures/crop_niches/all_foxtail_millet.mp4",
+          to = "./submission/Movie_S4_foxtail_millet.mp4",
+          overwrite = TRUE)
+file.copy(from = "./figures/crop_niches/all_buckwheat.mp4",
+          to = "./submission/Movie_S5_buckwheat.mp4",
+          overwrite = TRUE)
+file.copy(from = "./figures/crop_niches/all_rice.mp4",
+          to = "./submission/Movie_S6_rice.mp4",
+          overwrite = TRUE)
+
+# Write the compendium
+system(paste0("cp -r ../ ",tempdir(),"/Data_file_S3_research_compendium/"))
+
+system(paste("tar -zcf submission/Data_file_S3_research_compendium.tar.gz",
+             "-C ",tempdir(),
+             "--exclude='vignettes/data'",
+             "--exclude='vignettes/figures'",
+             "--exclude='vignettes/submission'",
+             "--exclude='vignettes/guedesbocinsky2018_cache'",
+             "--exclude='vignettes/zenodo'",
+             "--exclude='.git'",
+             "Data_file_S3_research_compendium"))
+
+
+## ----zenodo, cache = FALSE-----------------------------------------------
+unlink("./zenodo",
+       recursive = TRUE, 
+       force = TRUE)
+
+dir.create("./zenodo",
+           recursive = TRUE,
+           showWarnings = FALSE)
+
+system("tar -zcf ./zenodo/guedesbocinsky2018-1.0.0-output.tar.gz submission figures data")
+
 ## ----colophon, cache = FALSE---------------------------------------------
 # which R packages and versions?
 devtools::session_info()
+
+## ----git details, cache = FALSE------------------------------------------
+# what commit is this file at? You may need to change the path value
+# if your Rmd is not in analysis/paper/
+git2r::repository("..")
 
