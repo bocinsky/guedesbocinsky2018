@@ -1651,7 +1651,7 @@ dev.off()
 
 ## Create submission directory {-}
 
-```{r submission}
+```{r submission, cache = FALSE}
 unlink("./submission",
        recursive = TRUE, 
        force = TRUE)
@@ -1737,7 +1737,7 @@ system(paste("tar -zcf submission/Data_file_S3_research_compendium.tar.gz",
 
 ## Create Zenodo archive {-}
 
-```{r zenodo}
+```{r zenodo, cache = FALSE}
 unlink("./zenodo",
        recursive = TRUE, 
        force = TRUE)
@@ -1769,7 +1769,7 @@ devtools::session_info()
 
 The current Git commit details are:
 
-```{r git details}
+```{r git details, cache = FALSE}
 # what commit is this file at? You may need to change the path value
 # if your Rmd is not in analysis/paper/
 git2r::repository("..")
