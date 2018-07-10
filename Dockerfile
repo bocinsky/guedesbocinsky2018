@@ -64,10 +64,10 @@ RUN r -e 'devtools::install_cran("remotes")'
 RUN r -e 'devtools::install("${HOME}", dependencies = TRUE, upgrade_dependencies = FALSE)'
 
 # install the remotes
-RUN r -e 'remotes::install_local("${HOME}")'
+RUN r -e 'remotes::install_local("~/")'
 
 # Check the package
-RUN r -e 'devtools::check("${HOME}", vignettes = FALSE, args = "--no-vignettes")'
+RUN r -e 'devtools::check("~/", vignettes = FALSE, args = "--no-vignettes")'
 
 # render the analysis
-# && r -e "rmarkdown::render('${HOME}/vignettes/guedesbocinsky2018.Rmd')"
+# && r -e "rmarkdown::render('~/vignettes/guedesbocinsky2018.Rmd')"
