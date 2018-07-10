@@ -5,12 +5,12 @@ author:
   - Jade d'Alpoim Guedes
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 params:
+   
    cores: 2
    clean: FALSE
    google_maps_elevation_api_key: !r Sys.getenv('google_maps_elevation_api_key')
    tdar_un: !r Sys.getenv('tdar_un')
    tdar_pw: !r Sys.getenv('tdar_pw')
-   
 output: 
     bookdown::html_document2:
       code_folding: hide
