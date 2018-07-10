@@ -61,7 +61,7 @@ RUN if [ -f install.R ]; then R --quiet -f install.R; fi
 RUN r -e 'devtools::install_cran("remotes")'
 
 # build this compendium package
-RUN r -e 'devtools::install("${HOME}", dependencies = TRUE, upgrade_dependencies = FALSE)'
+RUN r -e 'devtools::install("~/", dependencies = TRUE, upgrade_dependencies = FALSE)'
 
 # install the remotes
 RUN r -e 'remotes::install_local("~/")'
