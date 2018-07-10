@@ -4,23 +4,6 @@ FROM bocinsky/bocin_base:latest
 # required
 MAINTAINER Kyle Bocinsky <bocinsky@gmail.com>
 
-COPY . /guedesbocinsky2018
-
-# Install dev version of devtools to facilitate installing from "remotes" field in DESCRIPTION
-RUN r -e 'devtools::install_cran("remotes")'
-
-# build this compendium package
-RUN r -e 'devtools::install("/guedesbocinsky2018", dependencies = TRUE, upgrade_dependencies = FALSE)'
-
-# install the remotes
-RUN r -e 'remotes::install_local("/guedesbocinsky2018")'
-
-# Check the package
-RUN r -e 'devtools::check("/guedesbocinsky2018", vignettes = FALSE, args = "--no-vignettes")'
-
-# render the analysis
-# && r -e "rmarkdown::render('/guedesbocinsky2018/vignettes/guedesbocinsky2018.Rmd')"
-
 ENV NB_USER rstudio
 ENV NB_UID 1000
 ENV VENV_DIR /srv/venv
@@ -61,5 +44,30 @@ RUN python3 -m venv ${VENV_DIR} && \
 RUN R --quiet -e "devtools::install_github('IRkernel/IRkernel')" && \
     R --quiet -e "IRkernel::installspec(prefix='${VENV_DIR}')"
 
-
 CMD jupyter notebook --ip 0.0.0.0
+
+## Copies your repo files into the Docker Container
+USER root
+COPY . ${HOME}
+RUN chown -R ${NB_USER} ${HOME}
+
+## Become normal user again
+USER ${NB_USER}
+
+## Run an install.R script, if it exists.
+RUN if [ -f install.R ]; then R --quiet -f install.R; fi
+
+# Install dev version of devtools to facilitate installing from "remotes" field in DESCRIPTION
+RUN r -e 'devtools::install_cran("remotes")'
+
+# build this compendium package
+RUN r -e 'devtools::install("${HOME}", dependencies = TRUE, upgrade_dependencies = FALSE)'
+
+# install the remotes
+RUN r -e 'remotes::install_local("${HOME}")'
+
+# Check the package
+RUN r -e 'devtools::check("${HOME}", vignettes = FALSE, args = "--no-vignettes")'
+
+# render the analysis
+# && r -e "rmarkdown::render('${HOME}/vignettes/guedesbocinsky2018.Rmd')"
