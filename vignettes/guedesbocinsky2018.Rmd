@@ -1201,7 +1201,7 @@ local_niche <- function(niche, dens){
 }
 
 # Get the "Local" niche densities, by multiplying the site occupation probability densities
-# by the crop niche probabilities (summing will get the average)
+# by the crop niche probabilities
 # Join the niche and density tables
 niche_densities <- niches %>%
   dplyr::left_join(densities, by = c("Site", "Period")) %>%
@@ -1295,6 +1295,48 @@ niche_densities_extract <- niche_densities %>%
 niche_densities_extract %>%
   sf::st_set_geometry(NULL) %>%
   readr::write_csv("./data/derived_data/Table_S2_age_niche_estimates.csv")
+
+# # Calculate percent of sites whose median niche probabilities are >0.75 for each crop
+# niche_densities_extract %>%
+#   dplyr::mutate(`Niche probability median` = `Niche probability median` > 0.75) %>%
+#   dplyr::summarise(`Percent above 0.75 niche probability` = mean(`Niche probability median`, na.rm = T))
+# 
+# 
+# cairo_pdf("./figures/Figure_7_ancient_crops_density.pdf", width = 4.6, height = 3)
+# print(niche_densities_extract %>%
+#         dplyr::filter(Crop != "Buckwheat") %>%
+#         dplyr::mutate(Crop = as.factor(Crop),
+#                       Crop = dplyr::recode_factor(Crop,
+#                                                   `Foxtail millet` = "Millet",
+#                                                   `Broomcorn millet` = "Millet")) %>%
+#         ggplot2::ggplot(ggplot2::aes(`Niche probability median` * 100,
+#                                      ..density..,
+#                                      color = Crop,
+#                                      fill = Crop)) +
+#         ggplot2::geom_density(n = 1000,
+#                               bw = 2,
+#                               alpha = 0.1) +
+#         ggplot2::scale_x_continuous(limits = c(0, 100),
+#                                     expand = c(0, 0)) +
+#         ggplot2::scale_y_continuous(expand = c(0, 0, 0, 0.001)) +
+#         ggplot2::theme_minimal(base_size = 7) +
+#         ggplot2::xlab("Probability of being in the thermal niche (%)") +
+#         ggplot2::ylab("Probability density"))
+# dev.off()
+
+# # Plot ECDF for each crop of median local niche density among sites
+# cairo_pdf("./figures/niche_ecdf.pdf",
+#           width = 3.5,
+#           height = 2)
+# print({
+#   niche_densities_extract %>%
+#     ggplot2::ggplot(ggplot2::aes(x = `Niche probability median`,
+#                                  color = Crop)) + 
+#     ggplot2::stat_ecdf(geom = "step") +
+#     ggplot2::ylab("Empirical cumulative probability") +
+#     ggplot2::theme_minimal(base_size = 7)
+# })
+# dev.off()
 
 # # Plot relationship between number of crops and age
 # cairo_pdf("./figures/age_counts.pdf",
