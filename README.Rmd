@@ -27,7 +27,7 @@ library(magrittr)
 
 **When using the code included in this research compendium, please cite *all* of the following:**
 
-> d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Climate change stimulated agricultural innovation and exchange across Asia. In review.
+> d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Climate change stimulated agricultural innovation and exchange across Asia, 2018. *Science Advances* 4:eaar4491. http://doi.org/10.1126/sciadv.aar4491
 
 > d'Alpoim Guedes, Jade and R. Kyle Bocinsky. Research compendium for: *Climate change stimulated agricultural innovation and exchange across Asia*, 2018. Version 1.0.0. Zenodo. https://doi.org/10.5281/zenodo.1239106
 
@@ -93,9 +93,22 @@ brew install pandoc-citeproc
 Please refer to the dockerfiles for [rocker/geospatial](https://github.com/rocker-org/geospatial/blob/master/Dockerfile) and [bocinsky/bocin_base](https://github.com/bocinsky/bocin_base/blob/master/Dockerfile).
 
 #### Windows
-This software has not been tested on Windows, but should install and work fine if all system requirements are installed.
+This software has not been tested on Windows. We recommend using the Docker build to run this on Windows (see below).
 
+### R "vector memory exhausted" error
+Some installations of R---particularly R >= 3.5.0 running on macOS---will throw a "vector memory exhausted" error when running the analysis. This occurs when R allocates larger vectors than allowed by default; see the [R NEWS file for 3.5.0](ftp://cran.r-project.org/pub/R/doc/manuals/r-release.save/NEWS.pdf) for details. If you get this error, increasing the `R_MAX_VSIZE` environment variable might solve the issue. Run these lines in the terminal:
 
+```bash
+cd ~
+touch .Renviron
+open .Renviron
+```
+
+Then, add this to the first line of `.Renviron`:
+
+```bash
+R_MAX_VSIZE=100Gb
+```
 
 ### Authentication for the Google Elevation API and tDAR
 This analyses requires the user to have the Google Elevation API key and a tDAR user name and password either as environment variables or passed to the `guedesbocinsky2018.Rmd` RMarkdown vignette as parameters. Please see the [Running the analysis] sections below for guidance on setting these parameters.
