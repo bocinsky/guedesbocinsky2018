@@ -59,13 +59,13 @@ MAINTAINER Kyle Bocinsky <bocinsky@gmail.com>
 RUN r -e 'devtools::install_cran("remotes")'
 
 # build this compendium package
-RUN r -e 'devtools::install("~/", dependencies = TRUE, upgrade_dependencies = FALSE)'
+RUN r -e 'devtools::install(".", dependencies = TRUE, upgrade_dependencies = FALSE)'
 
 # install the remotes
-RUN r -e 'remotes::install_local("~/")'
+RUN r -e 'remotes::install_local(".")'
 
 # Check the package
-RUN r -e 'devtools::check("~/", vignettes = FALSE, args = "--no-vignettes")'
+RUN r -e 'devtools::check(".", vignettes = FALSE, args = "--no-vignettes")'
 
 # render the analysis
 # && r -e "rmarkdown::render('~/vignettes/guedesbocinsky2018.Rmd')"
