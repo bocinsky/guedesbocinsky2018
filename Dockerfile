@@ -7,30 +7,15 @@ MAINTAINER Kyle Bocinsky <bocinsky@gmail.com>
 ENV NB_USER rstudio
 ENV NB_UID 1000
 ENV VENV_DIR /srv/venv
-#
-## Set ENV for all programs...
-#ENV PATH ${VENV_DIR}/bin:$PATH
-## And set ENV for R! It doesn't read from the environment...
-#RUN echo "PATH=${PATH}" >> /usr/local/lib/R/etc/Renviron
-#
-## The `rsession` binary that is called by nbrsessionproxy to start R doesn't seem to start
-## without this being explicitly set
-#ENV LD_LIBRARY_PATH /usr/local/lib/R/lib
-#
+
 ENV HOME /home/${NB_USER}
 WORKDIR ${HOME}
-#
-#RUN apt-get update && \
-#    apt-get -y install python3-venv python3-dev && \
-#    apt-get purge && \
-#    apt-get clean && \
-#    rm -rf /var/lib/apt/lists/*
-#
-## Create a venv dir owned by unprivileged user & set up notebook in it
-## This allows non-root to install python libraries if required
+
+# Create a venv dir owned by unprivileged user & set up notebook in it
+# This allows non-root to install python libraries if required
 RUN mkdir -p ${VENV_DIR} && chown -R ${NB_USER} ${VENV_DIR}
-#
-## Copies your repo files into the Docker Container
+
+# Copies your repo files into the Docker Container
 USER root
 COPY . ${HOME}
 RUN chown -R ${NB_USER} ${HOME}
@@ -38,9 +23,6 @@ RUN chown -R ${NB_USER} /tmp
 
 ## Become normal user again
 USER ${NB_USER}
-
-### Run an install.R script, if it exists.
-#RUN if [ -f install.R ]; then R --quiet -f install.R; fi
 
 # Install dev version of devtools to facilitate installing from "remotes" field in DESCRIPTION
 RUN r -e 'devtools::install_cran("remotes")'
@@ -57,4 +39,4 @@ RUN r -e 'devtools::check(".", vignettes = FALSE, args = "--no-vignettes")'
 # render the analysis
 # && r -e "rmarkdown::render('~/vignettes/guedesbocinsky2018.Rmd')"
 
-#CMD jupyter notebook --ip 0.0.0.0
+CMD jupyter notebook --ip 0.0.0.0
