@@ -4,9 +4,9 @@ FROM bocinsky/bocin_base:latest
 # required
 MAINTAINER Kyle Bocinsky <bocinsky@gmail.com>
 
-#ENV NB_USER rstudio
-#ENV NB_UID 1000
-#ENV VENV_DIR /srv/venv
+ENV NB_USER rstudio
+ENV NB_UID 1000
+ENV VENV_DIR /srv/venv
 #
 ## Set ENV for all programs...
 #ENV PATH ${VENV_DIR}/bin:$PATH
@@ -17,8 +17,8 @@ MAINTAINER Kyle Bocinsky <bocinsky@gmail.com>
 ## without this being explicitly set
 #ENV LD_LIBRARY_PATH /usr/local/lib/R/lib
 #
-#ENV HOME /home/${NB_USER}
-#WORKDIR ${HOME}
+ENV HOME /home/${NB_USER}
+WORKDIR ${HOME}
 #
 #RUN apt-get update && \
 #    apt-get -y install python3-venv python3-dev && \
@@ -44,14 +44,14 @@ MAINTAINER Kyle Bocinsky <bocinsky@gmail.com>
 #RUN R --quiet -e "devtools::install_github('IRkernel/IRkernel')" && \
 #    R --quiet -e "IRkernel::installspec(prefix='${VENV_DIR}')"
 #
-### Copies your repo files into the Docker Container
-#USER root
-#COPY . ${HOME}
-#RUN chown -R ${NB_USER} ${HOME}
-#
-### Become normal user again
-### USER ${NB_USER}
-#
+## Copies your repo files into the Docker Container
+USER root
+COPY . ${HOME}
+RUN chown -R ${NB_USER} ${HOME}
+
+## Become normal user again
+USER ${NB_USER}
+
 ### Run an install.R script, if it exists.
 #RUN if [ -f install.R ]; then R --quiet -f install.R; fi
 
