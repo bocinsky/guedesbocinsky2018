@@ -38,5 +38,3 @@ RUN r -e 'devtools::check(".", vignettes = FALSE, args = "--no-vignettes")'
 
 # render the analysis
 # && r -e "rmarkdown::render('~/vignettes/guedesbocinsky2018.Rmd')"
-
-CMD jupyter notebook --ip 0.0.0.0
