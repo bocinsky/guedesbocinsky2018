@@ -118,7 +118,7 @@ Archaeological site location data are sensitive information due to the possibili
 
 The data are available through tDAR at the following DOI: [10.6067/XCV8MK6G05](https://doi.org/10.6067/XCV8MK6G05). Please go to the site and select "Request Access, Submit Correction, Comment" under the downloads section in the right panel. You will have to [create a tDAR user account](https://core.tdar.org/account/new) and agree to the [tDAR user agreement](https://www.tdar.org/about/policies/terms-of-use/).
 
-This analysis uses the tDAR application programming interface (API) to authenticate a user into tDAR and access and download the archaeological site data.
+This analysis uses the tDAR application programming interface (API) to authenticate a user into tDAR and access and download the archaeological site data. This requires a user to be part of the tDAR API Group. Please contact Digital Antiquity staff ([info@digitalantiquity.org](mailto:info@digitalantiquity.org)) to be added to this group.
 
 ### Running the analysis
 There are three ways to run the analysis:
